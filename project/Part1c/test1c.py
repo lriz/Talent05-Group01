@@ -1,12 +1,27 @@
 import numpy as np
+import json
+import argparse
 from decimal import Decimal
 
-#PROJECT Part (1c) First implementation (a bit by hand):
+# PROJECT Part (1c) First implementation (a bit by hand):
+# To run, example:
+# $ python test1c.py -f test_input.json
 
-Nparticles=4 #TODO: generalize for input.
+# Argparse: insert arguments to code using the command line.
+parser = argparse.ArgumentParser(description='None')  # Generate a parser.
+parser.add_argument('-f','--file',help='a json input file name for the program', type=str,required=True)  # Define a command line operation.
+args = parser.parse_args()
+
+folder_name = 'input_files/'  # Folder of input files.
+
+with open("".join((folder_name,args.file))) as data_file:
+        input_dict = json.load(data_file)  # A dictionary. Keys are the name of input, values are the value of input.
+
+
+Nparticles=input_dict["number of particles"] #TODO: generalize for input.
 Npairs=Nparticles/2
 
-NspLevels=8 # Includes spin
+NspLevels=input_dict["number of single-particle levels"] # Includes spin
 NLevels=8/2 # TODO: NspLevels/Npairs
 
 BreakingPairs=0  #0=no pair breaking   #1=yes   by pair we mean here s=0
