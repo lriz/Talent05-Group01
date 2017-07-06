@@ -1,32 +1,30 @@
-from numpy import *
+import numpy as np
 from decimal import Decimal
 
-#PROJECT 1c) First implementation (a bit by hand):
+#PROJECT Part (1c) First implementation (a bit by hand):
 
-Nparticles=4
+Nparticles=4 #TODO: generalize for input.
 Npairs=Nparticles/2
 
-NspLevels=8 #includes spin
-NpairLevels=8/2
+NspLevels=8 # Includes spin
+NLevels=8/2 # TODO: NspLevels/Npairs
 
 BreakingPairs=0  #0=no pair breaking   #1=yes   by pair we mean here s=0
 
 def combinatorial(n,r):   #n>r
-    f = math.factorial
+    f = np.math.factorial
     return f(n) / f(r) / f(n-r)
 
 
 if BreakingPairs==0:
     Mtotal=0
-    NSlaterDet=combinatorial(NpairLevels,Npairs)
+    NSlaterDet=combinatorial(NLevels,Npairs)
 else:
     NSlaterDet=combinatorial(NspLevels,Nparticles)
 
+H=np.zeros(NSlaterDet)
 
-
-H=zeros(NSlaterDet)
-
-g=1.0
+g=1.0  # Interaction constant.  #TODO: generalize for input.
 
 
 # for i in range(0,NSlaterDet):
@@ -38,22 +36,27 @@ g=1.0
 # dict = {'a':1, 'b': true, 'c': "name"}
 
 #SD=[]
-p=range(1,NpairLevels+1)
+p=range(1,NLevels+1) # List of levels.
 
 
-sd1=[1]*Npairs
-SD=[sd1]
+sd1=[1]*Npairs  # General slater determinant.  #TODO: rename.
+SD=[sd1]  #TODO: explain.
 
 def potencia(c):
-    """Calcula y devuelve el conjunto potencia del 
+    print 'eneter potencia'
+    """Calcula y devuelve el conjunto potencia del
        conjunto c.
     """
+    print 'c',c
     if len(c) == 0:
         return [[]]
     r = potencia(c[:-1])
+    print 'return',r + [s + [c[-1]] for s in r]
     return r + [s + [c[-1]] for s in r]
 
 def imprime_ordenado(c):
+    print 'imprime_ordenado'
+    print 'c',c
     for e in sorted(c, key=lambda s: (len(s), s)):
         print(e)
 
@@ -75,7 +78,18 @@ def combinaciones(c, n):
 imprime_ordenado(combinaciones([1, 2, 3, 4], 2))
 
 
+def format_for_function_example(a,b,c):
+    """
+    function description.
+    Args:
+        a: description.
+        b: description.
+        c: description.
 
+    Returns:
+        description.
+    """
+    pass
 
 
 
