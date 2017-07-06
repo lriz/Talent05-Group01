@@ -21,8 +21,8 @@ with open("".join((folder_name,args.file))) as data_file:
 Nparticles=input_dict["number of particles"] #TODO: generalize for input.
 Npairs=Nparticles/2
 
-NspLevels=input_dict["number of single-particle levels"] # Includes spin
-NLevels=8/2 # TODO: NspLevels/Npairs
+NspLevels=input_dict["number of single-particle states"] # Includes spin
+NLevels=NspLevels/Npairs # TODO: NspLevels/Npairs
 
 BreakingPairs=0  #0=no pair breaking   #1=yes   by pair we mean here s=0
 
@@ -93,16 +93,19 @@ def combinaciones(c, n):
 imprime_ordenado(combinaciones([1, 2, 3, 4], 2))
 
 
-def format_for_function_example(a,b,c):
+def function_format_example(a,b,c):
     """
-    function description.
+    Name of creator: Noam.
+    Please change comments and functions names to english :)
+    Function description.
+
     Args:
         a: description.
         b: description.
         c: description.
 
     Returns:
-        description.
+        Description.
     """
     pass
 
