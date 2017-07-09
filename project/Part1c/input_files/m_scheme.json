@@ -1,0 +1,33 @@
+{
+  "shell configuration":
+  {
+    "0s1/2":
+    {
+      "2J-total": 1,
+      "angular momentum": 0,
+      "number of particles": [2],
+      "M-total": [0]
+    },
+    "0s1/2":
+    {
+      "2J-total": 1,
+      "angular momentum": 0,
+      "number of particles": [2],
+      "M-total": [0]
+    },
+    "0s1/2":
+    {
+      "2J-total": 1,
+      "angular momentum": 0,
+      "number of particles": [2],
+      "M-total": [0]
+    },
+    "0s1/2":
+    {
+      "2J-total": 1,
+      "angular momentum": 0,
+      "number of particles": [2],
+      "M-total": [0]
+    }
+  }
+}
