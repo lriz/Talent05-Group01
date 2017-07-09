@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2af66e10-18e4-43a7-a943-cf3d15c16fa8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part1c/single_particle_state_class.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/LNLT_shell.py" afterPath="$PROJECT_DIR$/project/Part1c/LNLT_shell.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/input_files/m_scheme.json" afterPath="$PROJECT_DIR$/project/Part1c/input_files/m_scheme.json" />
     </list>
     <ignored path="Talent05-Group01.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,8 +27,8 @@
       <file leaf-file-name="LNLT_shell.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/Part1c/LNLT_shell.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.628125">
-              <caret line="95" column="8" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.734375">
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -398,14 +395,22 @@
       <option name="number" value="Default" />
       <updated>1499355999787</updated>
     </task>
+    <task id="LOCAL-00001" summary="Generate sps.&#10;Create a single particle state class - i,p,l,n,j,m_j">
+      <created>1499631301547</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1499631301547</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14096186" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14096186" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -446,6 +451,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Generate sps.&#10;Create a single particle state class - i,p,l,n,j,m_j" />
+    <option name="LAST_COMMIT_MESSAGE" value="Generate sps.&#10;Create a single particle state class - i,p,l,n,j,m_j" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -504,8 +513,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/Part1c/LNLT_shell.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.628125">
-          <caret line="95" column="8" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.734375">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
