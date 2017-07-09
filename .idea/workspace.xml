@@ -401,7 +401,13 @@
       <option name="project" value="LOCAL" />
       <updated>1499631301547</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Generate sps.&#10;Create a single particle state class - i,p,l,n,j,m_j">
+      <created>1499631362031</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1499631362031</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
