@@ -1,0 +1,160 @@
+\documentclass[aps,prl,groupedaddress]{revtex4-1}  % One column - tight
+%\documentclass[aps,prl,preprint,groupedaddress]{revtex4-1}  % One column - spread
+%\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}  % Two column
+%\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
+%\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
+
+% Use the \preprint command to place your local institutional report
+% number in the upper righthand corner of the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+% Use the 'preprintnumbers' class option to override journal defaults
+% to display numbers if necessary
+%\preprint{}
+
+% You should use BibTeX and apsrev.bst for references
+% Choosing a journal automatically selects the correct APS
+% BibTeX style file (bst file), so only uncomment the line
+% below if necessary.
+%\bibliographystyle{apsrev4-1}
+
+% % % % % % % % % % % % Noam% % % % % % % % % % % % 
+% Added preamble commands:
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{figures/}{figures/phase_diagram/}{figures/levels_scheme/}{figures/decomposition/}{figures/phase_diagram/}{figures/energies_transitions_ratios/}}
+\usepackage[unicode=true,pdfusetitle,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{braket}
+%\usepackage[enable]{todonotes}
+\hypersetup{colorlinks=True,urlcolor=blue,linkcolor=blue,citecolor=blue,filecolor=black}
+\usepackage[caption=false]{subfig}
+% Extra commands
+%\usepackage{lmodern}
+%\usepackage[T1]{fontenc}
+%\setcounter{secnumdepth}{3}
+%\usepackage{color}
+%\usepackage{float}
+%\usepackage{mathtools}
+%\usepackage{amssymb}
+%\usepackage{breakurl}
+
+%\usepackage{pslatex}  % Change font style.
+%\renewcommand{\arraystretch}{1.5}  % Widens rows in Tables
+%\setlength{\extrarowheight}{2pt}   % Widens rows in Tables
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+
+\makeatother
+
+\begin{document}
+
+%Title of paper
+\title{Shell-model project for Nuclear Talent course}
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current
+% author. Explanatory text should go in the []'s, actual e-mail
+% address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro foreach each type of information
+
+% \affiliation command applies to all authors since the last
+% \affiliation command. The \affiliation command should follow the
+% other information
+% \affiliation can be followed by \email, \homepage, \thanks as well.
+\author{Group 1 - N. Gavrielov}
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+\affiliation{}
+
+%Collaboration name if desired (requires use of superscriptaddress
+%option in \documentclass). \noaffiliation is required (may also be
+%used with the \author command).
+%\collaboration can be followed by \email, \homepage, \thanks as well.
+%\collaboration{}
+%\noaffiliation
+
+\date{\today}
+
+\begin{abstract}
+% insert abstract here
+\end{abstract}
+
+% insert suggested PACS numbers in braces on next line
+\pacs{}
+% insert suggested keywords - APS authors don't need to do this
+%\keywords{}
+
+%\maketitle must follow title, authors, abstract, \pacs, and \keywords
+\maketitle
+\section{Part 1c}
+\subsection{Dimensionality}
+The Hamiltonian matrix is calculated for $N$ single-particle-states (sps) and $n$ particles. Generally, (e.g. allowing pairs breaking) we have ${N \choose n}=\frac{N!}{n!(N-n)!}$ possibilities for ordering the particles. 
+
+If we look at $k$-particle states (e.g. pairs, 2-particle states) we will have ${N \choose k}$ possibilities for ordering (e.g. for $N=8,k=4$)
+
+levels that should be filled by $n/2$ pairs (where $N$ and $n$ are both even integers), which yields $\frac{(N/2)!}{[n/2]![(N-n)/2]!}$ possibilities for ordering the pairs. Working in the pairs representation, this will generate a $\frac{(N/2)!}{[n/2]![(N-n)/2]!}\times\frac{(N/2)!}{[n/2]![(N-n)/2]!}$ Hamiltonian matrix.
+
+As an example, for 8-sps and 4-particles in the pairs representation, we have a dimensionality of ${4 \choose 2}=6$, whch yields a $6\times6$ Hamiltonian matrix.
+
+\subsection{Calculating the states}
+For a doubly-degenerate level with pair-particles (spin $1/2$ for each and total spin 0), there are 6 possible orderings written as
+
+\begin{subequations}
+\begin{align}
+\ket{1,2,3,4} \leftrightarrow &\ket{1,2},\\
+\ket{1,2,5,6} \leftrightarrow &\ket{1,3},\\
+\ket{1,2,7,8} \leftrightarrow &\ket{1,4},\\
+\ket{3,4,5,6} \leftrightarrow &\ket{2,3},\\
+\ket{3,4,7,8} \leftrightarrow &\ket{2,4},\\
+\ket{5,6,7,8} \leftrightarrow &\ket{3,4}.
+\end{align}
+\end{subequations}
+
+The right column represents two pairs in two different levels (pair states), e.g. $\ket{1,2}$ represents a pair in level $P=1$ and a pair in level $P=2$. The left column represents the positions of all four particles (single particle states), e.g. $\ket{1,2,3,4}$ represents one particle in state number 1, one particle in state number 2, etc.
+
+\subsection{Hamiltonian Matrix}
+
+The Hamiltonian has two parts, the unperturbed Hamiltonian
+
+\begin{equation}
+\hat H_0 = \xi \sum_{p,\sigma} (p-1) \hat a_{p,\sigma}^\dagger \hat a_{p,\sigma},
+\label{eq:H_0}
+\end{equation}
+
+with $\xi=1$, and the interacting part
+
+\begin{equation}
+\hat V = -\frac{1}{2} g \sum_{p,q} \hat P_p^+ \hat P_q^- ,\label{eq:V}
+\end{equation}
+
+where $\hat P_p^+$ and $\hat P_p^-$ are the pair creation and annihilation operators
+\begin{equation}
+\hat P_p^+ = \hat a_{p,+}^\dagger \hat a_{p,-}^\dagger, \qquad
+\hat P_p^- = \hat a_{p,-} \hat a_{p,+} .
+\label{eq:P}
+\end{equation}
+
+The full Hamiltonian then reads $\hat H = \hat H_0 + \hat V$. 
+
+Next we calculate the Hamiltonian matrix. For the unperturbed part, we have
+
+\begin{align}
+\hat H_0 = \sum_{\sigma} \left[ \hat a_{2,\sigma}^\dagger \hat a_{2,\sigma} + 2 \hat a_{3,\sigma}^\dagger \hat a_{3,\sigma} + 3 \hat a_{4,\sigma}^\dagger \hat a_{4,\sigma}  \right]
+\end{align}
+
+\end{document}
+
+
