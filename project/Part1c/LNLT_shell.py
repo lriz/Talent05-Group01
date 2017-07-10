@@ -1,8 +1,9 @@
 import numpy as np
 import json
 import argparse
-from single_particle_state_class import single_particle_state
 from collections import OrderedDict
+from single_particle_state_class import single_particle_state
+from hamiltonian_unperturbed import hamiltonian_unperturbed
 
 def shell_configurations():
     return [{'name': '0s1/2', 'N': 0},
@@ -112,18 +113,21 @@ with open("".join((folder_name,args.file))) as data_file:
 shell_configurations_list = shell_configurations()
 # Ordering the dictionary according to P values.
 input_dict["shell-configuration P-levels"] = OrderedDict(sorted(input_dict["shell-configuration P-levels"].iteritems(), key=lambda x: x[0]))
-m_broken_basis, all_sps_list = get_m_broken_basis()
-m_scheme_basis = get_m_scheme_basis(m_broken_basis)
 #################### Global parameters ####################
+
+#TODO ################################################################################
+#TODO: move to sps_generator.py and rename as m_scheme_basis_generator, make class get_m_scheme_basis, print functions etc. ?
+m_broken_basis, all_sps_list = get_m_broken_basis()
+m_scheme_basis = np.array(get_m_scheme_basis(m_broken_basis))
 
 print_sps(all_sps_list)
 print
 print "Number of general {}-particle states:".format(input_dict["number of particles"]),len(m_broken_basis)
 print_m_scheme_basis()
+#TODO ################################################################################
 
 
-
-
+hamiltonian_unperturbed(m_scheme_basis)
 
 
 

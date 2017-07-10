@@ -1,109 +1,79 @@
-import numpy as np
-import json
-import argparse
-from decimal import Decimal
+from single_particle_state_class import single_particle_state
+from collections import OrderedDict
 
-# PROJECT Part (1c) First implementation (a bit by hand):
-# To run, example:
-# $ python test1c.py -f test_input.json
+def get_m_broken_basis(input_dict, shell_configurations_list):
+    all_sps_list = []
+    sps_index = 1
+    for p_level_index in input_dict["shell-configuration P-levels"].keys():
+        level_name = input_dict["shell-configuration P-levels"][p_level_index]["name"]
+        N_number = [shell['N'] for shell in  shell_configurations_list  if shell['name'] == level_name][-1] #TODO: check that not empty.
+        j_total = input_dict["shell-configuration P-levels"][p_level_index]["2J-total"]
+        for m_j in range(-j_total, j_total+1, 2):
+            all_sps_list.append(single_particle_state(p_level_index,
+                                                         N_number,
+                                                         input_dict["shell-configuration P-levels"][p_level_index]["angular momentum"],
+                                                         j_total,
+                                                         m_j,
+                                                         sps_index))
+            sps_index += 1
 
-# Argparse: insert arguments to code using the command line.
-parser = argparse.ArgumentParser(description='None')  # Generate a parser.
-parser.add_argument('-f','--file',help='a json input file name for the program', type=str,required=True)  # Define a command line operation.
-args = parser.parse_args()
+    m_broken_basis = list([list(x) for x in choose_iter(all_sps_list, input_dict["number of particles"])])
+    return m_broken_basis, all_sps_list
 
-folder_name = 'input_files/'  # Folder of input files.
-
-with open("".join((folder_name,args.file))) as data_file:
-        input_dict = json.load(data_file)  # A dictionary. Keys are the name of input, values are the value of input.
-
-
-Nparticles=input_dict["number of particles"] #TODO: generalize for input.
-Npairs=Nparticles/2
-
-NspLevels=input_dict["number of single-particle states"] # Includes spin
-NLevels=NspLevels/Npairs # TODO: NspLevels/Npairs
-
-BreakingPairs=0  #0=no pair breaking   #1=yes   by pair we mean here s=0
-
-def combinatorial(n,r):   #n>r
-    f = np.math.factorial
-    return f(n) / f(r) / f(n-r)
-
-
-if BreakingPairs==0:
-    Mtotal=0
-    NSlaterDet=combinatorial(NLevels,Npairs)
-else:
-    NSlaterDet=combinatorial(NspLevels,Nparticles)
-
-H=np.zeros(NSlaterDet)
-
-g=1.0  # Interaction constant.  #TODO: generalize for input.
-
-
-# for i in range(0,NSlaterDet):
-#     for j in range(0,NSlaterDet):
-#         H[i][j]=-g
-
-# tuple = ('a','b','c')
-# list = ['a','b','c']
-# dict = {'a':1, 'b': true, 'c': "name"}
-
-#SD=[]
-p=range(1,NLevels+1) # List of levels.
-
-
-sd1=[1]*Npairs  # General slater determinant.  #TODO: rename.
-SD=[sd1]  #TODO: explain.
-
-def potencia(c):
-    """Calcula y devuelve el conjunto potencia del
-       conjunto c.
+def choose_iter(elements, length):
     """
-    if len(c) == 0:
-        return [[]]
-    r = potencia(c[:-1])
-    return r + [s + [c[-1]] for s in r]
-
-def imprime_ordenado(c):
-    for e in sorted(c, key=lambda s: (len(s), s)):
-        print(e)
-
-#imprime_ordenado(potencia([1, 2, 3, 4]))
-
-def combinaciones(c, n):
-    """Calcula y devuelve una lista con todas las
-       combinaciones posibles que se pueden hacer
-       con los elementos contenidos en c tomando n
-       elementos a la vez.
+    Generate all possible elements from a list given a wanted length. e.g. number of states and number of particles.
+    :param elements: the number of states.
+    :param length: the number of particles.
+    :return:
     """
-    return [s for s in potencia(c) if len(s) == n]
+    for i in xrange(len(elements)):
+        if length == 1:
+            yield (elements[i],)
+        else:
+            for next in choose_iter(elements[i+1:len(elements)], length-1):
+                yield (elements[i],) + next
+def choose(l, k):
+    return list(choose_iter(l, k))
 
-# Aqui utilizamos una lista por comprension, 
-# la cual se puede leer asi: para cada subconjunto s que pertenece al resultado 
-# del conjunto potencia de c, conservar solo aquellos valores de s 
-# en donde su cardinalidad sea igual a n. 
+def print_sps(all_sps_list):
+    print
+    print "{:>3} || {:>2} || {:>2} || {:>2} || {:>2} || {:>3}".format("i", "p", "N", "L", "2J", "2M_J")
+    print "".join((" ","-"*34))
+    for sps in all_sps_list:
+        print "{:>3} || {:>2} || {:>2} || {:>2} || {:>2} || {:>3}".format(sps.index, sps.p, sps.n, sps.l, sps.j, sps.m_j)
 
-imprime_ordenado(combinaciones(range(1,NspLevels+1), 2))
+def print_m_scheme_basis(input_dict, m_scheme_basis):
+    print
+    m_total_list = [(input_dict["shell-configuration P-levels"][p]["M-total"], input_dict["shell-configuration P-levels"][p]["name"]) for p in input_dict["shell-configuration P-levels"]]
+    m_total_list = []
+    for p in input_dict["shell-configuration P-levels"]:
+        m_total_list.append(input_dict["shell-configuration P-levels"][p]["M-total"])
+        m_total_list.append("".join(("(",input_dict["shell-configuration P-levels"][p]["name"],")")))
+    print "".join(("sps with M-total = ","{} "*len(m_total_list))).format(*m_total_list)
+    print 'Basis length:', len(m_scheme_basis)
+    print m_scheme_basis
 
+def get_m_scheme_basis(m_scheme_basis):
+    return m_scheme_basis
 
-def function_format_example(a,b,c):
-    """
-    Name of creator: Noam.
-    Please change comments and functions names to english :)
-    Function description.
-
-    Args:
-        a: description.
-        b: description.
-        c: description.
-
-    Returns:
-        Description.
-    """
-    pass
-
-
-
-
+def get_m_scheme_basis(input_dict, m_broken_basis):
+    m_scheme_basis = []
+    for sps in m_broken_basis:
+        sps_temp_dict = OrderedDict()
+        for p in input_dict["shell-configuration P-levels"]:
+            sps_p_list = []
+            for i in sps:
+                if i.get_p() == p:
+                    sps_p_list.append(i)
+            sps_temp_dict[p] = sps_p_list
+        sps_temp_dict = OrderedDict((k, v) for k, v in sps_temp_dict.iteritems() if v)
+        m_bool = True
+        for p, value in sps_temp_dict.iteritems():
+            if sum([v.get_m_j() for v in value]) == input_dict["shell-configuration P-levels"][p]["M-total"]:
+                continue
+            else:
+                m_bool = False
+        if m_bool:
+            m_scheme_basis.append(sps)
+    return m_scheme_basis
