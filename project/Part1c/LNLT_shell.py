@@ -33,7 +33,7 @@ with open("".join((folder_name,args.file))) as data_file:
 #################### Global parameters ####################
 shell_configurations_list = shell_configurations()
 # Ordering the dictionary according to P values.
-input_dict["shell-configuration P-levels"] = OrderedDict(sorted(input_dict["shell-configuration P-levels"].iteritems(), key=lambda x: x[0]))
+input_dict["shell-orbit P-levels"] = OrderedDict(sorted(input_dict["shell-orbit P-levels"].iteritems(), key=lambda x: x[0]))
 #################### Global parameters ####################
 
 sps_generator_obj = sps_generator(input_dict)
@@ -49,4 +49,4 @@ print "Number of general {}-particle states:".format(input_dict["number of parti
 sps_generator_obj.print_m_scheme_basis()
 
 
-hamiltonian_unperturbed(m_scheme_basis)
+print hamiltonian_unperturbed(m_scheme_basis)
