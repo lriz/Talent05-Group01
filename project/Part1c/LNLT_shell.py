@@ -126,7 +126,6 @@ print "Number of general {}-particle states:".format(input_dict["number of parti
 print_m_scheme_basis()
 #TODO ################################################################################
 
-
 hamiltonian_unperturbed(m_scheme_basis)
 
 
