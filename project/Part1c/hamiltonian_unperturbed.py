@@ -6,6 +6,9 @@ def hamiltonian_unperturbed(m_scheme_basis):
     :return: the Hamiltonian matrix.
     """
     print "hamiltonian_unperturbed"
-    h_matrix = np.array([])  # the unperturbed  Hamiltonian matrix.
-    for eig in m_scheme_basis:
-        h_matrix = np.append(h_matrix, sum([int(i.get_p())-1 for i in eig]))
+    dim = len(m_scheme_basis)
+    h_matrix = np.zeros((dim, dim))  # the unperturbed  Hamiltonian matrix.
+    for i, eig in enumerate(m_scheme_basis):
+        s = np.sum([int(j.get_p())-1 for j in eig])
+        h_matrix[i,i] = s
+    return h_matrix
