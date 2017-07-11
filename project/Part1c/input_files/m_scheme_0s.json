@@ -1,31 +1,36 @@
 {
   "number of particles": 4,
   "2M-total": [0],
+  "orbit separation": false,
   "shell-orbit P-levels":
   {
     "1":
     {
       "name": "0s1/2",
       "2J-total": 1,
-      "angular momentum": 0
+      "angular momentum": 0,
+      "2M-total": [0]
     },
     "2":
     {
       "name": "0s1/2",
       "2J-total": 1,
-      "angular momentum": 0
+      "angular momentum": 0,
+      "2M-total": [0]
     },
     "3":
     {
       "name": "0s1/2",
       "2J-total": 1,
-      "angular momentum": 0
+      "angular momentum": 0,
+      "2M-total": [0]
     },
     "4":
     {
       "name": "0s1/2",
       "2J-total": 1,
-      "angular momentum": 0
+      "angular momentum": 0,
+      "2M-total": [0]
     }
   }
 }
