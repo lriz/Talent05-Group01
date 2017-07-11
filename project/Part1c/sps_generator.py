@@ -50,7 +50,34 @@ class sps_generator(object):
     def choose(self, l, k):
         return list(self.choose_iter(l, k))
 
+    #TODO: change for class inheretence.
     def calc_m_scheme_basis(self, m_broken_basis):
+        if self.input_dict["orbit separation"]:
+            print 'test'
+            self.calc_m_scheme_basis_orbit_separation(m_broken_basis)
+        else:
+            self.calc_m_scheme_basis_no_orbit_separation(m_broken_basis)
+
+    def calc_m_scheme_basis_orbit_separation(self, m_broken_basis):
+        for sps in m_broken_basis:
+            sps_temp_dict = OrderedDict()
+            for p in self.input_dict["shell-orbit P-levels"]:
+                sps_p_list = []
+                for i in sps:
+                    if i.get_p() == p:
+                        sps_p_list.append(i)
+                sps_temp_dict[p] = sps_p_list
+            sps_temp_dict = OrderedDict((k, v) for k, v in sps_temp_dict.iteritems() if v)
+            m_bool = True
+            for p, value in sps_temp_dict.iteritems():
+                if sum([v.get_m_j() for v in value]) in self.input_dict["shell-orbit P-levels"][p]["2M-total"]:
+                    continue
+                else:
+                    m_bool = False
+            if m_bool:
+                self.m_scheme_basis.append(sps)
+
+    def calc_m_scheme_basis_no_orbit_separation(self, m_broken_basis):
         for sps in m_broken_basis:
             if sum([i.get_m_j() for i in sps]) in self.input_dict["2M-total"]:
                 self.m_scheme_basis.append(sps)
