@@ -1,16 +1,5 @@
 import numpy as np
 
-class Potential(object):
-    def __init__(self,g):
-        self.g = g
-    def get_element(self,p,q,r,s):
-        print("e: {0} {1} {2} {3}; {4}".format(p,q,r,s,self.g))
-        if p%2==1  and p==q-1 and r%2==1 and r==s-1:
-            print("This happens")
-            return -self.g
-        else:
-            return 0
-
 def find_index(m_scheme_basis,state):
     res = [i for i ,l in enumerate(m_scheme_basis) if all([(a in l) for a in state])]
     if res==[]:
@@ -41,7 +30,7 @@ class TwoBodyInteraction(object):
                 for a in range(1,len(self.sp_basis)):
                     if self.sp_basis[a-1] in state_a:
                         continue
-                    # TODO: Insert the new particles, and remember the phase
+                    # Inserts the new particles, and remember the phase
                     # important to clone state_prime first
                     state_b = None
                     phase_b = None
@@ -72,9 +61,9 @@ class TwoBodyInteraction(object):
                                 continue
                         else:
                             continue
-                        print("state: {0}".format(state))
-                        print("state_c: {0}".format(state_c))
-                        print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
+                        #print("state: {0}".format(state))
+                        #print("state_c: {0}".format(state_c))
+                        #print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
                         self.matrix[ind_i,ind_j]+=self.potential.get_element(a,b,c.get_index(),d.get_index())*(1-((phase_a+phase_b+phase_c)%2)*2)
                         # TODO: search for the corresponding state in m_schemebasis
                         # TODO: find matrix element multiply with the phase

@@ -1,11 +1,13 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import json
 import argparse
 from collections import OrderedDict
 from single_particle_state_class import single_particle_state
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from sps_generator import sps_generator
-from interaction_hamiltonian import Potential, TwoBodyInteraction
+from interaction_hamiltonian import TwoBodyInteraction
+from pairing_potential import PairingPotential
 
 def shell_configurations():
     return [{'name': '0s1/2', 'N': 0},
@@ -53,11 +55,26 @@ sps_generator_obj.print_m_scheme_basis()
 
 print hamiltonian_unperturbed(m_scheme_basis)
 
-V = Potential(1)
+#gl = np.linspace(-1,1)
+#energies=[];
+#for g in gl:
+g = 1
+V = PairingPotential(g)
 
 tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
 
 tbi.compute_matrix()
-H = hamiltonian_unperturbed(m_scheme_basis)
+H = np.array(hamiltonian_unperturbed(m_scheme_basis))
 H+=tbi.get_matrix()
+print("Hamiltonian:")
 print H
+
+eigs,vecs = np.linalg.eig(np.array(H))
+print("The eigen values:")
+print(np.sort(eigs))
+#    energies.append(np.sort(eigs))
+
+#energies = np.array(energies)
+#for i in range(0,6):
+#    plt.plot(gl,energies[:,i])
+#plt.show()
