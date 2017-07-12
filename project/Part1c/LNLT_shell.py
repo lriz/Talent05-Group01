@@ -5,6 +5,7 @@ from collections import OrderedDict
 from single_particle_state_class import single_particle_state
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from sps_generator import sps_generator
+from interaction_hamiltonian import Potential, TwoBodyInteraction
 
 def shell_configurations():
     return [{'name': '0s1/2', 'N': 0},
@@ -36,13 +37,14 @@ shell_configurations_list = shell_configurations()
 input_dict["shell-orbit P-levels"] = OrderedDict(sorted(input_dict["shell-orbit P-levels"].iteritems(), key=lambda x: x[0]))
 #################### Global parameters ####################
 
+
 sps_generator_obj = sps_generator(input_dict)
 sps_generator_obj.calc_m_broken_basis(shell_configurations_list)
 m_broken_basis = sps_generator_obj.get_m_broken_basis()
 get_all_sps_list = sps_generator_obj.get_all_sps_list()
 sps_generator_obj.calc_m_scheme_basis(m_broken_basis)
 m_scheme_basis = np.array(sps_generator_obj.get_m_scheme_basis())
-
+print(get_all_sps_list)
 sps_generator_obj.print_sps()
 print
 print "Number of general {}-particle states:".format(input_dict["number of particles"]),len(m_broken_basis)
@@ -50,3 +52,12 @@ sps_generator_obj.print_m_scheme_basis()
 
 
 print hamiltonian_unperturbed(m_scheme_basis)
+
+V = Potential(1)
+
+tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
+
+tbi.compute_matrix()
+H = hamiltonian_unperturbed(m_scheme_basis)
+H+=tbi.get_matrix()
+print H

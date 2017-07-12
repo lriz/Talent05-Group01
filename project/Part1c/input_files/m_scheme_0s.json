@@ -1,7 +1,7 @@
 {
   "number of particles": 4,
   "2M-total": [0],
-  "orbit separation": false,
+  "orbit separation": true,
   "shell-orbit P-levels":
   {
     "1":
