@@ -10,7 +10,7 @@ class sps_generator(object):
         self.input_dict = input_dict
         self.m_scheme_basis = []
         self.m_broken_basis = []
-        self.all_sps_list = []
+        self.sps_list = []
 
     def calc_m_broken_basis(self, shell_configurations_list):
         sps_index = 1
@@ -19,7 +19,7 @@ class sps_generator(object):
             N_number = [shell['N'] for shell in  shell_configurations_list  if shell['name'] == level_name][-1] #TODO: check that not empty.
             j_total = self.input_dict["shell-orbit P-levels"][p_level_index]["2J-total"]
             for m_j in range(-j_total, j_total+1, 2):
-                self.all_sps_list.append(single_particle_state(p_level_index,
+                self.sps_list.append(single_particle_state(p_level_index,
                                                              N_number,
                                                              self.input_dict["shell-orbit P-levels"][p_level_index]["angular momentum"],
                                                              j_total,
@@ -27,13 +27,13 @@ class sps_generator(object):
                                                              sps_index))
                 sps_index += 1
 
-        self.m_broken_basis = np.array([list(x) for x in self.choose_iter(self.all_sps_list, self.input_dict["number of particles"])])
+        self.m_broken_basis = np.array([list(x) for x in self.choose_iter(self.sps_list, self.input_dict["number of particles"])])
 
     def get_m_broken_basis(self):
         return self.m_broken_basis
 
     def get_all_sps_list(self):
-        return self.all_sps_list
+        return self.sps_list
 
     def choose_iter(self, elements, length):
         """
@@ -90,7 +90,7 @@ class sps_generator(object):
         print
         print "{:>3} || {:>2} || {:>2} || {:>2} || {:>2} || {:>3}".format("i", "p", "N", "L", "2J", "2M_J")
         print "".join((" ","-"*34))
-        for sps in self.all_sps_list:
+        for sps in self.sps_list:
             print "{:>3} || {:>2} || {:>2} || {:>2} || {:>2} || {:>3}".format(sps.index, sps.p, sps.n, sps.l, sps.j, sps.m_j)
 
     def print_m_scheme_basis(self):
