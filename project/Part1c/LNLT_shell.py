@@ -47,35 +47,39 @@ m_broken_basis = sps_generator_obj.get_m_broken_basis()
 get_all_sps_list = sps_generator_obj.get_all_sps_list()
 sps_generator_obj.calc_m_scheme_basis(m_broken_basis)
 m_scheme_basis = np.array(sps_generator_obj.get_m_scheme_basis())
-print(get_all_sps_list)
+#print(get_all_sps_list)
 sps_generator_obj.print_sps()
-print
-print "Number of general {}-particle states:".format(input_dict["number of particles"]),len(m_broken_basis)
-sps_generator_obj.print_m_scheme_basis()
+#print
+#print("Number of general {}-particle states:".format(input_dict["number of particles"]),len(m_broken_basis))
+#sps_generator_obj.print_m_scheme_basis()
 
+m_broken_basis = np.array(m_broken_basis)
+print "Type of m_broken_basis", type(m_broken_basis)
+print "Type of m_scheme_basis", type(m_scheme_basis)
+#print hamiltonian_unperturbed(m_scheme_basis)
 
-print hamiltonian_unperturbed(m_scheme_basis)
-
-#gl = np.linspace(-1,1)
-#energies=[];
-#for g in gl:
-#g = 1
-#V = PairingPotential(g)
-V = GeneralHamiltonian("sdshellint.dat")
-tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
-
+gl = np.linspace(-1,1)
+energies=[];
+g = 1
+V = PairingPotential(g)
+#V = GeneralHamiltonian("sdshellint.dat")
+#tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
+tbi = TwoBodyInteraction(get_all_sps_list,m_broken_basis,V)
 tbi.compute_matrix()
-H = np.array(hamiltonian_unperturbed(m_scheme_basis))
-H+=tbi.get_matrix()
-print("Hamiltonian:")
-print H
+H0 = np.array(hamiltonian_unperturbed(m_broken_basis))
+HI = tbi.get_matrix()
+print HI
+for g in gl:
+    H = H0+g*HI
+    #print("Hamiltonian:")
+    #print H
 
-eigs,vecs = np.linalg.eig(np.array(H))
-print("The eigen values:")
-print(np.sort(eigs))
-#    energies.append(np.sort(eigs))
+    eigs,vecs = np.linalg.eig(np.array(H))
+    #print("The eigen values:")
+    #print(np.sort(eigs))
+    energies.append(np.sort(eigs))
 
-#energies = np.array(energies)
-#for i in range(0,6):
-#    plt.plot(gl,energies[:,i])
-#plt.show()
+energies = np.array(energies)
+for i in range(0,len(m_broken_basis)):
+    plt.plot(gl,energies[:,i])
+plt.show()

@@ -25,7 +25,10 @@ class TwoBodyInteraction(object):
                 state_a[i] = None
                 state_a[j] = None
                 state_a = np.array([e for e in state_a if e != None])
-                phase_a = i+j
+                # The j particle is taken out of a state with A-1 particles
+                # rather than A particles therefore the subtraction of one
+                # in the phase computation
+                phase_a = i+j-1
                 # create two particles with sp states a and b
                 for a in range(1,len(self.sp_basis)):
                     if self.sp_basis[a-1] in state_a:
@@ -51,6 +54,7 @@ class TwoBodyInteraction(object):
                             if (b<state_b[k].get_index()):
                                 state_c = np.insert(state_b,k,self.sp_basis[b-1])
                                 phase_c = k
+                                break
                         else:
                             phase_c = len(state_b)
                             state_c = np.append(state_b,self.sp_basis[b-1])
@@ -64,7 +68,7 @@ class TwoBodyInteraction(object):
                         #print("state: {0}".format(state))
                         #print("state_c: {0}".format(state_c))
                         #print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
-                        self.matrix[ind_i,ind_j]+=self.potential.get_element(a,b,c.get_index(),d.get_index())*(1-((phase_a+phase_b+phase_c)%2)*2)
+                        self.matrix[ind_i,ind_j]-=self.potential.get_element(a,b,c.get_index(),d.get_index())*(((phase_a+phase_b+phase_c)%2)*2-1)
                         # TODO: search for the corresponding state in m_schemebasis
                         # TODO: find matrix element multiply with the phase
         
