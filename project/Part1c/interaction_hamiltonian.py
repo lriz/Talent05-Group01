@@ -15,8 +15,7 @@ class TwoBodyInteraction(object):
         self.matrix = np.zeros((len(m_scheme_basis),len(m_scheme_basis)))
 
     def _compute_connections(self,state,ind_i):
-        
-        # annihilate two particle at place i and j (i<j)
+        # annihilate two particles at place i and j (i<j)
         for i in range(0,len(state)-1):
             for j in range(i+1,len(state)):
                 state_a = np.copy(state)
@@ -27,8 +26,8 @@ class TwoBodyInteraction(object):
                 state_a = np.array([e for e in state_a if e != None])
                 phase_a = i+j
                 # create two particles with sp states a and b
-                for a in range(1,len(self.sp_basis)):
-                    if self.sp_basis[a-1] in state_a:
+                for a in range(1,len(self.sp_basis)):  #TODO: using the sp basis counting scheme? Particle #1 (index 1), particle #2 (index 2)...
+                    if self.sp_basis[a-1] in state_a:  #TODO: needed? won't it continue anyway?
                         continue
                     # Inserts the new particles, and remember the phase
                     # important to clone state_prime first
