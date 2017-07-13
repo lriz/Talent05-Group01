@@ -1,5 +1,6 @@
 from single_particle_state_class import single_particle_state
 from collections import OrderedDict
+import numpy as np
 
 class sps_generator(object):
     """
@@ -26,7 +27,7 @@ class sps_generator(object):
                                                              sps_index))
                 sps_index += 1
 
-        self.m_broken_basis = list([list(x) for x in self.choose_iter(self.all_sps_list, self.input_dict["number of particles"])])
+        self.m_broken_basis = np.array([list(x) for x in self.choose_iter(self.all_sps_list, self.input_dict["number of particles"])])
 
     def get_m_broken_basis(self):
         return self.m_broken_basis
