@@ -6,7 +6,7 @@ class GeneralHamiltonian(object):
     This class reads a data file with m-scheme two-body matrix elements
     and then makes it possible for our program to search in it.
     """
-    def __init__(self,interaction_filename):
+    def __init__(self, interaction_filename):
         """
         :param interaction_filename: the interaction filename. Opened from 'input_file/' directory.
         self.input_file: the opened interaction filename.
@@ -33,7 +33,7 @@ class GeneralHamiltonian(object):
         self.sps_length = int(self.file_list[0])
         # and store them
         self.sp_energies = []
-        self.sp_states = []
+        self.sps_list = []
         for i in range(1, self.sps_length+1):
             line_split = self.file_list[i].split()
             self.sp_energies.append(float(line_split[-1]))
@@ -43,7 +43,7 @@ class GeneralHamiltonian(object):
                                           int(line_split[3]),
                                           int(line_split[4]),
                                           int(line_split[0]))
-            self.sp_states.append(state)
+            self.sps_list.append(state)
 
     def read_file_interaction(self):
         self.tp_matelems = np.zeros((self.sps_length, self.sps_length, self.sps_length, self.sps_length))
@@ -59,7 +59,9 @@ class GeneralHamiltonian(object):
             elem = float(line_split[4])
             self.tp_matelems[a,b,c,d] = elem
 
-    def get_element(self,a,b,c,d):
+    def get_matrix_element(self,a,b,c,d):
         return self.tp_matelems[a-1,b-1,c-1,d-1]
-            
+
+    def get_sps_list(self):
+        return self.sps_list
         
