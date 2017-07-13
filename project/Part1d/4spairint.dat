@@ -1,0 +1,26 @@
+# Pairing Project, recast the interaction in this scheme
+# number of single-particle states, only neutrons!!!!
+    8
+#   legend
+#   index  n     l    2j   2m_j   single-particle energies
+     1     0     0     1    -1    0.0  # (p-1) - sp energies
+     2     0     0     1     1    0.0  # (p-1) - sp energies
+     3     1     0     1    -1    1.0  # (p-1) - sp energies
+     4     1     0     1     1    1.0  # (p-1) - sp energies
+     5     2     0     1    -1    2.0  # (p-1) - sp energies
+     6     2     0     1     1    2.0  # (p-1) - sp energies
+     7     3     0     1    -1    3.0  # (p-1) - sp energies
+     8     3     0     1     1    3.0  # (p-1) - sp energies
+# interacting part g depedent
+# number of matrix elements in m-scheme
+    10
+   1   2   1   2  -1.0 # g strength
+   1   2   3   4  -1.0 # g strength
+   1   2   5   6  -1.0 # g strength
+   1   2   7   8  -1.0 # g strength
+   3   4   3   4  -1.0 # g strength
+   3   4   5   6  -1.0 # g strength
+   3   4   7   8  -1.0 # g strength
+   5   6   5   6  -1.0 # g strength
+   5   6   7   8  -1.0 # g strength
+   7   8   7   8  -1.0 # g strength
