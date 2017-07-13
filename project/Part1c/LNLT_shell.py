@@ -58,12 +58,15 @@ sps_generator_obj.print_m_scheme_basis()
 print hamiltonian_unperturbed(m_scheme_basis)
 #################### Print ####################
 
+#TODO: change names so we'd remember in the future.
 #gl = np.linspace(-1,1)
 #energies=[];
 #for g in gl:
 #g = 1
 #V = PairingPotential(g)
 V = GeneralHamiltonian("sdshellint.dat")
+V.read_file_sps()
+V.read_file_interaction()
 tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
 
 tbi.compute_matrix()
