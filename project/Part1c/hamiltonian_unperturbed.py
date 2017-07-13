@@ -5,7 +5,6 @@ def hamiltonian_unperturbed(m_scheme_basis):
     :param m_scheme_basis: a basis of sps in m_scheme.
     :return: the Hamiltonian matrix.
     """
-    print "hamiltonian_unperturbed"
     dim = len(m_scheme_basis)
     h_matrix = np.zeros((dim, dim))  # the unperturbed  Hamiltonian matrix.
     for i, eig in enumerate(m_scheme_basis):
