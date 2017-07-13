@@ -8,6 +8,7 @@ from hamiltonian_unperturbed import hamiltonian_unperturbed
 from sps_generator import sps_generator
 from interaction_hamiltonian import TwoBodyInteraction
 from pairing_potential import PairingPotential
+from general_potential import GeneralHamiltonian
 
 def shell_configurations():
     return [{'name': '0s1/2', 'N': 0},
@@ -58,9 +59,9 @@ print hamiltonian_unperturbed(m_scheme_basis)
 #gl = np.linspace(-1,1)
 #energies=[];
 #for g in gl:
-g = 1
-V = PairingPotential(g)
-
+#g = 1
+#V = PairingPotential(g)
+V = GeneralHamiltonian("sdshellint.dat")
 tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
 
 tbi.compute_matrix()
