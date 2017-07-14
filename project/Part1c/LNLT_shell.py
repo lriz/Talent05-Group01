@@ -63,10 +63,10 @@ energies=[];
 g = 1
 V = PairingPotential(g)
 #V = GeneralHamiltonian("sdshellint.dat")
-#tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
-tbi = TwoBodyInteraction(get_all_sps_list,m_broken_basis,V)
+tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
+#tbi = TwoBodyInteraction(get_all_sps_list,m_broken_basis,V)
 tbi.compute_matrix()
-H0 = np.array(hamiltonian_unperturbed(m_broken_basis))
+H0 = np.array(hamiltonian_unperturbed(m_scheme_basis))
 HI = tbi.get_matrix()
 print HI
 for g in gl:
@@ -80,6 +80,6 @@ for g in gl:
     energies.append(np.sort(eigs))
 
 energies = np.array(energies)
-for i in range(0,len(m_broken_basis)):
+for i in range(0,len(m_scheme_basis)):
     plt.plot(gl,energies[:,i])
 plt.show()
