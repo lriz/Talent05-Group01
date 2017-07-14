@@ -32,7 +32,7 @@ class sps_generator(object):
     def get_m_broken_basis(self):
         return self.m_broken_basis
 
-    def get_all_sps_list(self):
+    def get_sps_list(self):
         return self.sps_list
 
     def choose_iter(self, elements, length):
@@ -53,8 +53,7 @@ class sps_generator(object):
 
     #TODO: change for class inheretence.
     def calc_m_scheme_basis(self, m_broken_basis):
-        if self.input_dict["orbit separation"]:
-            print 'test'
+        if self.input_dict["use input file"]:
             self.calc_m_scheme_basis_orbit_separation(m_broken_basis)
         else:
             self.calc_m_scheme_basis_no_orbit_separation(m_broken_basis)
@@ -84,6 +83,7 @@ class sps_generator(object):
                 self.m_scheme_basis.append(sps)
 
     def get_m_scheme_basis(self):
+        print 'print_m_scheme_basis'
         return self.m_scheme_basis
 
     def print_sps(self):
