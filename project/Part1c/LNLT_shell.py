@@ -5,10 +5,12 @@ import argparse
 from collections import OrderedDict
 from single_particle_state_class import single_particle_state
 from hamiltonian_unperturbed import hamiltonian_unperturbed
+from hamiltonian_unperturbed import hamiltonian_unperturbed_pairing
 from sps_generator import sps_generator
 from interaction_hamiltonian import TwoBodyInteraction
 from pairing_potential import PairingPotential
 from general_potential import GeneralHamiltonian
+from generate_many_body_basis import generate_many_body_basis
 
 def shell_configurations():
     return [{'name': '0s1/2', 'N': 0},
@@ -47,6 +49,7 @@ m_broken_basis = sps_generator_obj.get_m_broken_basis()
 get_all_sps_list = sps_generator_obj.get_all_sps_list()
 sps_generator_obj.calc_m_scheme_basis(m_broken_basis)
 m_scheme_basis = np.array(sps_generator_obj.get_m_scheme_basis())
+
 #################### Get m_scheme_basis ####################
 
 #################### Print ####################
@@ -55,25 +58,32 @@ sps_generator_obj.print_sps()
 print
 print "Number of general {}-particle states:".format(input_dict["number of particles"]),len(m_broken_basis)
 sps_generator_obj.print_m_scheme_basis()
-print hamiltonian_unperturbed(m_scheme_basis)
+print hamiltonian_unperturbed_pairing(m_scheme_basis)
 #################### Print ####################
 
 #TODO: change names so we'd remember in the future.
-#gl = np.linspace(-1,1)
-#energies=[];
+gl = np.linspace(-1,1)
+energies=[];
 #for g in gl:
-#g = 1
+g = 1
 #V = PairingPotential(g)
 V = GeneralHamiltonian("sdshellint.dat")
 V.read_file_sps()
 V.read_file_interaction()
-tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
-
+#tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
+mp_basis = generate_many_body_basis(V.get_sps_list(),3)
+print("dim: {0}".format(len(mp_basis)))
+tbi = TwoBodyInteraction(get_all_sps_list,mp_basis,V)
+print("Computes interaction hamiltonian")
 tbi.compute_matrix()
-H = np.array(hamiltonian_unperturbed(m_scheme_basis))
-H+=tbi.get_matrix()
-print("Hamiltonian:")
-print H
+print("Computes unperturbed hamiltonain")
+H0 = hamiltonian_unperturbed(mp_basis,V.get_sp_energies())
+HI = tbi.get_matrix()
+#print HI
+#for g in gl:
+H = H0+HI
+    #print("Hamiltonian:")
+    #print H
 
 eigs,vecs = np.linalg.eig(np.array(H))
 print("The eigen values:")
@@ -81,6 +91,6 @@ print(np.sort(eigs))
 #    energies.append(np.sort(eigs))
 
 #energies = np.array(energies)
-#for i in range(0,6):
+#for i in range(0,len(m_broken_basis)):
 #    plt.plot(gl,energies[:,i])
 #plt.show()
