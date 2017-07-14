@@ -15,8 +15,13 @@ class TwoBodyInteraction(object):
         self.matrix = np.zeros((len(m_scheme_basis),len(m_scheme_basis)))
 
     def _compute_connections(self,state,ind_i):
-        
-        # annihilate two particle at place i and j (i<j)
+        """
+        Calculate H_I|SD> for a single slater determinant |SD>.
+        :param state:
+        :param ind_i:
+        :return:
+        """
+        # annihilate two particles at place i and j (i<j)
         for i in range(0,len(state)-1):
             for j in range(i+1,len(state)):
                 state_a = np.copy(state)
@@ -30,26 +35,26 @@ class TwoBodyInteraction(object):
                 # in the phase computation
                 phase_a = i+j-1
                 # create two particles with sp states a and b
-                for a in range(1,len(self.sp_basis)):
-                    if self.sp_basis[a-1] in state_a:
+                for a in range(1,len(self.sp_basis)):  #TODO: using the sp basis counting scheme? Particle #1 (index 1), particle #2 (index 2)...
+                    if self.sp_basis[a-1] in state_a:  #TODO: needed? won't it continue anyway?
                         continue
                     # Inserts the new particles, and remember the phase
                     # important to clone state_prime first
-                    state_b = None
-                    phase_b = None
+                    state_b = None  # needed?
+                    phase_b = None  # needed?
                     for k in range(0,len(state_a)):
                         if (a<state_a[k].get_index()):
                             state_b = np.insert(state_a,k,self.sp_basis[a-1])
                             phase_b = k
                             break
-                    else:
+                    else: # only necessary for [1,2]?
                         phase_b = len(state_a)
                         state_b = np.append(state_a,self.sp_basis[a-1])
                     for b in range(a+1,len(self.sp_basis)+1):
                         if self.sp_basis[b-1] in state_b:
                             continue
-                        state_c = None
-                        phase_c = None
+                        state_c = None # needed?
+                        phase_c = None # needed?
                         for k in range(0,len(state_b)):
                             if (b<state_b[k].get_index()):
                                 state_c = np.insert(state_b,k,self.sp_basis[b-1])
@@ -68,7 +73,8 @@ class TwoBodyInteraction(object):
                         #print("state: {0}".format(state))
                         #print("state_c: {0}".format(state_c))
                         #print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
-                        self.matrix[ind_i,ind_j]-=self.potential.get_element(a,b,c.get_index(),d.get_index())*(((phase_a+phase_b+phase_c)%2)*2-1)
+
+                        self.matrix[ind_i,ind_j]-=self.potential.get_matrix_element(a,b,c.get_index(),d.get_index())*(((phase_a+phase_b+phase_c)%2)*2-1)
                         # TODO: search for the corresponding state in m_schemebasis
                         # TODO: find matrix element multiply with the phase
         
