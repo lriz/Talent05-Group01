@@ -77,7 +77,7 @@ class SPSGenerator(object):
         return self.sps_list
 
     def get_m_scheme_basis(self):
-        return self.m_scheme_basis
+        return np.array(self.m_scheme_basis)
 
     def set_sps_list(self, sps_list):
         self.sps_list = sps_list
