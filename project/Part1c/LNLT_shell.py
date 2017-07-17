@@ -49,6 +49,11 @@ with open("".join((folder_name,args.file))) as data_file:
 shell_configurations_list = shell_configurations()
 # Ordering the dictionary according to P values.
 orbits_dict["shell-orbit P-levels"] = OrderedDict(sorted(orbits_dict["shell-orbit P-levels"].iteritems(), key=lambda x: x[0]))
+# Command to print entire matrix.
+# threshold: total number of array elements which trigger summarization rather than full repr.
+# precision: precision of the output.
+# suppress: suppresses the use of scientific notation for small numbers.
+np.set_printoptions(threshold='nan', precision=3, suppress=True)  
 #################### Global parameters ####################
 
 #################### Get m_scheme_basis ####################
@@ -63,8 +68,10 @@ m_scheme_basis = np.array(sps_generator_obj.get_m_scheme_basis())
 #################### Print ####################
 sps_generator_obj.print_sps()
 print
-print "Number of general {}-particle states with 2M={}:".format(orbits_dict["number of particles"],config.json["2M-total"]),len(m_broken_basis)
+#print "Number of general {}-particle states with 2M={}:".format(orbits_dict["number of particles"],config.json["2M-total"]),len(m_broken_basis)
 sps_generator_obj.print_m_scheme_basis()
+print
+print 'Hamiltonian Unperturbed' 
 print hamiltonian_unperturbed_pairing(m_scheme_basis)
 #################### Print ####################
 
@@ -72,19 +79,24 @@ print hamiltonian_unperturbed_pairing(m_scheme_basis)
 gl = np.linspace(-1,1)
 energies=[];
 #for g in gl:
-g = 1
+#g = 1
 #V = PairingPotential(g)
 V = GeneralHamiltonian("sdshellint.dat")
 V.read_file_sps()
 V.read_file_interaction()
-#tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
-mp_basis = generate_many_body_basis(V.get_sps_list(),3)
-print("dim: {0}".format(len(mp_basis)))
-tbi = TwoBodyInteraction(sps_list,mp_basis,V)
+# Working in m_scheme_basis and not a general 'm_broken_basis' (or Tor's 'mp_basis').
+# 'V' is not ordered in the odemetric system hence it gives a matrix which is not sorted according to the m_scheme_basis.
+tbi = TwoBodyInteraction(sps_list, m_scheme_basis, V)  
+#mp_basis = generate_many_body_basis(V.get_sps_list(),2)
+#print "mp_basis", mp_basis
+#print("dim: {0}".format(len(mp_basis)))
+
+print("dim: {0}".format(len(m_scheme_basis)))
+#tbi = TwoBodyInteraction(sps_list,m_scheme_basis,V)
 print("Computes interaction hamiltonian")
 tbi.compute_matrix()
 print("Computes unperturbed hamiltonain")
-H0 = hamiltonian_unperturbed(mp_basis,V.get_sp_energies())
+H0 = hamiltonian_unperturbed(m_scheme_basis, V.get_sp_energies())  #TODO: why V.get_sp_energies()?
 HI = tbi.get_matrix()
 #print HI
 #for g in gl:
@@ -95,14 +107,17 @@ H = H0+HI
 energies, eig_vectors_list = np.linalg.eig(np.array(H))
 print("The eigen values:")
 print(np.sort(energies))
-#np.set_printoptions(threshold='nan')  # Command to print entire matrix.
+print
+# THe J^2 squared Hamiltonian - to calculate the J values of the energies.
 H_j = hamiltonian_j_squared(eig_vectors_list, m_scheme_basis)
 # Count num. of off-diagonal elements (search for degeneracies)
 # Remove the diagonal part of H_j and then count non-zero elements.
-print np.count_nonzero(H_j - np.diag(np.diagonal(H_j)))
-print np.diagonal(H_j)  # Look at the diagonal part of H_j.
-for j in np.diagonal(H_j):
-        print j, np.roots([1,1,-j])[-1]
+print 'Hamiltonian J^2'
+print H_j
+print 'J^2 diagonal', np.diagonal(H_j)  # Look at the diagonal part of H_j.
+print 'J^2 non-zero elements', np.count_nonzero(H_j - np.diag(np.diagonal(H_j)))
+for j_squared in np.diagonal(H_j):
+        print 'J(J+1)=', round(j_squared, 3), 'J=', round(np.roots([1,1,-j_squared])[-1], 3)
 #np.count_nonzero(h_j - np.diag(np.diagonal(h_j)))
 #    energies.append(np.sort(eigs))
 
