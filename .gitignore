@@ -34,4 +34,5 @@ Trash
 # doconce:
 .*_html_file_collection
 
-Added a line below
+# Pycharm idea
+.idea
