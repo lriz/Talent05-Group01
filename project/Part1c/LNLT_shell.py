@@ -1,16 +1,14 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import json
 import argparse
+import json
 from collections import OrderedDict
-from SingleParticleState import SingleParticleState
-from hamiltonian_unperturbed import hamiltonian_unperturbed
-from hamiltonian_unperturbed import hamiltonian_unperturbed_pairing
-from SPSGenerator import SPSGenerator
+
+import matplotlib.pyplot as plt
+import numpy as np
 from interaction_hamiltonian import TwoBodyInteraction
-from PairingPotential import PairingPotential
-from GeneralHamiltonian import GeneralHamiltonian
-from generate_many_body_basis import generate_many_body_basis
+
+from hamiltonian_unperturbed import hamiltonian_unperturbed_pairing
+from project.Part1c.PairingPotential import PairingPotential
+
 
 def shell_configurations():
     return [{'name': '0s1/2', 'N': 0},
