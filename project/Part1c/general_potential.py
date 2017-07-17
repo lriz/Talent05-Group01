@@ -43,7 +43,7 @@ class GeneralHamiltonian(object):
                                           int(line_split[3]),
                                           int(line_split[4]),
                                           int(line_split[0]))
-            self.sps_list.append(state)
+            self.sps_list.append(state)  #TODO: order according to odemetric system.
 
     def read_file_interaction(self):
         self.tp_matelems = np.zeros((self.sps_length, self.sps_length, self.sps_length, self.sps_length))
@@ -64,5 +64,8 @@ class GeneralHamiltonian(object):
 
     def get_sps_list(self):
         return self.sps_list
+
     def get_sp_energies(self):
         return self.sp_energies
+
+
