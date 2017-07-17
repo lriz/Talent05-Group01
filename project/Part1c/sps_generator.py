@@ -13,6 +13,9 @@ class sps_generator(object):
         self.sps_list = []
 
     def calc_m_broken_basis(self, shell_configurations_list):
+	"""
+	Calculates the slater determinantes from a single-particle basis. Can NOT take Morten's input file. Only uses the json input file with given orbits.
+	"""
         sps_index = 1
         for p_level_index in self.input_dict["shell-orbit P-levels"].keys():
             level_name = self.input_dict["shell-orbit P-levels"][p_level_index]["name"]
@@ -94,6 +97,8 @@ class sps_generator(object):
 
     def print_m_scheme_basis(self):
         print
+	print '#'*100
+	print "M-scheme Basis"
         #m_total_list = [(self.input_dict["2M-total"], self.input_dict["shell-orbit P-levels"][p]["name"]) for p in self.input_dict["shell-orbit P-levels"]]
         m_total_list = []
         for p in self.input_dict["shell-orbit P-levels"]:
@@ -102,4 +107,6 @@ class sps_generator(object):
         print "".join(("sps with 2M-total = ","{} "*len(m_total_list))).format(*m_total_list)
         print 'Basis length:', len(self.m_scheme_basis)
         print self.m_scheme_basis
+	print '#'*100
+	
 
