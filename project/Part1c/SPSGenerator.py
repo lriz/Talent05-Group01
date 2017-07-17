@@ -1,8 +1,8 @@
-from single_particle_state_class import single_particle_state
+from SingleParticleState import SingleParticleState
 from collections import OrderedDict
 import numpy as np
 
-class sps_generator(object):
+class SPSGenerator(object):
     """
 
     """
@@ -19,12 +19,12 @@ class sps_generator(object):
             N_number = [shell['N'] for shell in  shell_configurations_list  if shell['name'] == level_name][-1] #TODO: check that not empty.
             j_total = self.input_dict["shell-orbit P-levels"][p_level_index]["2J-total"]
             for m_j in range(-j_total, j_total+1, 2):
-                self.sps_list.append(single_particle_state(p_level_index,
-                                                             N_number,
-                                                             self.input_dict["shell-orbit P-levels"][p_level_index]["angular momentum"],
-                                                             j_total,
-                                                             m_j,
-                                                             sps_index))
+                self.sps_list.append(SingleParticleState(p_level_index,
+                                                         N_number,
+                                                         self.input_dict["shell-orbit P-levels"][p_level_index]["angular momentum"],
+                                                         j_total,
+                                                         m_j,
+                                                         sps_index))
                 sps_index += 1
 
         self.m_broken_basis = np.array([list(x) for x in self.choose_iter(self.sps_list, self.input_dict["number of particles"])])

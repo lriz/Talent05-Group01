@@ -1,4 +1,4 @@
-class single_particle_state(object):
+class SingleParticleState(object):
     """
 
     """

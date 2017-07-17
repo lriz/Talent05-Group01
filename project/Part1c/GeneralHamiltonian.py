@@ -1,4 +1,4 @@
-from single_particle_state_class import single_particle_state
+from SingleParticleState import SingleParticleState
 import numpy as np
 
 class GeneralHamiltonian(object):
@@ -37,12 +37,12 @@ class GeneralHamiltonian(object):
         for i in range(1, self.sps_length+1):
             line_split = self.file_list[i].split()
             self.sp_energies.append(float(line_split[-1]))
-            state = single_particle_state(int(line_split[1]),
-                                          int(line_split[1]),
-                                          int(line_split[2]),
-                                          int(line_split[3]),
-                                          int(line_split[4]),
-                                          int(line_split[0]))
+            state = SingleParticleState(int(line_split[1]),
+                                        int(line_split[1]),
+                                        int(line_split[2]),
+                                        int(line_split[3]),
+                                        int(line_split[4]),
+                                        int(line_split[0]))
             self.sps_list.append(state)
 
     def read_file_interaction(self):

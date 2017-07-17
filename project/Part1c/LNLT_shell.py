@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 import json
 import argparse
 from collections import OrderedDict
-from single_particle_state_class import single_particle_state
+from SingleParticleState import SingleParticleState
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from hamiltonian_unperturbed import hamiltonian_unperturbed_pairing
-from sps_generator import sps_generator
+from SPSGenerator import SPSGenerator
 from interaction_hamiltonian import TwoBodyInteraction
 from pairing_potential import PairingPotential
-from general_potential import GeneralHamiltonian
+from GeneralHamiltonian import GeneralHamiltonian
 from generate_many_body_basis import generate_many_body_basis
 
 def shell_configurations():

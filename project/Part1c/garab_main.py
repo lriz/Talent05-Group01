@@ -9,12 +9,12 @@ from hamiltonian_unperturbed import hamiltonian_unperturbed_pairing
 from sps_generator import sps_generator
 from interaction_hamiltonian import TwoBodyInteraction
 from pairing_potential import PairingPotential
-from general_potential import GeneralHamiltonian
+from GeneralHamiltonian import GeneralHamiltonian
 from generate_many_body_basis import generate_many_body_basis
 from j_operator import get_JJ_operator
 from level_ploter import LevelPloter
 
-A = 20
+A = 18
 n = A-16
 
 
