@@ -1,7 +1,7 @@
 from SingleParticleState import SingleParticleState
 import numpy as np
 
-class GeneralHamiltonian(object):
+class ReadMatrixElementsFile(object):
     """
     This class reads a data file with m-scheme two-body matrix elements
     and then makes it possible for our program to search in it.
