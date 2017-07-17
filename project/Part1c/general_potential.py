@@ -58,6 +58,13 @@ class GeneralHamiltonian(object):
             d = int(line_split[3])-1
             elem = float(line_split[4])
             self.tp_matelems[a,b,c,d] = elem
+            #self.tp_matelems[b,a,c,d] = elem
+            #self.tp_matelems[a,b,d,c] = elem
+            #self.tp_matelems[b,a,d,c] = elem
+            self.tp_matelems[c,d,a,b] = elem
+            #self.tp_matelems[c,d,b,a] = elem
+            #self.tp_matelems[d,c,a,b] = elem
+            #self.tp_matelems[d,c,b,a] = elem
 
     def get_matrix_element(self,a,b,c,d):
         return self.tp_matelems[a-1,b-1,c-1,d-1]
