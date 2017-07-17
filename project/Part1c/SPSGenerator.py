@@ -1,68 +1,56 @@
 from SingleParticleState import SingleParticleState
 from collections import OrderedDict
+from itertools import combinations
 import numpy as np
 
 class SPSGenerator(object):
     """
 
     """
-    def __init__(self, input_dict):
-        self.input_dict = input_dict
+    def __init__(self):
+        super(SPSGenerator,self).__init__()
         self.m_scheme_basis = []
         self.m_broken_basis = []
         self.sps_list = []
 
-    def calc_m_broken_basis(self, shell_configurations_list):
+    def calc_sps_list(self, shell_configurations_list, input_dict):
         sps_index = 1
-        for p_level_index in self.input_dict["shell-orbit P-levels"].keys():
-            level_name = self.input_dict["shell-orbit P-levels"][p_level_index]["name"]
+        for p_level_index in input_dict["shell-orbit P-levels"].keys():
+            level_name = input_dict["shell-orbit P-levels"][p_level_index]["name"]
             N_number = [shell['N'] for shell in  shell_configurations_list  if shell['name'] == level_name][-1] #TODO: check that not empty.
-            j_total = self.input_dict["shell-orbit P-levels"][p_level_index]["2J-total"]
+            j_total = input_dict["shell-orbit P-levels"][p_level_index]["2J-total"]
             for m_j in range(-j_total, j_total+1, 2):
                 self.sps_list.append(SingleParticleState(p_level_index,
                                                          N_number,
-                                                         self.input_dict["shell-orbit P-levels"][p_level_index]["angular momentum"],
+                                                         input_dict["shell-orbit P-levels"][p_level_index]["angular momentum"],
                                                          j_total,
                                                          m_j,
                                                          sps_index))
                 sps_index += 1
 
-        self.m_broken_basis = np.array([list(x) for x in self.choose_iter(self.sps_list, self.input_dict["number of particles"])])
-
-    def get_m_broken_basis(self):
-        return self.m_broken_basis
-
-    def get_all_sps_list(self):
-        return self.sps_list
-
-    def choose_iter(self, elements, length):
+    def calc_m_broken_basis(self,sps_list, n):
         """
-        Generate all possible elements from a list given a wanted length. e.g. number of states and number of particles.
-        :param elements: the number of states.
-        :param length: the number of particles.
+        Calculate all Slater determinants from a single particle basis.
+        :param sps_list: a list of all the single particle state.
+        :param n: number of particles to couple together.
         :return:
         """
-        for i in xrange(len(elements)):
-            if length == 1:
-                yield (elements[i],)
-            else:
-                for next in self.choose_iter(elements[i+1:len(elements)], length-1):
-                    yield (elements[i],) + next
-    def choose(self, l, k):
-        return list(self.choose_iter(l, k))
+        self.m_broken_basis=[]
+        for l in combinations(sps_list, n):
+            self.m_broken_basis.append(list(l))
+        return np.array(self.m_broken_basis)
 
     #TODO: change for class inheretence.
-    def calc_m_scheme_basis(self, m_broken_basis):
-        if self.input_dict["orbit separation"]:
-            print 'test'
-            self.calc_m_scheme_basis_orbit_separation(m_broken_basis)
+    def calc_m_scheme_basis(self, m_broken_basis, M_total, orbits_dict, orbits_separation):
+        if orbits_separation:
+            self.calc_m_scheme_basis_orbit_separation(m_broken_basis, orbits_dict, M_total)
         else:
-            self.calc_m_scheme_basis_no_orbit_separation(m_broken_basis)
+            self.calc_m_scheme_basis_no_orbit_separation(m_broken_basis, M_total)
 
-    def calc_m_scheme_basis_orbit_separation(self, m_broken_basis):
+    def calc_m_scheme_basis_orbit_separation(self, m_broken_basis, orbits_dict, M_total):
         for sps in m_broken_basis:
             sps_temp_dict = OrderedDict()
-            for p in self.input_dict["shell-orbit P-levels"]:
+            for p in orbits_dict["shell-orbit P-levels"]:
                 sps_p_list = []
                 for i in sps:
                     if i.get_p() == p:
@@ -71,17 +59,23 @@ class SPSGenerator(object):
             sps_temp_dict = OrderedDict((k, v) for k, v in sps_temp_dict.iteritems() if v)
             m_bool = True
             for p, value in sps_temp_dict.iteritems():
-                if sum([v.get_m_j() for v in value]) in self.input_dict["shell-orbit P-levels"][p]["2M-total"]:
+                if sum([v.get_m_j() for v in value]) in M_total:
                     continue
                 else:
                     m_bool = False
             if m_bool:
                 self.m_scheme_basis.append(sps)
 
-    def calc_m_scheme_basis_no_orbit_separation(self, m_broken_basis):
+    def calc_m_scheme_basis_no_orbit_separation(self, m_broken_basis, M_total):
         for sps in m_broken_basis:
-            if sum([i.get_m_j() for i in sps]) in self.input_dict["2M-total"]:
+            if sum([i.get_m_j() for i in sps]) in M_total:
                 self.m_scheme_basis.append(sps)
+
+    def get_m_broken_basis(self):
+        return self.m_broken_basis
+
+    def get_sps_list(self):
+        return self.sps_list
 
     def get_m_scheme_basis(self):
         return self.m_scheme_basis
