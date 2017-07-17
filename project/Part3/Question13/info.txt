@@ -1,0 +1,21 @@
+# create executables
+shell o23.ans
+# made the bat file executable (if needed)
+chmod +x o23.bat
+# run the program
+./o23.bat
+
+#magnetic moment (Schmidt Ch 25.5)
+#$\cfrac{\mu}{\mu_N}= j(g^l_q\pm\cfrac{g^s_q-g^l_q}{2*l+1})$
+# + or - according to j\pm1/2
+# q is n (neutron) or (proton)
+# g^s_q and g^l_q are related to the interaction => look at *.deo
+
+#neutron in 1s1/2
+#magnetic moment = -1.72 (+) or -1.84 (-)
+
+#neutron in 0d3/2
+#magnetic moment = -1.83 (+) or -1.50 (-)
+
+# if you want to look at the occupation number of particles look at *.occ file
+# in the GS we get 0.17 0d3; 5.81 0d5; 1.02 1s1
