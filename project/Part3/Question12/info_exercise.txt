@@ -1,6 +1,6 @@
 # We create only one input file which has two parts merged
-shell o22.ans
+shell o22_ex.ans
 # make the program executable (if needed)
-chmod +x o22.bat
+chmod +x o22_ex.bat
 # run the program
-./o22.bat
+./o22_ex.bat
