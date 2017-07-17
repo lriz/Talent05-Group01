@@ -6,8 +6,8 @@ from collections import OrderedDict
 from SingleParticleState import SingleParticleState
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from hamiltonian_unperturbed import hamiltonian_unperturbed_pairing
-from sps_generator import sps_generator
-from interaction_hamiltonian import TwoBodyInteraction
+from SPSGenerator import SPSGenerator
+from TwoBodyInteraction import TwoBodyInteraction
 from pairing_potential import PairingPotential
 from GeneralHamiltonian import GeneralHamiltonian
 from generate_many_body_basis import generate_many_body_basis
