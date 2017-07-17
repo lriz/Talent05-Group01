@@ -16,7 +16,7 @@ class TwoBodyOperator(object):
         self.potential = potential
         self.matrix = np.zeros((len(m_scheme_basis),len(m_scheme_basis)))
 
-    def _compute_connections(self,state,ind_i):
+    def _compute_matrix_element(self,state,ind_i):
         """
         Calculate H_I|SD> for a single slater determinant |SD>.
         :param state:
@@ -87,7 +87,7 @@ class TwoBodyOperator(object):
         
     def compute_matrix(self):
         for i,ket in enumerate(self.m_scheme_basis):
-            self._compute_connections(ket,i)
+            self._compute_matrix_element(ket,i)
 
     def get_matrix(self):
         return self.matrix
