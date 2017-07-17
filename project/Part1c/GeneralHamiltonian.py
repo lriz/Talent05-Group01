@@ -6,16 +6,14 @@ class GeneralHamiltonian(object):
     This class reads a data file with m-scheme two-body matrix elements
     and then makes it possible for our program to search in it.
     """
-    def __init__(self, interaction_filename):
+    def __init__(self, interaction_file):
         """
         :param interaction_filename: the interaction filename. Opened from 'input_file/' directory.
         self.input_file: the opened interaction filename.
         self.file_list: a list of the interaction filename, comments refined out.
         self.sps_length: number of single particle states.
-        :return:
         """
-        folder_name = 'input_files/'  # Folder of input files. (This makes it harder to use from command line since we can not use autocompletion)
-        self.input_file = open("".join((folder_name, interaction_filename)))
+        self.input_file = interaction_file
         self.file_list = []
         self.sps_length = 0
 
