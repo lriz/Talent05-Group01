@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import json
 import argparse
 from collections import OrderedDict
-from single_particle_state_class import single_particle_state
+from SingleParticleState import SingleParticleState
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from hamiltonian_unperturbed import hamiltonian_unperturbed_pairing
 from sps_generator import sps_generator
@@ -12,7 +12,7 @@ from pairing_potential import PairingPotential
 from GeneralHamiltonian import GeneralHamiltonian
 from generate_many_body_basis import generate_many_body_basis
 from j_operator import get_JJ_operator
-from level_ploter import LevelPloter
+from LevelPloter import LevelPloter
 
 A = 18
 n = A-16
