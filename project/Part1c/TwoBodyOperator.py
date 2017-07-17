@@ -8,7 +8,8 @@ def find_index(m_scheme_basis,state):
     else:
         return res[0]
         d,c
-class TwoBodyInteraction(object):
+
+class TwoBodyOperator(object):
     def __init__(self,sp_basis,m_scheme_basis,potential):
         self.sp_basis = sp_basis
         self.m_scheme_basis = m_scheme_basis
