@@ -83,7 +83,6 @@ class sps_generator(object):
                 self.m_scheme_basis.append(sps)
 
     def get_m_scheme_basis(self):
-        print 'print_m_scheme_basis'
         return self.m_scheme_basis
 
     def print_sps(self):
@@ -95,7 +94,7 @@ class sps_generator(object):
 
     def print_m_scheme_basis(self):
         print
-        m_total_list = [(self.input_dict["2M-total"], self.input_dict["shell-orbit P-levels"][p]["name"]) for p in self.input_dict["shell-orbit P-levels"]]
+        #m_total_list = [(self.input_dict["2M-total"], self.input_dict["shell-orbit P-levels"][p]["name"]) for p in self.input_dict["shell-orbit P-levels"]]
         m_total_list = []
         for p in self.input_dict["shell-orbit P-levels"]:
             m_total_list.append(self.input_dict["2M-total"])

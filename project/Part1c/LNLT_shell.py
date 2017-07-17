@@ -4,7 +4,7 @@ import json
 import argparse
 from collections import OrderedDict
 from single_particle_state_class import single_particle_state
-from hamiltonian_unperturbed import hamiltonian_unperturbed
+from hamiltonian_unperturbed import hamiltonian_unperturbed, hamiltonian_unperturbed_pairing
 from hamiltonian_j_squared import hamiltonian_j_squared
 from sps_generator import sps_generator
 from interaction_hamiltonian import TwoBodyInteraction
@@ -61,10 +61,9 @@ m_scheme_basis = np.array(sps_generator_obj.get_m_scheme_basis())
 #################### Get m_scheme_basis ####################
 
 #################### Print ####################
-print(sps_list)
 sps_generator_obj.print_sps()
 print
-print "Number of general {}-particle states:".format(orbits_dict["number of particles"]),len(m_broken_basis)
+print "Number of general {}-particle states with 2M={}:".format(orbits_dict["number of particles"],config.json["2M-total"]),len(m_broken_basis)
 sps_generator_obj.print_m_scheme_basis()
 print hamiltonian_unperturbed_pairing(m_scheme_basis)
 #################### Print ####################
@@ -81,7 +80,7 @@ V.read_file_interaction()
 #tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
 mp_basis = generate_many_body_basis(V.get_sps_list(),3)
 print("dim: {0}".format(len(mp_basis)))
-tbi = TwoBodyInteraction(get_all_sps_list,mp_basis,V)
+tbi = TwoBodyInteraction(sps_list,mp_basis,V)
 print("Computes interaction hamiltonian")
 tbi.compute_matrix()
 print("Computes unperturbed hamiltonain")
