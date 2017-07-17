@@ -66,31 +66,35 @@ gl = np.linspace(-1,1)
 energies=[];
 #for g in gl:
 g = 1
-#V = PairingPotential(g)
-V = GeneralHamiltonian("sdshellint.dat")
-V.read_file_sps()
-V.read_file_interaction()
-#tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
-mp_basis = generate_many_body_basis(V.get_sps_list(),3)
-print("dim: {0}".format(len(mp_basis)))
-tbi = TwoBodyInteraction(get_all_sps_list,mp_basis,V)
+V = PairingPotential(g)
+#V = GeneralHamiltonian("sdshellint.dat")
+#V.read_file_sps()
+#V.read_file_interaction()
+tbi = TwoBodyInteraction(get_all_sps_list,m_scheme_basis,V)
+#mp_basis = generate_many_body_basis(V.get_sps_list(),3)
+#print("dim: {0}".format(len(mp_basis)))
+#tbi = TwoBodyInteraction(V.get_sps_list(),mp_basis,V)
 print("Computes interaction hamiltonian")
 tbi.compute_matrix()
 print("Computes unperturbed hamiltonain")
-H0 = hamiltonian_unperturbed(mp_basis,V.get_sp_energies())
+H0 = hamiltonian_unperturbed_pairing(m_scheme_basis)
 HI = tbi.get_matrix()
+print "Total Hamiltonian for g = 1:"
+print H0+HI
 #print HI
-#for g in gl:
-H = H0+HI
+for g in gl:
+    H = H0+g*HI
     #print("Hamiltonian:")
     #print H
 
-eigs,vecs = np.linalg.eig(np.array(H))
-print("The eigen values:")
-print(np.sort(eigs))
-#    energies.append(np.sort(eigs))
+    eigs,vecs = np.linalg.eig(np.array(H))
+    #print("The eigen values:")
+    #print(np.sort(eigs))
+    energies.append(np.sort(eigs))
 
-#energies = np.array(energies)
-#for i in range(0,len(m_broken_basis)):
-#    plt.plot(gl,energies[:,i])
-#plt.show()
+energies = np.array(energies)
+for i in range(0,len(m_scheme_basis)):
+    plt.plot(gl,energies[:,i])
+plt.xlabel(r"$g \in [-1,1]$")
+plt.ylabel(r"$E$")
+plt.show()
