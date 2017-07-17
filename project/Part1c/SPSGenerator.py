@@ -13,16 +13,16 @@ class SPSGenerator(object):
         self.m_broken_basis = []
         self.sps_list = []
 
-    def calc_sps_list(self, shell_configurations_list, input_dict):
+    def calc_sps_list(self, shell_configurations_list, orbits_dict):
         sps_index = 1
-        for p_level_index in input_dict["shell-orbit P-levels"].keys():
-            level_name = input_dict["shell-orbit P-levels"][p_level_index]["name"]
+        for p_level_index in orbits_dict.keys():
+            level_name = orbits_dict[p_level_index]["name"]
             N_number = [shell['N'] for shell in  shell_configurations_list  if shell['name'] == level_name][-1] #TODO: check that not empty.
-            j_total = input_dict["shell-orbit P-levels"][p_level_index]["2J-total"]
+            j_total = orbits_dict[p_level_index]["2J-total"]
             for m_j in range(-j_total, j_total+1, 2):
                 self.sps_list.append(SingleParticleState(p_level_index,
                                                          N_number,
-                                                         input_dict["shell-orbit P-levels"][p_level_index]["angular momentum"],
+                                                         orbits_dict[p_level_index]["angular momentum"],
                                                          j_total,
                                                          m_j,
                                                          sps_index))
@@ -40,7 +40,6 @@ class SPSGenerator(object):
             self.m_broken_basis.append(list(l))
         return np.array(self.m_broken_basis)
 
-    #TODO: change for class inheretence.
     def calc_m_scheme_basis(self, m_broken_basis, M_total, orbits_dict, orbits_separation):
         if orbits_separation:
             self.calc_m_scheme_basis_orbit_separation(m_broken_basis, orbits_dict, M_total)
@@ -50,7 +49,7 @@ class SPSGenerator(object):
     def calc_m_scheme_basis_orbit_separation(self, m_broken_basis, orbits_dict, M_total):
         for sps in m_broken_basis:
             sps_temp_dict = OrderedDict()
-            for p in orbits_dict["shell-orbit P-levels"]:
+            for p in orbits_dict:
                 sps_p_list = []
                 for i in sps:
                     if i.get_p() == p:
@@ -79,6 +78,9 @@ class SPSGenerator(object):
 
     def get_m_scheme_basis(self):
         return self.m_scheme_basis
+
+    def set_sps_list(self, sps_list):
+        self.sps_list = sps_list
 
     def print_sps(self):
         print
