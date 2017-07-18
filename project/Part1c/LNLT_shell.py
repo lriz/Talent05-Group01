@@ -10,6 +10,7 @@ from SPSGenerator import SPSGenerator
 from TwoBodyOperator import TwoBodyOperator
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from LevelPloter import LevelPloter
+from ResultPrinter import ResultPrinter
 
 
 
@@ -94,10 +95,21 @@ factor = (18.0/(16.0+args.num_of_particles))**0.3
 H=H0+factor*HI
 
 energies, eig_vectors_list = np.linalg.eig(np.array(H))
-print("The eigen values:")
 
-print(np.sort(energies))
+energyzip = zip(energies.tolist(),eig_vectors_list.tolist())
+energyzip = sorted(energyzip,key=lambda k: k[0])
+en,ev =zip(*energyzip)
+energies = list(en)
+eig_vectors_list = list(ev)
 
-level_diagram = LevelPloter(np.sort(energies))
-level_diagram.plotLevels()
+rp = ResultPrinter(energies,energies)
+rp.print_to_screen()
+rp.print_to_file("test.lo")
+
+#print("The eigen values:")
+
+#print(np.sort(energies))
+
+#level_diagram = LevelPloter(np.sort(energies))
+#level_diagram.plotLevels()
 
