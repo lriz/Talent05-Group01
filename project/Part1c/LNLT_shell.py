@@ -1,6 +1,7 @@
 import argparse
 import json
 from collections import OrderedDict
+
 import numpy as np
 from PairingPotential import PairingPotential
 
@@ -9,6 +10,8 @@ from SPSGenerator import SPSGenerator
 from TwoBodyOperator import TwoBodyOperator
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from LevelPloter import LevelPloter
+
+
 
 
 def shell_configurations():
@@ -25,6 +28,7 @@ def shell_configurations():
             {'name': '0g9/2', 'N': 4}]
 
 #################### Argparse ####################
+
 parser = argparse.ArgumentParser(description='Input for shell-model program')
 group = parser.add_mutually_exclusive_group()
 parser.add_argument('-n','--num_of_particles', help='the number of particles we wish to work with.', default=2, type=int, required=True)
@@ -34,12 +38,14 @@ parser.add_argument('-os','--orbits_separation', help='in case we choose an orbi
                                                       'is used', default=False, type=bool, required=False)
 group.add_argument('-if','--interaction_file', help='interaction file name.', default=False, type=str, required=False)
 group.add_argument('-of','--orbits_file', help='json file name for defining the wanted orbits.', default=False, type=str, required=False)
+
 args = parser.parse_args()
 #################### Argparse ####################
 
 sps_object = SPSGenerator()
 shell_configurations_list = shell_configurations()
 folder_name = 'input_files/'  # Folder of input files.
+
 if args.orbits_file:
     with open("".join((folder_name, args.orbits_file)), 'rb') as data_file:
         orbits_dict = json.load(data_file)["shell-orbit P-levels"]
@@ -79,6 +85,7 @@ print("Computes interaction hamiltonian")
 tbi.compute_matrix()
 print("Computes unperturbed hamiltonain")
 H0 = hamiltonian_unperturbed(m_scheme_basis, V.get_sp_energies())
+
 HI = tbi.get_matrix()
 if np.sum(np.sum(np.abs(HI - np.transpose(HI))))>1e-10:
     print("Interaction hamiltonian is not symmetric")
@@ -86,8 +93,9 @@ if np.sum(np.sum(np.abs(HI - np.transpose(HI))))>1e-10:
 factor = (18.0/(16.0+args.num_of_particles))**0.3
 H=H0+factor*HI
 
-eigs,vecs = np.linalg.eig(np.array(H))
+energies, eig_vectors_list = np.linalg.eig(np.array(H))
 print("The eigen values:")
+
 print(np.sort(eigs))
 
 level_diagram = LevelPloter(np.sort(eigs))

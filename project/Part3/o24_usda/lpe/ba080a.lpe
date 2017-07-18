@@ -1,0 +1,73 @@
+! ---------- shell input for ba080a.lpe
+sd                 input *.sp file name
+sdpn               proton-neutron *.sp file name
+usda               interaction file name
+   6   8   8   0   8   10         6   number of pn orbitals, inc-core, izc-core, nvp-valence nvn-valence, neig, dim
+
+    6     number of levels,  nonconverged levels from extra.dat =   0
+  -28.3221   10   8   1    0.0000   0.0000   0.0000   2.0878   4.9072   1.0050
+  -25.1498   10   8   1    0.0000   0.0000   0.0000   2.0064   3.9983   1.9953
+  -21.8903   10   8   1    0.0000   0.0000   0.0000   2.9644   4.0278   1.0078
+  -19.4145   10   8   1    0.0000   0.0000   0.0000   3.0836   3.8707   1.0457
+  -18.2319   10   8   1    0.0000   0.0000   0.0000   2.9859   3.0699   1.9442
+  -10.9195   10   8   1    0.0000   0.0000   0.0000   3.8719   3.1262   1.0020
+
+! ---------- begin input for o_240.modelx
+M
+sdpn      
+  6
+  3
+0d3/2
+0d5/2
+1s1/2
+0d3/2
+0d5/2
+1s1/2
+y
+y
+   0 999   0 999   0 999
+y
+  1  0  4
+y
+  2  0  6
+y
+  3  0  2
+y
+  4  0  4
+y
+  5  0  6
+y
+  6  0  2
+n
+n
+X
+! ---------- end input for o_240.modelx
+
+! ---------- begin input for o_240.levelx
+L
+o_240
+s
+sdpn      
+   0
+   8
+y
+i 
+o_240
+n
+n
+n
+  0 11  2
+n
+  0  0  0
+n
+  0 11  2
+0
+0
+ 1
+  10
+n
+s
+y
+X
+! ---------- end input for o_240.levelx
+

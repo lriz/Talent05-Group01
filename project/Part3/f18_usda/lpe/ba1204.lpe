@@ -1,0 +1,75 @@
+! ---------- shell input for ba1204.lpe
+sd                 input *.sp file name
+sdpn               proton-neutron *.sp file name
+usda               interaction file name
+   6   8   8   1   1   10         8   number of pn orbitals, inc-core, izc-core, nvp-valence nvn-valence, neig, dim
+
+    8     number of levels,  nonconverged levels from extra.dat =   0
+   -9.7642    4   0   1    0.0291   0.8023   0.1686   0.0291   0.8023   0.1686
+   -9.4034    4   0   1    0.1861   0.4191   0.3948   0.1861   0.4191   0.3948
+   -7.6361    4   0   1    0.0102   0.6555   0.3343   0.0102   0.6555   0.3343
+   -5.8768    4   0   1    0.3831   0.4990   0.1179   0.3831   0.4990   0.1179
+   -1.8313    4   0   1    0.4983   0.4696   0.0321   0.4983   0.4696   0.0321
+   -1.5554    4   0   1    0.4308   0.0819   0.4873   0.4308   0.0819   0.4873
+   -0.7917    4   0   1    0.4750   0.0610   0.4640   0.4750   0.0610   0.4640
+    3.9664    4   0   1    0.9874   0.0116   0.0009   0.9874   0.0116   0.0009
+
+! ---------- begin input for f_180.modelx
+M
+sdpn      
+  6
+  3
+0d3/2
+0d5/2
+1s1/2
+0d3/2
+0d5/2
+1s1/2
+y
+y
+   0 999   0 999   0 999
+y
+  1  0  4
+y
+  2  0  6
+y
+  3  0  2
+y
+  4  0  4
+y
+  5  0  6
+y
+  6  0  2
+n
+n
+X
+! ---------- end input for f_180.modelx
+
+! ---------- begin input for f_180.levelx
+L
+f_180
+s
+sdpn      
+  -1
+  -1
+y
+i 
+f_180
+n
+n
+n
+  0 12  2
+n
+  1  5  2
+n
+  1  5  2
+0
+0
+ 1
+  10
+n
+s
+y
+X
+! ---------- end input for f_180.levelx
+

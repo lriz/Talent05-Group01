@@ -1,0 +1,95 @@
+! ---------- shell input for lk1e12.lpe
+sdpf               input *.sp file name
+sdpfpn             proton-neutron *.sp file name
+sdpfk              interaction file name
+  14   8   8   1  13   10         4   number of pn orbitals, inc-core, izc-core, nvp-valence nvn-valence, neig, dim
+
+    4     number of levels,  nonconverged levels from extra.dat =   0
+ -116.0300    2  12  -1    0.8781   0.0020   0.1200   0.0000   0.0000   0.0000   0.0000   6.0000   4.0000   2.0000   0.8403   0.0000   0.1597   0.0000
+ -115.1774    2  12  -1    0.9962   0.0018   0.0020   0.0000   0.0000   0.0000   0.0000   6.0000   4.0000   2.0000   0.0489   0.0000   0.9511   0.0000
+ -113.6996    2  12  -1    0.1234   0.0080   0.8686   0.0000   0.0000   0.0000   0.0000   6.0000   4.0000   2.0000   0.1104   0.0000   0.8896   0.0000
+ -109.0873    2  12  -1    0.0023   0.9882   0.0095   0.0000   0.0000   0.0000   0.0000   6.0000   4.0000   2.0000   0.0004   0.0000   0.9996   0.0000
+
+! ---------- begin input for f_301.modelx
+M
+sdpfpn    
+ 14
+  7
+0d5/2
+0d3/2
+1s1/2
+0f7/2
+0f5/2
+1p3/2
+1p1/2
+0d5/2
+0d3/2
+1s1/2
+0f7/2
+0f5/2
+1p3/2
+1p1/2
+y
+y
+   0 999   0 999   0 999
+y
+  1  0  6
+y
+  2  0  4
+y
+  3  0  2
+y
+  4  0  0
+y
+  5  0  0
+y
+  6  0  0
+y
+  7  0  0
+y
+  8  6  6
+y
+  9  4  4
+y
+ 10  2  2
+y
+ 11  0  8
+y
+ 12  0  0
+y
+ 13  0  4
+y
+ 14  0  0
+n
+n
+X
+! ---------- end input for f_301.modelx
+
+! ---------- begin input for f_301.levelx
+L
+f_301
+s
+sdpfpn    
+   1
+  13
+y
+i 
+f_301
+n
+n
+n
+  0 12  2
+n
+  1  5  2
+n
+  1  7  2
+0
+0
+-1
+  10
+n
+s
+y
+X
+! ---------- end input for f_301.levelx
+

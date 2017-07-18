@@ -34,4 +34,6 @@ Trash
 # doconce:
 .*_html_file_collection
 
-Added a line below
+
+# Added a line below
+.idea/*

@@ -1,0 +1,72 @@
+! ---------- shell input for bb0309.lpe
+sd                 input *.sp file name
+sdpn               proton-neutron *.sp file name
+usdb               interaction file name
+   6   8   8   0   3   10         5   number of pn orbitals, inc-core, izc-core, nvp-valence nvn-valence, neig, dim
+
+    5     number of levels,  nonconverged levels from extra.dat =   0
+  -13.5861    9   3   1    0.0000   0.0000   0.0000   0.0878   2.8371   0.0751
+  -10.8587    9   3   1    0.0000   0.0000   0.0000   0.1142   1.9746   0.9113
+   -6.1836    9   3   1    0.0000   0.0000   0.0000   1.0272   1.9427   0.0301
+   -5.2473    9   3   1    0.0000   0.0000   0.0000   0.8618   1.1570   0.9811
+   -0.8544    9   3   1    0.0000   0.0000   0.0000   1.9090   1.0886   0.0024
+
+! ---------- begin input for o_190.modelx
+M
+sdpn      
+  6
+  3
+0d3/2
+0d5/2
+1s1/2
+0d3/2
+0d5/2
+1s1/2
+y
+y
+   0 999   0 999   0 999
+y
+  1  0  4
+y
+  2  0  6
+y
+  3  0  2
+y
+  4  0  4
+y
+  5  0  6
+y
+  6  0  2
+n
+n
+X
+! ---------- end input for o_190.modelx
+
+! ---------- begin input for o_190.levelx
+L
+o_190
+s
+sdpn      
+   0
+   3
+y
+i 
+o_190
+n
+n
+n
+  1 11  2
+n
+  0  0  0
+n
+  1 11  2
+0
+0
+ 1
+  10
+n
+s
+y
+X
+! ---------- end input for o_190.levelx
+

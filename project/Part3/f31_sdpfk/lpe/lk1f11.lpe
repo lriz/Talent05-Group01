@@ -1,0 +1,90 @@
+! ---------- shell input for lk1f11.lpe
+sdpf               input *.sp file name
+sdpfpn             proton-neutron *.sp file name
+sdpfk              interaction file name
+  14   8   8   1  14   10         9   number of pn orbitals, inc-core, izc-core, nvp-valence nvn-valence, neig, dim
+
+
+! ---------- begin input for f_311.modelx
+M
+sdpfpn    
+ 14
+  7
+0d5/2
+0d3/2
+1s1/2
+0f7/2
+0f5/2
+1p3/2
+1p1/2
+0d5/2
+0d3/2
+1s1/2
+0f7/2
+0f5/2
+1p3/2
+1p1/2
+y
+y
+   0 999   0 999   0 999
+y
+  1  0  6
+y
+  2  0  4
+y
+  3  0  2
+y
+  4  0  0
+y
+  5  0  0
+y
+  6  0  0
+y
+  7  0  0
+y
+  8  6  6
+y
+  9  4  4
+y
+ 10  2  2
+y
+ 11  0  8
+y
+ 12  0  0
+y
+ 13  0  4
+y
+ 14  0  0
+n
+n
+X
+! ---------- end input for f_311.modelx
+
+! ---------- begin input for f_311.levelx
+L
+f_311
+s
+sdpfpn    
+   1
+  14
+y
+i 
+f_311
+n
+n
+n
+  1 11  2
+n
+  1  5  2
+n
+  0 12  2
+0
+0
+-1
+  10
+n
+s
+y
+X
+! ---------- end input for f_311.levelx
+

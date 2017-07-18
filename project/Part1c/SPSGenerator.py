@@ -13,6 +13,7 @@ class SPSGenerator(object):
         self.m_broken_basis = []
         self.sps_list = []
 
+
     def calc_sps_list(self, shell_configurations_list, orbits_dict):
         sps_index = 1
         for p_level_index in orbits_dict.keys():
@@ -91,7 +92,9 @@ class SPSGenerator(object):
 
     def print_m_scheme_basis(self):
         print
-        m_total_list = [(self.input_dict["2M-total"], self.input_dict["shell-orbit P-levels"][p]["name"]) for p in self.input_dict["shell-orbit P-levels"]]
+	print '#'*100
+	print "M-scheme Basis"
+        #m_total_list = [(self.input_dict["2M-total"], self.input_dict["shell-orbit P-levels"][p]["name"]) for p in self.input_dict["shell-orbit P-levels"]]
         m_total_list = []
         for p in self.input_dict["shell-orbit P-levels"]:
             m_total_list.append(self.input_dict["2M-total"])
@@ -99,4 +102,6 @@ class SPSGenerator(object):
         print "".join(("sps with 2M-total = ","{} "*len(m_total_list))).format(*m_total_list)
         print 'Basis length:', len(self.m_scheme_basis)
         print self.m_scheme_basis
+	print '#'*100
+	
 

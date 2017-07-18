@@ -1,0 +1,26 @@
+--------------------------------------------------
+lpe,   0             ! option (lpe or lan), neig (zero=10) 
+sdpf                 ! model space (*.sp) name (a8)
+y                    ! any restrictions (y/n)
+sd 
+          0,  6,     ! min,max in orbit p1d 5/2
+          0,  4,     ! min,max in orbit p1d 3/2
+          0,  2,     ! min,max in orbit p2s 1/2
+          0,  0,     ! min,max in orbit p1f 7/2
+          0,  0,     ! min,max in orbit p1f 5/2
+          0,  0,     ! min,max in orbit p2p 3/2
+          0,  0,     ! min,max in orbit p2p 1/2
+          6,  6,     ! min,max in orbit n1d 5/2
+          4,  4,     ! min,max in orbit n1d 3/2
+          2,  2,     ! min,max in orbit n2s 1/2
+          0,  8,     ! min,max in orbit n1f 7/2
+          0,  0,     ! min,max in orbit n1f 5/2
+          0,  4,     ! min,max in orbit n2p 3/2
+          0,  0,     ! min,max in orbit n2p 1/2
+sdpfk                ! interaction (*.int) name (a8)
+  9                  ! number of protons
+ 30                  ! number of nucleons
+ 0.0, 6.0, 1.0,      ! min J, max J, del J 
+  2                  ! parity (0 for +) (1 for -) (2 for both)
+--------------------------------------------------
+st                   ! option 

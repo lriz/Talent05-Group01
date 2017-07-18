@@ -35,6 +35,7 @@ class ReadMatrixElementsFile(object):
         for i in range(1, self.sps_length+1):
             line_split = self.file_list[i].split()
             self.sp_energies.append(float(line_split[-1]))
+            
             state = SingleParticleState(int(line_split[1]),
                                         int(line_split[1]),
                                         int(line_split[2]),
@@ -42,6 +43,7 @@ class ReadMatrixElementsFile(object):
                                         int(line_split[4]),
                                         int(line_split[0]))
             self.sps_list.append(state)
+
 
     def read_file_interaction(self):
         #TODO: should be generalized for any number of particles. For this assumes 4-particles.
@@ -74,3 +76,5 @@ class ReadMatrixElementsFile(object):
 
     def get_sp_energies(self):
         return self.sp_energies
+
+
