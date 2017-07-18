@@ -96,21 +96,8 @@ H=H0+factor*HI
 energies, eig_vectors_list = np.linalg.eig(np.array(H))
 print("The eigen values:")
 
-print(np.sort(eigs))
+print(np.sort(energies))
 
-level_diagram = LevelPloter(np.sort(eigs))
+level_diagram = LevelPloter(np.sort(energies))
 level_diagram.plotLevels()
 
-
-#jjmat =  get_JJ_operator(V.get_sp_energies(),mp_basis_m0)
-#print jjmat
-
-values=[]
-for i,e in enumerate(eigs):
-    #jj = np.dot(vecs[:,i],np.dot(jjmat,vecs[:,i]))
-    jj = 0
-    values.append((e,np.round(jj,3),np.round(np.roots([1,1,-jj])[-1])))
-
-values = sorted(values,key=lambda k : k[0])
-for tup in values:
-    print "E: {} J(J+1): {} J: {}".format(*tup)

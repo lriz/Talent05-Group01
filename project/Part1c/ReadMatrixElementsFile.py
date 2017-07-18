@@ -69,7 +69,10 @@ class ReadMatrixElementsFile(object):
             #self.tp_matelems[d,c,b,a] = elem
 
     def get_matrix_element(self,a,b,c,d):
-        return self.tp_matelems[a-1,b-1,c-1,d-1]
+        return self.tp_matelems[a.get_index()-1,
+                                b.get_index()-1,
+                                c.get_index()-1,
+                                d.get_index()-1]
 
     def get_sps_list(self):
         return self.sps_list
