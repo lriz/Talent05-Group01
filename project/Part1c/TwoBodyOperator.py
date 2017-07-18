@@ -1,4 +1,5 @@
 import numpy as np
+from math import *
 
 def find_index(m_scheme_basis,state):
     res = [i for i ,l in enumerate(m_scheme_basis) if all([(a in l) for a in state])]
@@ -6,15 +7,18 @@ def find_index(m_scheme_basis,state):
         return None
     else:
         return res[0]
-        
-class TwoBodyInteraction(object):
-    def __init__(self, sp_basis, m_scheme_basis, potential):
+
+class TwoBodyOperator(object):
+    def __init__(self,sp_basis,m_scheme_basis,potential):
+
         self.sp_basis = sp_basis
         self.m_scheme_basis = m_scheme_basis
         self.potential = potential
         self.matrix = np.zeros((len(m_scheme_basis),len(m_scheme_basis)))
 
-    def _compute_connections(self, state, ind_i):
+
+    def _compute_matrix_element(self,state,ind_i):
+
         """
         Calculate H_I|SD> for a single slater determinant |SD>.
         :param state:
@@ -34,6 +38,7 @@ class TwoBodyInteraction(object):
                 # rather than A particles therefore the subtraction of one
                 # in the phase computation
                 phase_a = i+j-1
+                #print("{}= {} a_{} a_{} {}".format(state_a,(-1)**(phase_a),d,c,state))
                 # create two particles with sp states a and b
                 for a in range(1,len(self.sp_basis)):  #TODO: using the sp basis counting scheme? Particle #1 (index 1), particle #2 (index 2)...
                     if self.sp_basis[a-1] in state_a:  #TODO: needed? won't it continue anyway?
@@ -50,6 +55,7 @@ class TwoBodyInteraction(object):
                     else: # only necessary for [1,2]?
                         phase_b = len(state_a)
                         state_b = np.append(state_a,self.sp_basis[a-1])
+                    #print("{}= {}ad_{} a_{} a_{} {}".format(state_b,(-1)**(phase_a+phase_b),a,d,c,state))
                     for b in range(a+1,len(self.sp_basis)+1):
                         if self.sp_basis[b-1] in state_b:
                             continue
@@ -70,19 +76,19 @@ class TwoBodyInteraction(object):
                                 continue
                         else:
                             continue
+                        #print("{}= {} ad_{} ad_{} a_{} a_{} {}".format(state_c,(-1)**(phase_a+phase_b+phase_c),b,a,d,c,state))
                         #print("state: {0}".format(state))
                         #print("state_c: {0}".format(state_c))
                         #print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
-
-                        self.matrix[ind_i,ind_j]-=self.potential.get_matrix_element(a,b,c.get_index(),d.get_index())*(((phase_a+phase_b+phase_c)%2)*2-1)
+                        self.matrix[ind_i,ind_j]-=self.potential.get_matrix_element(a,b,c.get_index(),d.get_index())*(1-((phase_a+phase_b+phase_c)%2)*2)
                         # TODO: search for the corresponding state in m_schemebasis
                         # TODO: find matrix element multiply with the phase
         
     def compute_matrix(self):
-        for i, ket in enumerate(self.m_scheme_basis):
-            self._compute_connections(ket, i)
+        for i,ket in enumerate(self.m_scheme_basis):
+            self._compute_matrix_element(ket,i)
+
 
     def get_matrix(self):
         return self.matrix
-
 

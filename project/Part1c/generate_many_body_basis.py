@@ -1,12 +1,15 @@
-from itertools import permutations
+from itertools import combinations
 from numpy import array
-"""
-This function generates all Slater determinants from
-a single particle basis
-"""
-def generate_many_body_basis(sp_basis,A):
+
+def generate_many_body_basis(sps_list, n):
+    """
+    Calculate all Slater determinants from a single particle basis.
+    :param sps_list: a list of all the single particle state.
+    :param n: number of particles to couple together.
+    :return:
+    """
     mp_basis=[]
-    for l in permutations(sp_basis,A):
+    for l in combinations(sps_list, n):
         mp_basis.append(list(l))
     return array(mp_basis)
     

@@ -1,0 +1,20 @@
+# create the wavefunction
+shell o22.ans
+# made the bat file executable (if needed)
+chmod +x o22.bat
+# run the program
+./o22.bat
+#prepare the executable for the gamma study
+#to choose the initiat/final state look at *.lpt
+shell o22g.ans
+chmod +x o22g.bat
+./o22g.bat
+#in this bat file we run 'map' which takes as input the output of 'dens', i.e. *.den,
+#and gives the output *.deo (more interesting) and *.dei
+#If you need to tweak edit *.den and re-run ./o22g.bat
+
+
+#To compare B(E2) we need to convert from e^2*fm^4 to e^2*b^2 in terms of Weisskopf Units
+#for B(E2) 1 W.U = 5.940*10^(-6)*A^(4/3) [e^2*b^2]
+
+#We get in terms of W.U. 1.08 (with NushellX) for 1st exitated 2+ state to GS (gamma decay) compare to 1.2 (5) from ensdf

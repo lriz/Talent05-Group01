@@ -1,16 +1,17 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import json
 import argparse
+import json
 from collections import OrderedDict
-from single_particle_state_class import single_particle_state
-from hamiltonian_unperturbed import hamiltonian_unperturbed, hamiltonian_unperturbed_pairing
-from hamiltonian_j_squared import hamiltonian_j_squared
-from sps_generator import sps_generator
-from interaction_hamiltonian import TwoBodyInteraction
-from pairing_potential import PairingPotential
-from general_potential import GeneralHamiltonian
-from generate_many_body_basis import generate_many_body_basis
+
+import numpy as np
+from PairingPotential import PairingPotential
+
+from ReadMatrixElementsFile import ReadMatrixElementsFile
+from SPSGenerator import SPSGenerator
+from TwoBodyOperator import TwoBodyOperator
+from hamiltonian_unperturbed import hamiltonian_unperturbed
+from LevelPloter import LevelPloter
+
+
 
 
 def shell_configurations():
@@ -27,101 +28,89 @@ def shell_configurations():
             {'name': '0g9/2', 'N': 4}]
 
 #################### Argparse ####################
-# get arguments from the command line.
-parser = argparse.ArgumentParser(description='None')  # Generate a parser.
-#parser.add_argument('-c','--config',help='a json config file name for the program', type=str,required=True)  # Define a command line operation.
-#group = parser.add_mutually_exclusive_group(required=True)
-# Only one of these can appear in the terminal (mutually exclusive)
-#group.add_argument('-f','--file',help='a json input file name for the program', type=str)  # a command line operation.
-#group.add_argument('-i','--interaction_file',help='a text input file name to a given interaction file', type=str)  # a command line operation.
-parser.add_argument('-f','--file',help='a json input file name for the program', type=str)  # a command line operation.
+
+parser = argparse.ArgumentParser(description='Input for shell-model program')
+group = parser.add_mutually_exclusive_group()
+parser.add_argument('-n','--num_of_particles', help='the number of particles we wish to work with.', default=2, type=int, required=True)
+parser.add_argument('-M','--M_total', help='the total M value for constructing an m-scheme basis.', default=0, type=int, required=True, nargs='*')
+parser.add_argument('-os','--orbits_separation', help='in case we choose an orbits file, choose also whether to have '
+                                                      'separation of orbits in the m-scheme or not. Used only when -o '
+                                                      'is used', default=False, type=bool, required=False)
+group.add_argument('-if','--interaction_file', help='interaction file name.', default=False, type=str, required=False)
+group.add_argument('-of','--orbits_file', help='json file name for defining the wanted orbits.', default=False, type=str, required=False)
+
 args = parser.parse_args()
 #################### Argparse ####################
 
-folder_name = 'input_files/'  # Folder of input files.
-with open("".join((folder_name,args.file))) as data_file:
-        orbits_dict = json.load(data_file)  # A dictionary. Keys are the name of input, values are the value of input.
-
-#with open("".join((folder_name,args.config))) as data_file:
-#        config_dict = json.load(data_file)  # A dictionary. Keys are the name of input, values are the value of input.
-
-#################### Global parameters ####################
+sps_object = SPSGenerator()
 shell_configurations_list = shell_configurations()
-# Ordering the dictionary according to P values.
-orbits_dict["shell-orbit P-levels"] = OrderedDict(sorted(orbits_dict["shell-orbit P-levels"].iteritems(), key=lambda x: x[0]))
-# Command to print entire matrix.
-# threshold: total number of array elements which trigger summarization rather than full repr.
-# precision: precision of the output.
-# suppress: suppresses the use of scientific notation for small numbers.
-np.set_printoptions(threshold='nan', precision=3, suppress=True)  
-#################### Global parameters ####################
+folder_name = 'input_files/'  # Folder of input files.
 
-#################### Get m_scheme_basis ####################
-sps_generator_obj = sps_generator(orbits_dict)
-sps_generator_obj.calc_m_broken_basis(shell_configurations_list)
-m_broken_basis = sps_generator_obj.get_m_broken_basis()
-sps_list = sps_generator_obj.get_sps_list()
-sps_generator_obj.calc_m_scheme_basis(m_broken_basis)
-m_scheme_basis = np.array(sps_generator_obj.get_m_scheme_basis())
-#################### Get m_scheme_basis ####################
+if args.orbits_file:
+    with open("".join((folder_name, args.orbits_file)), 'rb') as data_file:
+        orbits_dict = json.load(data_file)["shell-orbit P-levels"]
+        orbits_dict = OrderedDict(sorted(orbits_dict.iteritems(), key=lambda x: x[0]))  # A sorted dictionary.
+                                                                                        # Keys are the "p-levels" (the index of the orbit)
+                                                                                        # and values several parameters (see file itself).
+    sps_object.calc_sps_list(shell_configurations_list, orbits_dict)
+    sps_list = sps_object.get_sps_list()
+    V = PairingPotential(1)
 
-#################### Print ####################
-sps_generator_obj.print_sps()
-print
-#print "Number of general {}-particle states with 2M={}:".format(orbits_dict["number of particles"],config.json["2M-total"]),len(m_broken_basis)
-sps_generator_obj.print_m_scheme_basis()
-print
-print 'Hamiltonian Unperturbed' 
-print hamiltonian_unperturbed_pairing(m_scheme_basis)
-#################### Print ####################
+else:
+    interaction_file = open("".join((folder_name, args.interaction_file)), 'rb')
+    # Read the potential
+    V = ReadMatrixElementsFile(interaction_file)
+    V.read_file_sps()
+    V.read_file_interaction()
+    sps_list = V.get_sps_list()
 
-#TODO: change names so we'd remember in the future.
-gl = np.linspace(-1,1)
-energies=[];
-#for g in gl:
-#g = 1
-#V = PairingPotential(g)
-V = GeneralHamiltonian("sdshellint.dat")
-V.read_file_sps()
-V.read_file_interaction()
-# Working in m_scheme_basis and not a general 'm_broken_basis' (or Tor's 'mp_basis').
-# 'V' is not ordered in the odemetric system hence it gives a matrix which is not sorted according to the m_scheme_basis.
-tbi = TwoBodyInteraction(sps_list, m_scheme_basis, V)  
-#mp_basis = generate_many_body_basis(V.get_sps_list(),2)
-#print "mp_basis", mp_basis
-#print("dim: {0}".format(len(mp_basis)))
+sps_object.calc_m_broken_basis(sps_list, args.num_of_particles)
+m_broken_basis = sps_object.get_m_broken_basis()
+
+# Calculate the m_scheme_basis according to whether we have a matrix elements input file or a json orbits file.
+if args.orbits_file:
+    sps_object.calc_m_scheme_basis(m_broken_basis, args.M_total, orbits_dict, args.orbits_separation)
+else:
+    sps_object.calc_m_scheme_basis_no_orbit_separation(m_broken_basis, args.M_total)
+
+m_scheme_basis = sps_object.get_m_scheme_basis()
+print 'm_scheme_basis',m_scheme_basis
+sps_object.set_sps_list(sps_list)
+sps_object.print_sps()
 
 print("dim: {0}".format(len(m_scheme_basis)))
-#tbi = TwoBodyInteraction(sps_list,m_scheme_basis,V)
+
+tbi = TwoBodyOperator(sps_list, m_scheme_basis, V)
 print("Computes interaction hamiltonian")
 tbi.compute_matrix()
 print("Computes unperturbed hamiltonain")
-H0 = hamiltonian_unperturbed(m_scheme_basis, V.get_sp_energies())  #TODO: why V.get_sp_energies()?
+H0 = hamiltonian_unperturbed(m_scheme_basis, V.get_sp_energies())
+
 HI = tbi.get_matrix()
-#print HI
-#for g in gl:
-H = H0+HI
-    #print("Hamiltonian:")
-    #print H
+if np.sum(np.sum(np.abs(HI - np.transpose(HI))))>1e-10:
+    print("Interaction hamiltonian is not symmetric")
+    exit(1)
+factor = (18.0/(16.0+args.num_of_particles))**0.3
+H=H0+factor*HI
 
 energies, eig_vectors_list = np.linalg.eig(np.array(H))
 print("The eigen values:")
-print(np.sort(energies))
-print
-# THe J^2 squared Hamiltonian - to calculate the J values of the energies.
-H_j = hamiltonian_j_squared(eig_vectors_list, m_scheme_basis)
-# Count num. of off-diagonal elements (search for degeneracies)
-# Remove the diagonal part of H_j and then count non-zero elements.
-print 'Hamiltonian J^2'
-print H_j
-print 'J^2 diagonal', np.diagonal(H_j)  # Look at the diagonal part of H_j.
-print 'J^2 non-zero elements', np.count_nonzero(H_j - np.diag(np.diagonal(H_j)))
-for j_squared in np.diagonal(H_j):
-        print 'J(J+1)=', round(j_squared, 3), 'J=', round(np.roots([1,1,-j_squared])[-1], 3)
-#np.count_nonzero(h_j - np.diag(np.diagonal(h_j)))
-#    energies.append(np.sort(eigs))
 
-#energies = np.array(energies)
-#for i in range(0,len(m_broken_basis)):
-#    plt.plot(gl,energies[:,i])
-#plt.show()
+print(np.sort(eigs))
+
+level_diagram = LevelPloter(np.sort(eigs))
+level_diagram.plotLevels()
+
+
+#jjmat =  get_JJ_operator(V.get_sp_energies(),mp_basis_m0)
+#print jjmat
+
+values=[]
+for i,e in enumerate(eigs):
+    #jj = np.dot(vecs[:,i],np.dot(jjmat,vecs[:,i]))
+    jj = 0
+    values.append((e,np.round(jj,3),np.round(np.roots([1,1,-jj])[-1])))
+
+values = sorted(values,key=lambda k : k[0])
+for tup in values:
+    print "E: {} J(J+1): {} J: {}".format(*tup)
