@@ -18,7 +18,6 @@ class TwoBodyOperator(object):
 
 
     def _compute_matrix_element(self,state,ind_i):
-
         """
         Calculate H_I|SD> for a single slater determinant |SD>.
         :param state:
