@@ -4,15 +4,14 @@ from collections import OrderedDict
 
 import numpy as np
 from PairingPotential import PairingPotential
-
+from JClass import JClass
 from ReadMatrixElementsFile import ReadMatrixElementsFile
 from SPSGenerator import SPSGenerator
 from TwoBodyOperator import TwoBodyOperator
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from LevelPloter import LevelPloter
 
-
-
+np.set_printoptions(threshold='nan')
 
 def shell_configurations():
     return [{'name': '0s1/2', 'N': 0},
@@ -28,7 +27,6 @@ def shell_configurations():
             {'name': '0g9/2', 'N': 4}]
 
 #################### Argparse ####################
-
 parser = argparse.ArgumentParser(description='Input for shell-model program')
 group = parser.add_mutually_exclusive_group()
 parser.add_argument('-n','--num_of_particles', help='the number of particles we wish to work with.', default=2, type=int, required=True)
@@ -74,7 +72,7 @@ else:
     sps_object.calc_m_scheme_basis_no_orbit_separation(m_broken_basis, args.M_total)
 
 m_scheme_basis = sps_object.get_m_scheme_basis()
-print 'm_scheme_basis',m_scheme_basis
+#print 'm_scheme_basis',m_scheme_basis
 sps_object.set_sps_list(sps_list)
 sps_object.print_sps()
 
@@ -98,6 +96,10 @@ print("The eigen values:")
 
 print(np.sort(energies))
 
-level_diagram = LevelPloter(np.sort(energies))
-level_diagram.plotLevels()
-
+#level_diagram = LevelPloter(np.sort(energies))
+#level_diagram.plotLevels()
+print 'J+'
+j_plus = JClass(args.num_of_particles,'+')
+j_plus_mat = TwoBodyOperator(sps_list, m_scheme_basis, j_plus)
+j_plus_mat.compute_matrix()
+print j_plus_mat.get_matrix()
