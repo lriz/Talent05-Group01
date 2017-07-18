@@ -8,14 +8,15 @@ def find_index(m_scheme_basis,state):
     else:
         return res[0]
         d,c
-class TwoBodyInteraction(object):
+
+class TwoBodyOperator(object):
     def __init__(self,sp_basis,m_scheme_basis,potential):
         self.sp_basis = sp_basis
         self.m_scheme_basis = m_scheme_basis
         self.potential = potential
         self.matrix = np.zeros((len(m_scheme_basis),len(m_scheme_basis)))
 
-    def _compute_connections(self,state,ind_i):
+    def _compute_matrix_element(self,state,ind_i):
         """
         Calculate H_I|SD> for a single slater determinant |SD>.
         :param state:
@@ -77,16 +78,13 @@ class TwoBodyInteraction(object):
                         #print("state: {0}".format(state))
                         #print("state_c: {0}".format(state_c))
                         #print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
-
-                        
-
                         self.matrix[ind_i,ind_j]-=self.potential.get_matrix_element(a,b,c.get_index(),d.get_index())*(1-((phase_a+phase_b+phase_c)%2)*2)
                         # TODO: search for the corresponding state in m_schemebasis
                         # TODO: find matrix element multiply with the phase
         
     def compute_matrix(self):
         for i,ket in enumerate(self.m_scheme_basis):
-            self._compute_connections(ket,i)
+            self._compute_matrix_element(ket,i)
 
     def get_matrix(self):
         return self.matrix
