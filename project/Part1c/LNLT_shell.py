@@ -2,8 +2,6 @@ import argparse
 import json
 from collections import OrderedDict
 import numpy as np
-import sys
-sys.path.insert(0, '/home/noam/Desktop/Physics/PythonPrograms/Overlap/OverlapCode/')
 from PairingPotential import PairingPotential
 
 from ReadMatrixElementsFile import ReadMatrixElementsFile
