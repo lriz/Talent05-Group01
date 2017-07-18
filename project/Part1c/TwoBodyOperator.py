@@ -43,6 +43,7 @@ class TwoBodyOperator(object):
                 for a in range(1,len(self.sp_basis)):  #TODO: using the sp basis counting scheme? Particle #1 (index 1), particle #2 (index 2)...
                     if self.sp_basis[a-1] in state_a:  #TODO: needed? won't it continue anyway?
                         continue
+                    a_s = self.sp_basis[a-1]
                     # Inserts the new particles, and remember the phase
                     # important to clone state_prime first
                     state_b = None  # needed?
@@ -59,6 +60,7 @@ class TwoBodyOperator(object):
                     for b in range(a+1,len(self.sp_basis)+1):
                         if self.sp_basis[b-1] in state_b:
                             continue
+                        b_s = self.sp_basis[b-1]
                         state_c = None # needed?
                         phase_c = None # needed?
                         for k in range(0,len(state_b)):
@@ -80,7 +82,7 @@ class TwoBodyOperator(object):
                         #print("state: {0}".format(state))
                         #print("state_c: {0}".format(state_c))
                         #print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
-                        self.matrix[ind_i,ind_j]-=self.potential.get_matrix_element(a,b,c.get_index(),d.get_index())*(1-((phase_a+phase_b+phase_c)%2)*2)
+                        self.matrix[ind_i,ind_j]-=self.potential.get_matrix_element(a_s,b_s,c,d)*(1-((phase_a+phase_b+phase_c)%2)*2)
                         # TODO: search for the corresponding state in m_schemebasis
                         # TODO: find matrix element multiply with the phase
         

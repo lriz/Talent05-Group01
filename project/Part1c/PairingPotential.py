@@ -3,7 +3,7 @@ class PairingPotential(object):
         self.g = g
 
     def get_matrix_element(self,p,q,r,s):
-        if p%2==1  and p==q-1 and r%2==1 and r==s-1:
+        if p.get_index()%2==1  and p.get_index()==q.get_index()-1 and r.get_index()%2==1 and r.get_index()==s.get_index()-1:
             return -self.g
         else:
             return 0
