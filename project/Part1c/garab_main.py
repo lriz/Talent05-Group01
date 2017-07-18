@@ -11,10 +11,9 @@ from TwoBodyInteraction import TwoBodyInteraction
 from PairingPotential import PairingPotential
 from GeneralHamiltonian import GeneralHamiltonian
 from generate_many_body_basis import generate_many_body_basis
-from j_operator import get_JJ_operator
 from LevelPloter import LevelPloter
 
-A = 18
+A = 20
 n = A-16
 
 
@@ -71,12 +70,13 @@ level_diagram = LevelPloter(np.sort(eigs))
 level_diagram.plotLevels()
 
 
-jjmat =  get_JJ_operator(V.get_sp_energies(),mp_basis_m0)
-print jjmat
+#jjmat =  get_JJ_operator(V.get_sp_energies(),mp_basis_m0)
+#print jjmat
 
 values=[]
 for i,e in enumerate(eigs):
-    jj = np.dot(vecs[:,i],np.dot(jjmat,vecs[:,i]))
+    #jj = np.dot(vecs[:,i],np.dot(jjmat,vecs[:,i]))
+    jj = 0
     values.append((e,np.round(jj,3),np.round(np.roots([1,1,-jj])[-1])))
 
 values = sorted(values,key=lambda k : k[0])
