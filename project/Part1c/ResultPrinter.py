@@ -45,12 +45,14 @@ class ResultPrinter(object):
         output+="".join(("-"*60,'\n'))
         for i,e_nush in zip(range(len(self.energies)),nushellx_energies):
             output+="{:<3}\t||  {:>7}\t||{:>7}\t||\t{:>7}\n".format(i+1,np.round(self.energies[i],3), "-", e_nush)#np.round(self.j_values[i],3))
-            if self.energies[i] - float(e_nush) > 0.01:
-                self.degeneracy_index.append(i)
+            if abs(self.energies[i] - float(e_nush)) > 0.01:
+                self.degeneracy_index.append(i+1)
         return output
     def _generate_degeneracy(self):
         output='Differences from NushellX\n'
-        output+=(len(self.degeneracy_index)-1)*"{}, ".format(self.degeneracy_index[:-1])
+        output+="".join(["{}, ".format(index) for index in  self.degeneracy_index[:-1]])
+        if self.degeneracy_index:
+            output+='{}'.format(str(self.degeneracy_index[-1]))
         return output
 
     def print_all_to_screen(self):
