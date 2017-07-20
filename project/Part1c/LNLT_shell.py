@@ -98,8 +98,32 @@ print(np.sort(energies))
 
 #level_diagram = LevelPloter(np.sort(energies))
 #level_diagram.plotLevels()
-print 'J+'
-j_plus = JClass(args.num_of_particles,'+')
-j_plus_mat = TwoBodyOperator(sps_list, m_scheme_basis, j_plus)
-j_plus_mat.compute_matrix()
-print j_plus_mat.get_matrix()
+# Calculate J+J-
+Jplus_Jmin = JClass(args.num_of_particles,'+-')
+Jplus_Jmin_mat = TwoBodyOperator(sps_list, m_scheme_basis, Jplus_Jmin)
+Jplus_Jmin_mat.compute_matrix()
+Jplus_Jmin_mat = Jplus_Jmin_mat.get_matrix()
+# Calculate J-J+
+Jmin_Jplus = JClass(args.num_of_particles,'-+')
+Jmin_Jplus_mat = TwoBodyOperator(sps_list, m_scheme_basis, Jmin_Jplus)
+Jmin_Jplus_mat.compute_matrix()
+Jmin_Jplus_mat = Jmin_Jplus_mat.get_matrix()
+# Calculate JzJz
+Jz_Jz = JClass(args.num_of_particles,'zz')
+Jz_Jz = TwoBodyOperator(sps_list, m_scheme_basis, Jz_Jz)
+Jz_Jz.compute_matrix()
+Jz_Jz = Jz_Jz.get_matrix()
+print 'J^2 Matrix'
+print 'Jplus_Jmin'
+print Jplus_Jmin_mat
+print
+print 'Jmin_Jplus_mat'
+print Jmin_Jplus_mat
+print
+print 'Jz_Jz'
+print Jz_Jz
+j_square = -0.5*(Jplus_Jmin_mat+Jmin_Jplus_mat)+Jz_Jz
+print j_square
+for jj in np.diagonal(j_square):
+    print 'jj',jj
+    print np.roots([4,2,-jj])/2
