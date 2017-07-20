@@ -1,0 +1,22 @@
+# o23_o22.ans is already complete of all 3 steps we need:
+# (1) lpe of 23O
+# (2) lpe of 22O
+# (3) dens computes spectroscopic factors from GS of 23O to all 22O states
+
+shell o23_o22.ans
+# the two folders have more ore less the same input
+# standard: up to 10 levels in excitated states
+# more levels: up to 50 levels in excitated states
+# care! It computes ONLY bound states
+
+chmod +x o23_o22.bat
+./o23_o22.bat
+
+# look in *.occ to get the occupation orbitals (o_23b.occ)
+# 0d3    0d5    1s1
+# 0.17   5.81   1.02
+# compare with sum rule in spectroscopic factors in *.lsf according to 
+# equation 40.13 (Alex notes)
+# if I sum all I get the total occupation number of neutrons (7)
+# I can look at different orbitals looking at (n,l,2j) and summing them up!
+# BUG: total sum is total sum displayed + sum of last term

@@ -1,0 +1,27 @@
+--------------------------------------------------
+lpe,   0             ! option (lpe or lan), neig (zero=10) 
+sd                   ! model space (*.sp) name (a8)
+n                    ! any restrictions (y/n)
+usdb                 ! interaction (*.int) name (a8)
+  8                  ! number of protons
+ 23                  ! number of nucleons
+ 0.5, 6.5, 1.0,      ! min J, max J, del J 
+  0                  ! parity (0 for +) (1 for -) (2 for both)
+--------------------------------------------------
+lpe,   0             ! option (lpe or lan), neig (zero=10) 
+  8                  ! number of protons
+ 22                  ! number of nucleons
+ 0.0, 7.0, 1.0,      ! min J, max J, del J 
+  0                  ! parity (0 for +) (1 for -) (2 for both)
+--------------------------------------------------
+den                  ! option 
+1                    ! 1, 2 or t
+bb0600               ! initial file name (default from lpe above)
+  -1                 ! max number (-1 for all)
+bb0701               ! final file name (default = from lpe above)
+   1                 ! max number (-1 for all)
+ 0.0, 4.0, 1.0,      ! min, max J, del J for bb0600
+ 0.5, 0.5, 1.0,      ! min, max J, del J for bb0701
+n                    ! restrict coupling for operator
+--------------------------------------------------
+st                   ! option 

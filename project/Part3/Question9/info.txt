@@ -1,0 +1,7 @@
+# Calculate spectroscopic factor of one transition
+shell o23_022.ans
+chmod +x o23_022.bat
+./o23_022.bat
+
+# Why the spectroscopic factor is so small?
+# (question of exercise)

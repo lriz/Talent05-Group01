@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2af66e10-18e4-43a7-a943-cf3d15c16fa8" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part1c/ResultPrinter.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part3/Question7/info.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part3/Question7/more_levels/o23_o22.ans" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part3/Question7/standard/o23_o22.ans" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part3/Question8/info.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part3/Question8/more_levels/o23_o24.ans" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part3/Question8/standard/o23_o24.ans" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part3/Question9/info.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/Part3/Question9/o23_o22.ans" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/Part1c/test.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/LNLT_shell.py" afterPath="$PROJECT_DIR$/project/Part1c/LNLT_shell.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/PairingPotential.py" afterPath="$PROJECT_DIR$/project/Part1c/PairingPotential.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/ReadMatrixElementsFile.py" afterPath="$PROJECT_DIR$/project/Part1c/ReadMatrixElementsFile.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/TwoBodyOperator.py" afterPath="$PROJECT_DIR$/project/Part1c/TwoBodyOperator.py" />
     </list>
     <ignored path="Talent05-Group01.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,8 +38,8 @@
       <file leaf-file-name="LNLT_shell.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/Part1c/LNLT_shell.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.166667">
+              <caret line="108" column="38" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -39,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TwoBodyOperator.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TwoBodyOperator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/Part1c/TwoBodyOperator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5439189">
-              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="63" column="7" selection-start-line="63" selection-start-column="7" selection-end-line="63" selection-end-column="7" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -54,8 +62,42 @@
       <file leaf-file-name="JClass.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/Part1c/JClass.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.8">
+              <caret line="81" column="19" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResultPrinter.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/Part1c/ResultPrinter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.48341233">
+              <caret line="17" column="70" selection-start-line="17" selection-start-column="70" selection-end-line="17" selection-end-column="70" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SPSGenerator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/Part1c/SPSGenerator.py">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+              <caret line="90" column="125" selection-start-line="86" selection-start-column="8" selection-end-line="90" selection-end-column="125" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SingleParticleState.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/Part1c/SingleParticleState.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="14" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -112,13 +154,15 @@
         <option value="$PROJECT_DIR$/project/Part1c/hamiltonian_j_squared.py" />
         <option value="$PROJECT_DIR$/project/Part1c/interaction_hamiltonian.py" />
         <option value="$PROJECT_DIR$/project/Part1c/input_files/m_scheme_sd.json" />
-        <option value="$PROJECT_DIR$/project/Part1c/LNLT_shell.py" />
         <option value="$PROJECT_DIR$/project/Part1c/sps_generator.py" />
         <option value="$PROJECT_DIR$/applications/nushellx_ans_generator.py" />
         <option value="$PROJECT_DIR$/applications/plot_isotopes.py" />
         <option value="$PROJECT_DIR$/project/Part1c/JSquared.py" />
-        <option value="$PROJECT_DIR$/project/Part1c/JClass.py" />
+        <option value="$PROJECT_DIR$/project/Part1c/SingleParticleState.py" />
         <option value="$PROJECT_DIR$/project/Part1c/TwoBodyOperator.py" />
+        <option value="$PROJECT_DIR$/project/Part1c/JClass.py" />
+        <option value="$PROJECT_DIR$/project/Part1c/LNLT_shell.py" />
+        <option value="$PROJECT_DIR$/project/Part1c/ResultPrinter.py" />
       </list>
     </option>
   </component>
@@ -436,6 +480,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2af66e10-18e4-43a7-a943-cf3d15c16fa8" name="Default" comment="" />
@@ -629,22 +676,64 @@
       <option name="project" value="LOCAL" />
       <updated>1500387121461</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="a">
+      <created>1500392740700</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1500392740700</updated>
+    </task>
+    <task id="LOCAL-00033" summary="created Jclass">
+      <created>1500392754490</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1500392754490</updated>
+    </task>
+    <task id="LOCAL-00034" summary="implemented Jclass">
+      <created>1500392765851</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1500392765851</updated>
+    </task>
+    <task id="LOCAL-00035" summary="written the JzJz,  J+J-,  J-J+ functions - they do not give a good results (negative values for J-J+ and J+J-">
+      <created>1500530330680</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1500530330680</updated>
+    </task>
+    <task id="LOCAL-00036" summary="added an 'equate' function to compare the quantum numbers of to sps. Where one of the sps m_j is modified">
+      <created>1500530415726</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1500530415726</updated>
+    </task>
+    <task id="LOCAL-00037" summary="added J^2 prints. We do not get good results for now (negative values in the matrix diagonal.">
+      <created>1500530497752</created>
+      <option name="number" value="00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1500530497753</updated>
+    </task>
+    <task id="LOCAL-00038" summary="a test file to push the results LNLT_shell.py gives">
+      <created>1500530625637</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1500530625637</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19415334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42335767" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24817519" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35245046" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3096976" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -667,8 +756,8 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24817519" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35245046" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19415334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4045881" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19415334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -682,12 +771,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Generate sps.&#10;Create a single particle state class - i,p,l,n,j,m_j" />
-    <MESSAGE value="Generate sps.&#10;Create a single particle state class - i,p,l,n,j,m_j&#10;Write m_scheme_basis for general shell configuration" />
-    <MESSAGE value="LNLT_shell - updated.&#10;sps_generator - class which generates m_scheme_basis and prints data" />
-    <MESSAGE value="Calculated the unperturbed Hamiltonian matrix in hamiltonian_unperturbed" />
-    <MESSAGE value="Fixed the calc_m_scheme_basis function and unit tested the s-d-shell: &#10;    - for N=2 particles there are 14 states with M=0.&#10;    - for N=3 particles there are 37 states with M=1/2.&#10;    - for N=4 particles there are 81 states with M=0." />
-    <MESSAGE value="print hamiltonian_unperturbed function&#10;" />
     <MESSAGE value="Fix typo." />
     <MESSAGE value="Added &quot;orbit separation&quot; option." />
     <MESSAGE value="deleted print" />
@@ -707,7 +790,13 @@
     <MESSAGE value="deleted notes" />
     <MESSAGE value="created Jclass for calculating the different J^2 elements" />
     <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
+    <MESSAGE value="created Jclass" />
+    <MESSAGE value="implemented Jclass" />
+    <MESSAGE value="written the JzJz,  J+J-,  J-J+ functions - they do not give a good results (negative values for J-J+ and J+J-" />
+    <MESSAGE value="added an 'equate' function to compare the quantum numbers of to sps. Where one of the sps m_j is modified" />
+    <MESSAGE value="added J^2 prints. We do not get good results for now (negative values in the matrix diagonal." />
+    <MESSAGE value="a test file to push the results LNLT_shell.py gives" />
+    <option name="LAST_COMMIT_MESSAGE" value="a test file to push the results LNLT_shell.py gives" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -923,16 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/Part1c/LNLT_shell.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/Part1c/PairingPotential.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -941,18 +1020,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/Part1c/JClass.py">
+    <entry file="file://$PROJECT_DIR$/project/Part1c/SingleParticleState.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <caret line="24" column="14" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/Part1c/TwoBodyOperator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5439189">
-          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="7" selection-start-line="63" selection-start-column="7" selection-end-line="63" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Part1c/SPSGenerator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="90" column="125" selection-start-line="86" selection-start-column="8" selection-end-line="90" selection-end-column="125" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Part1c/JClass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.8">
+          <caret line="81" column="19" selection-start-line="81" selection-start-column="19" selection-end-line="81" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Part1c/LNLT_shell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.166667">
+          <caret line="108" column="38" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Part1c/ResultPrinter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48341233">
+          <caret line="17" column="70" selection-start-line="17" selection-start-column="70" selection-end-line="17" selection-end-column="70" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

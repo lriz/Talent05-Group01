@@ -1,0 +1,23 @@
+# o23_o24.ans is already complete of all 3 steps we need:
+# (1) lpe of 23O
+# (2) lpe of 24O
+# (3) dens computes spectroscopic factors from GS of 23O to all 24O states
+
+shell o24_o22.ans
+# the two folders have more ore less the same input
+# standard: up to 10 levels in excitated states
+# more levels: up to 50 levels in excitated states
+# care! It computes ONLY bound states
+
+chmod +x o23_o24.bat
+./o23_o24.bat
+
+# look in *.occ to get the occupation orbitals (o_23b.occ)
+# 0d3    0d5    1s1
+# 0.17   5.81   1.02
+# compare with sum rule in spectroscopic factors in *.lsf according to 
+# equation 40.14 (Alex notes)
+# CARE! I have an normalization factor (2J_f+1)/(2J_i+1) which multiplies the spectroscopic factors
+# eg for s1/2 1.8587*(2*0+1)/(2*1/2+1)+0.0342*(2*1+1)/(2*1/2+1) = 0.98065
+# while (2j+1)-<n_k>=(2*1/2+1)-1.02=0.98
+# I can look at different orbitals looking at (n,l,2j) and summing them up!
