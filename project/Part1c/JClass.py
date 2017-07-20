@@ -4,12 +4,13 @@ class JClass(object):
     """
     Class which calculates the different J^2 elements - Jz^2, J+ and J-
     """
-    def __init__(self, n, j_type):
+    def __init__(self, n, jj_choice):
         """
         :param n: number of valance nucleons.
-        :param j_type: the type of J we wish to calculate - Jz ('z'), J+ ('+') or J- ('-').
+        :param jj_choice: the type of J we wish to calculate - JzJz ('zz'), J+J- ('+-') or J-J+ ('-+').
         """
-        self.j_type = j_type
+        self.jj_choice = jj_choice
+        self.n = n
 
     def get_matrix_element(self,p,q,s,r):
         """
@@ -20,43 +21,133 @@ class JClass(object):
         :param r:
         :return:
         """
-        if q == s:
-            print 'q=s'
-            print 'p','2J', p.get_j(), '2Mj',p.get_m_j(), 'r', '2J', r.get_j(), '2Mj', r.get_m_j()
-            if (p.get_j() == r.get_j()) and (p.get_m_j()+2 == r.get_m_j() or p.get_m_j()-2 == r.get_m_j()):
-                print 'get q=s'
-                return self.alpha_j(p.get_j(), r.get_m_j())
-            else:
-                return 0
-        elif p == r:
-            print 'p=r'
-            print 'q','2J', q.get_j(), '2Mj',q.get_m_j(), 's', '2J', s.get_j(), '2Mj', s.get_m_j()
-            if (q.get_j() == s.get_j()) and (q.get_m_j()+2 == s.get_m_j() or q.get_m_j()-2 == s.get_m_j()):
-                print 'get p=r'
-                return self.alpha_j(q.get_j(), s.get_m_j())
-            else:
-                return 0
-        elif p == s:
-            print 'p=s'
-            print 'q','J', q.get_j(), 'Mj',q.get_m_j(), 'r', '2J', r.get_j(), '2Mj', r.get_m_j(), 'sum', q.get_m_j()+2 +r.get_m_j()
-            if (q.get_j() == r.get_j()) and ((q.get_m_j()+2 == r.get_m_j()) or (q.get_m_j()-2 == r.get_m_j())):
-                print 'get p=s'
-                return -1*self.alpha_j(q.get_j(), r.get_m_j())  # the minus one comes from a phase.
-            else:
-                return 0
-        elif q == r:
-            print 'q=r'
-            print 'p','J', p.get_j(), 'Mj',p.get_m_j(), 'r', '2J', s.get_j(), '2Mj', s.get_m_j()
-            if (p.get_j() == s.get_j()) and (p.get_m_j()+2 == s.get_m_j() or p.get_m_j()-2 == s.get_m_j()):
-                print 'get q=r'
-                return -1*self.alpha_j(p.get_j(), s.get_m_j()) # the minus one comes from a phase.
-            else:
-                return 0
+        if self.jj_choice == '+-':
+            return self.Jplus_Jminus_element(p,q,s,r)
+        elif self.jj_choice == '-+':
+            return self.Jminus_Jplus_element(p,q,s,r)
+        elif self.jj_choice == 'zz':
+            return self.j_z_j_z_element(p,q,s,r)
+
+    def j_z_j_z_element(self,p,q,s,r):
+        if q == s and p == r:
+            return pow(s.get_m_j()+r.get_m_j(), 2)
+        elif p == s and q == r:
+            return -pow(s.get_m_j()+r.get_m_j(), 2)
         else:
             return 0
 
-    def alpha_j(self,j,m_j):
-        print 'alpha_j'
+    def Jminus_Jplus_element(self,p,q,s,r):
+        matrix_element_1 = 0
+        matrix_element_2 = 0
+        # Part 1:
+        # Check if Mj(r)-1 exists.
+        if r.get_m_j()+2 > r.get_j():  # The new Mj(r)-1 does NOT exists.
+            matrix_element_1 += 0
+        else:  # The new Mj(r)+1 exists.
+            # Add the |s r> according to phase (+1 for <p q|q p> and -1 for <p q| p q>).
+            if q == s and p == r:  # +1 phase.
+                matrix_element_1 += self.alpha_j(r.get_j(), r.get_m_j()+2, '-')
+            elif q == r and p == s:  # -1 phase.
+                matrix_element_1 += -self.alpha_j(r.get_j(), r.get_m_j()+2, '-')
+            # Check if Mj(s)-1 exists and if so add it to the matrix element.
+            if s.get_m_j()-2 < -s.get_j(): # The new Mj(s)-1 does NOT exists.
+                matrix_element_1 += 0
+            else:  # the new Mj(s)-1 exists.
+                if s.equate(q, -1) and r.equate(p, +1):  # +1 phase
+                    matrix_element_1 += self.alpha_j(s.get_j(), s.get_m_j(), '-')
+                elif s.equate(p, -1) and r.equate(q, +1):  # -1 phase
+                    matrix_element_1 += -self.alpha_j(s.get_j(), s.get_m_j(), '-')
+        matrix_element_1 = matrix_element_1*self.alpha_j(r.get_j(), r.get_m_j(), '+')
+        # End of Part 1.
+
+        # Part 2:
+        if s.get_m_j()+2 > s.get_j():  # The new Mj(s)-1 does NOT exists.
+            matrix_element_2 += 0
+        else:  # The new Mj(s)-1 exists.
+            # Add the |s r> according to phase (+1 for <p q|q p> and -1 for <p q| p q>).
+            if q == s and p == r:  # +1 phase.
+                matrix_element_2 += self.alpha_j(s.get_j(), s.get_m_j()+2, '-')
+            elif q == r and p == s:  # -1 phase.
+                matrix_element_2 += -self.alpha_j(s.get_j(), s.get_m_j()+2, '-')
+            # Check if Mj(r)+1 exists and if so add it to the matrix element.
+            if r.get_m_j()-2 < -r.get_j(): # The new Mj(r)+1 does NOT exists.
+                matrix_element_2 += 0
+            else:  # the new Mj(r)+1 exists.
+                if s.equate(q, +1) and r.equate(p, -1):  # +1 phase
+                    matrix_element_2 += self.alpha_j(r.get_j(), r.get_m_j(), '-')
+                elif s.equate(p, +1) and r.equate(q, -1):  # -1 phase
+                    matrix_element_2 += -self.alpha_j(r.get_j(), r.get_m_j(), '-')
+        matrix_element_2 = matrix_element_2*self.alpha_j(s.get_j(), s.get_m_j(), '+')
+        # End of Part 2.
+        print 'Jminus_Jplus_element'
+        print matrix_element_1+matrix_element_2
+        return matrix_element_1+matrix_element_2
+
+    def Jplus_Jminus_element(self,p,q,s,r):
+        print 'test'
+        matrix_element_1 = 0
+        matrix_element_2 = 0
+        # Part 1:
+        # Check if Mj(r)-1 exists.
+        if r.get_m_j()-2 < -r.get_j():  # The new Mj(r)-1 does NOT exists.
+            print '1'
+            matrix_element_1 += 0
+        else:  # The new Mj(r)-1 exists.
+            print '2'
+            # Add the |s r> according to phase (+1 for <p q|q p> and -1 for <p q| p q>).
+            if q == s and p == r:  # +1 phase.
+                print '3'
+                matrix_element_1 += self.alpha_j(r.get_j(), r.get_m_j()-2, '+')
+            elif q == r and p == s:  # -1 phase.
+                print '4'
+                matrix_element_1 += -self.alpha_j(r.get_j(), r.get_m_j()-2, '+')
+            # Check if Mj(s)+1 exists and if so add it to the matrix element.
+            if s.get_m_j()+2 > s.get_j(): # The new Mj(s)+1 does NOT exists.
+                print '5'
+                matrix_element_1 += 0
+            else:  # the new Mj(s)+1 exists.
+                print '6'
+                if s.equate(q, +1) and r.equate(p, -1):  # +1 phase
+                    print '7'
+                    matrix_element_1 += self.alpha_j(s.get_j(), s.get_m_j(), '+')
+                elif s.equate(p, +1) and r.equate(q, -1):  # -1 phase
+                    print '8'
+                    matrix_element_1 += -self.alpha_j(s.get_j(), s.get_m_j(), '+')
+        matrix_element_1 = matrix_element_1*self.alpha_j(r.get_j(), r.get_m_j(), '-')
+        # End of Part 1.
+
+        # Part 2:
+        if s.get_m_j()-2 < -s.get_j():  # The new Mj(s)-1 does NOT exists.
+            print '9'
+            matrix_element_2 += 0
+        else:  # The new Mj(s)-1 exists.
+            print '10'
+            # Add the |s r> according to phase (+1 for <p q|q p> and -1 for <p q| p q>).
+            if q == s and p == r:  # +1 phase.
+                print '11'
+                matrix_element_2 += self.alpha_j(s.get_j(), s.get_m_j()-2, '+')
+            elif q == r and p == s:  # -1 phase.
+                print '12'
+                matrix_element_2 += -self.alpha_j(s.get_j(), s.get_m_j()-2, '+')
+            # Check if Mj(r)+1 exists and if so add it to the matrix element.
+            if r.get_m_j()+2 > r.get_j(): # The new Mj(r)+1 does NOT exists.
+                print '13'
+                matrix_element_2 += 0
+            else:  # the new Mj(r)+1 exists.
+                print '14'
+                if s.equate(q, -1) and r.equate(p, +1):  # +1 phase
+                    print '15'
+                    matrix_element_2 += self.alpha_j(r.get_j(), r.get_m_j(), '+')
+                elif s.equate(p, -1) and r.equate(q, +1):  # -1 phase
+                    print '16'
+                    matrix_element_2 += -self.alpha_j(r.get_j(), r.get_m_j(), '+')
+        matrix_element_2 = matrix_element_2*self.alpha_j(s.get_j(), s.get_m_j(), '-')
+        # End of Part 2.
+        print 'Jplus_Jminus_element'
+        print matrix_element_1+matrix_element_2
+        return matrix_element_1+matrix_element_2
+
+    def alpha_j(self,j,m_j,j_type):
         """
         Calculates the J, J- coefficients.
         We divide by (n-1) since we calculate matrix elements for a two-body force:
@@ -68,8 +159,7 @@ class JClass(object):
         :param m_j: the chosen m_j.
         :return:
         """
-        if self.j_type == '+':
-            print 'mult',0.25*(j-m_j)*(j+m_j+2)/(self.n-1)
-            return pow(0.25*(j-m_j)*(j+m_j+2)/(self.n-1),0.5)
-        elif self.j_type == '-':
+        if j_type == '+':
+            return pow(0.25*(j-m_j)*(j+m_j+2)/(self.n-1), 0.5)
+        elif j_type == '-':
             return pow(0.25*(j+m_j)*(j-m_j+2)/(self.n-1), 0.5)
