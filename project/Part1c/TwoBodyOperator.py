@@ -18,7 +18,6 @@ class TwoBodyOperator(object):
 
 
     def _compute_matrix_element(self,state,ind_i):
-
         """
         Calculate H_I|SD> for a single slater determinant |SD>.
         :param state:
@@ -40,8 +39,8 @@ class TwoBodyOperator(object):
                 phase_a = i+j-1
                 #print("{}= {} a_{} a_{} {}".format(state_a,(-1)**(phase_a),d,c,state))
                 # create two particles with sp states a and b
-                for a in range(1,len(self.sp_basis)):  #TODO: using the sp basis counting scheme? Particle #1 (index 1), particle #2 (index 2)...
-                    if self.sp_basis[a-1] in state_a:  #TODO: needed? won't it continue anyway?
+                for a in range(1,len(self.sp_basis)):
+                    if self.sp_basis[a-1] in state_a:
                         continue
                     a_s = self.sp_basis[a-1]
                     # Inserts the new particles, and remember the phase
@@ -84,9 +83,7 @@ class TwoBodyOperator(object):
                         #print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
                         print(ind_i,ind_j)
                         self.matrix[ind_i,ind_j]-=self.potential.get_matrix_element(a_s,b_s,c,d)*(1-((phase_a+phase_b+phase_c)%2)*2)
-                        # TODO: search for the corresponding state in m_schemebasis
-                        # TODO: find matrix element multiply with the phase
-        
+
     def compute_matrix(self):
         for i,ket in enumerate(self.m_scheme_basis):
             self._compute_matrix_element(ket,i)

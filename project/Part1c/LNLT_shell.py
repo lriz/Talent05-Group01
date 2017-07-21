@@ -4,15 +4,17 @@ from collections import OrderedDict
 import matplotlib.pyplot as plt
 import numpy as np
 from PairingPotential import PairingPotential
-
+from JClass import JClass  # Noam's Jsqaured
 from ReadMatrixElementsFile import ReadMatrixElementsFile
 from SPSGenerator import SPSGenerator
 from TwoBodyOperator import TwoBodyOperator
 from hamiltonian_unperturbed import hamiltonian_unperturbed, hamiltonian_unperturbed_pairing
 from LevelPloter import LevelPloter
 from ResultPrinter import ResultPrinter
-from JSquaredOperator import JSquaredOperator
+from JSquaredOperator import JSquaredOperator  # Tor's Jsquared
 from NumberOperatorSquare import NumberOperatorSquare
+
+np.set_printoptions(threshold='nan')
 
 
 
@@ -30,7 +32,6 @@ def shell_configurations():
             {'name': '0g9/2', 'N': 4}]
 
 #################### Argparse ####################
-
 parser = argparse.ArgumentParser(description='Input for shell-model program')
 group = parser.add_mutually_exclusive_group()
 parser.add_argument('-n','--num_of_particles', help='the number of particles we wish to work with.', default=2, type=int, required=True)
@@ -40,7 +41,9 @@ parser.add_argument('-os','--orbits_separation', help='in case we choose an orbi
                                                       'is used', default=False, type=bool, required=False)
 group.add_argument('-if','--interaction_file', help='interaction file name.', default=False, type=str, required=False)
 group.add_argument('-of','--orbits_file', help='json file name for defining the wanted orbits.', default=False, type=str, required=False)
-parser.add_argument('-o','--output_file',help='specify output file',default='/dev/null',type=str,required=False)
+parser.add_argument('-o','--output_file',help='specify output file',default='\dev\null',type=str,required=False)
+parser.add_argument('-nu','--nushellx_folder',help='specify nushellx lpt directory to compare our results to',default='\dev\null',type=str,required=False)
+parser.add_argument('-Z','--protons_number',help='the number of protons',default=16,type=int,required=False)
 args = parser.parse_args()
 #################### Argparse ####################
 
@@ -74,25 +77,27 @@ m_broken_basis = sps_object.get_m_broken_basis()
 if args.M_total:
     if args.orbits_file:
         sps_object.calc_m_scheme_basis(m_broken_basis, args.M_total, orbits_dict, args.orbits_separation)
+        m_scheme_basis = sps_object.get_m_scheme_basis()
     else:
         sps_object.calc_m_scheme_basis_no_orbit_separation(m_broken_basis, args.M_total)
+
     m_scheme_basis = sps_object.get_m_scheme_basis()
     print 'm_scheme_basis',m_scheme_basis
 else:
     m_scheme_basis = np.array(m_broken_basis)
 sps_object.set_sps_list(sps_list)
-sps_object.print_sps()
 
 print("dim: {0}".format(len(m_scheme_basis)))
 
 tbi = TwoBodyOperator(sps_list, m_scheme_basis, V)
-print("Computes interaction hamiltonian")
 tbi.compute_matrix()
+
 print("Computes unperturbed hamiltonain")
 if args.orbits_file:
     H0=hamiltonian_unperturbed_pairing(m_scheme_basis)
 else:
     H0 = hamiltonian_unperturbed(m_scheme_basis, V.get_sp_energies())
+
 
 HI = tbi.get_matrix()
 if np.sum(np.sum(np.abs(HI - np.transpose(HI))))>1e-10:
@@ -111,6 +116,7 @@ en,ev =zip(*energyzip)
 energies = list(en)
 eig_vectors_list = list(ev)
 
+# Tor's Jsquared #####################################
 jjop = JSquaredOperator()
 jjopmb = TwoBodyOperator(sps_list,m_scheme_basis,jjop)
 jjopmb.compute_matrix()
@@ -172,10 +178,15 @@ for ev in eig_vectors_list:
     jj = np.dot(ev,np.dot(nummat,ev))
     #j_list.append(np.roots([1,1,-jj]))
     j_list.append(jj)
+
+# Tor's Jsquared #####################################
 rp = ResultPrinter(energies,
                    j_list,
                    sps_list,
-                   m_scheme_basis)
+                   m_scheme_basis,
+                   args.nushellx_folder,
+                   args.num_of_particles,
+                   args.protons_number)
 rp.print_all_to_screen()
 if args.output_file:
     rp.print_all_to_file(args.output_file)
@@ -189,3 +200,36 @@ if args.output_file:
 
 plt.plot(eig_vectors_list[0])
 plt.show()
+
+"""
+# Noam's Jsquared
+# Calculate J+J-
+Jplus_Jmin = JClass(args.num_of_particles,'+-')
+Jplus_Jmin_mat = TwoBodyOperator(sps_list, m_scheme_basis, Jplus_Jmin)
+Jplus_Jmin_mat.compute_matrix()
+Jplus_Jmin_mat = Jplus_Jmin_mat.get_matrix()
+# Calculate J-J+
+Jmin_Jplus = JClass(args.num_of_particles,'-+')
+Jmin_Jplus_mat = TwoBodyOperator(sps_list, m_scheme_basis, Jmin_Jplus)
+Jmin_Jplus_mat.compute_matrix()
+Jmin_Jplus_mat = Jmin_Jplus_mat.get_matrix()
+# Calculate JzJz
+Jz_Jz = JClass(args.num_of_particles,'zz')
+Jz_Jz = TwoBodyOperator(sps_list, m_scheme_basis, Jz_Jz)
+Jz_Jz.compute_matrix()
+Jz_Jz = Jz_Jz.get_matrix()
+print 'J^2 Matrix'
+print 'Jplus_Jmin'
+print Jplus_Jmin_mat
+print
+print 'Jmin_Jplus_mat'
+print Jmin_Jplus_mat
+print
+print 'Jz_Jz'
+print Jz_Jz
+j_square = 0.5*(Jplus_Jmin_mat+Jmin_Jplus_mat)+Jz_Jz
+print j_square
+for jj in np.diagonal(j_square):
+    print 'jj',jj
+    print np.roots([4,2,-jj])/2
+"""
