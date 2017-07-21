@@ -72,6 +72,7 @@ m_broken_basis = sps_object.get_m_broken_basis()
 if args.M_total:
     if args.orbits_file:
         sps_object.calc_m_scheme_basis(m_broken_basis, args.M_total, orbits_dict, args.orbits_separation)
+        m_scheme_basis = sps_object.get_m_scheme_basis()
     else:
         sps_object.calc_m_scheme_basis_no_orbit_separation(m_broken_basis, args.M_total)
         m_scheme_basis = sps_object.get_m_scheme_basis()
