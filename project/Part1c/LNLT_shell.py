@@ -1,7 +1,7 @@
 import argparse
 import json
 from collections import OrderedDict
-
+import matplotlib.pyplot as plt
 import numpy as np
 from PairingPotential import PairingPotential
 
@@ -11,7 +11,8 @@ from TwoBodyOperator import TwoBodyOperator
 from hamiltonian_unperturbed import hamiltonian_unperturbed
 from LevelPloter import LevelPloter
 from ResultPrinter import ResultPrinter
-
+from JSquaredOperator import JSquaredOperator
+from NumberOperatorSquare import NumberOperatorSquare
 
 
 
@@ -39,7 +40,7 @@ parser.add_argument('-os','--orbits_separation', help='in case we choose an orbi
                                                       'is used', default=False, type=bool, required=False)
 group.add_argument('-if','--interaction_file', help='interaction file name.', default=False, type=str, required=False)
 group.add_argument('-of','--orbits_file', help='json file name for defining the wanted orbits.', default=False, type=str, required=False)
-parser.add_argument('-o','--output_file',help='specify output file',default='\dev\null',type=str,required=False)
+parser.add_argument('-o','--output_file',help='specify output file',default='/dev/null',type=str,required=False)
 args = parser.parse_args()
 #################### Argparse ####################
 
@@ -104,8 +105,69 @@ en,ev =zip(*energyzip)
 energies = list(en)
 eig_vectors_list = list(ev)
 
+jjop = JSquaredOperator()
+jjopmb = TwoBodyOperator(sps_list,m_scheme_basis,jjop)
+jjopmb.compute_matrix()
+jjop1bmat = jjop.get_single_body_contribution(m_scheme_basis)
+jjopmat = jjopmb.get_matrix()
+out_str = ""
+for r in jjopmat:
+    for e in r:
+        out_str+="{} ".format(np.round(e,3))
+    out_str+="\n"
+print(out_str)
+
+out_str = ""
+for r in jjop1bmat:
+    for e in r:
+        out_str+="{} ".format(np.round(e,3))
+    out_str+="\n"
+print(out_str)
+
+jjopmat=jjopmat+jjop1bmat
+
+plt.matshow(jjopmat)
+plt.show()
+
+jj_diag,jj_Q = np.linalg.eig(jjopmat)
+print("J^2 eigen values:\n")
+print(np.sort(jj_diag))
+#for e in jj_diag:
+#    if (e != float(int(e))):
+#        print("the eigenvalues of J^2 should be an integer")
+#        exit(1)
+
+
+#Number operator squared
+num = NumberOperatorSquare()
+nummb = TwoBodyOperator(sps_list,m_scheme_basis,num)
+nummb.compute_matrix()
+nummat = nummb.get_matrix()+num.get_single_particle(m_scheme_basis)
+
+
+
+
+#jjopmat_transf = np.zeros((len(eig_vectors_list),len(eig_vectors_list)))
+
+#for i,v1 in enumerate(eig_vectors_list):
+#    for j,v2 in enumerate(eig_vectors_list):
+#        jjopmat_transf[i,j]=np.dot(v1,np.dot(jjopmat,v2))
+
+#print("min: {}".format(np.min(np.min(np.abs(jjopmat_transf)))))
+#plt.matshow(jjopmat_transf)
+#plt.colorbar()
+#plt.show()
+
+
+
+
+j_list = []
+for ev in eig_vectors_list:
+    jj = np.dot(ev,np.dot(nummat,ev))
+    #j_list.append(np.roots([1,1,-jj]))
+    j_list.append(jj)
 rp = ResultPrinter(energies,
-                   energies,
+                   j_list,
                    sps_list,
                    m_scheme_basis)
 rp.print_all_to_screen()
@@ -119,3 +181,5 @@ if args.output_file:
 #level_diagram = LevelPloter(np.sort(energies))
 #level_diagram.plotLevels()
 
+plt.plot(eig_vectors_list[0])
+plt.show()
