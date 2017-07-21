@@ -160,6 +160,6 @@ class JClass(object):
         :return:
         """
         if j_type == '+':
-            return pow(0.25*(j-m_j)*(j+m_j+2)/(self.n-1), 0.5)
+            return pow(0.25*(j-m_j)*(j+m_j+2), 0.5)
         elif j_type == '-':
-            return pow(0.25*(j+m_j)*(j-m_j+2)/(self.n-1), 0.5)
+            return pow(0.25*(j+m_j)*(j-m_j+2), 0.5)
