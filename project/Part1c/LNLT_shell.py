@@ -8,7 +8,7 @@ from PairingPotential import PairingPotential
 from ReadMatrixElementsFile import ReadMatrixElementsFile
 from SPSGenerator import SPSGenerator
 from TwoBodyOperator import TwoBodyOperator
-from hamiltonian_unperturbed import hamiltonian_unperturbed
+from hamiltonian_unperturbed import hamiltonian_unperturbed, hamiltonian_unperturbed_pairing
 from LevelPloter import LevelPloter
 from ResultPrinter import ResultPrinter
 from JSquaredOperator import JSquaredOperator
@@ -56,6 +56,7 @@ if args.orbits_file:
                                                                                         # and values several parameters (see file itself).
     sps_object.calc_sps_list(shell_configurations_list, orbits_dict)
     sps_list = sps_object.get_sps_list()
+    
     V = PairingPotential(1)
 
 else:
@@ -75,8 +76,8 @@ if args.M_total:
         sps_object.calc_m_scheme_basis(m_broken_basis, args.M_total, orbits_dict, args.orbits_separation)
     else:
         sps_object.calc_m_scheme_basis_no_orbit_separation(m_broken_basis, args.M_total)
-        m_scheme_basis = sps_object.get_m_scheme_basis()
-        print 'm_scheme_basis',m_scheme_basis
+    m_scheme_basis = sps_object.get_m_scheme_basis()
+    print 'm_scheme_basis',m_scheme_basis
 else:
     m_scheme_basis = np.array(m_broken_basis)
 sps_object.set_sps_list(sps_list)
@@ -88,13 +89,18 @@ tbi = TwoBodyOperator(sps_list, m_scheme_basis, V)
 print("Computes interaction hamiltonian")
 tbi.compute_matrix()
 print("Computes unperturbed hamiltonain")
-H0 = hamiltonian_unperturbed(m_scheme_basis, V.get_sp_energies())
+if args.orbits_file:
+    H0=hamiltonian_unperturbed_pairing(m_scheme_basis)
+else:
+    H0 = hamiltonian_unperturbed(m_scheme_basis, V.get_sp_energies())
 
 HI = tbi.get_matrix()
 if np.sum(np.sum(np.abs(HI - np.transpose(HI))))>1e-10:
     print("Interaction hamiltonian is not symmetric")
     exit(1)
 factor = (18.0/(16.0+args.num_of_particles))**0.3
+if args.orbits_file:
+    factor =1
 H=H0+factor*HI
 
 energies, eig_vectors_list = np.linalg.eig(np.array(H))
