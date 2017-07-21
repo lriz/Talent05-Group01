@@ -81,6 +81,7 @@ class TwoBodyOperator(object):
                         #print("state: {0}".format(state))
                         #print("state_c: {0}".format(state_c))
                         #print("({0}, {1}): {2}".format(ind_i,ind_j,self.potential.get_element(a,b,c.get_index(),d.get_index())))
+                        print(ind_i,ind_j)
                         self.matrix[ind_i,ind_j]-=self.potential.get_matrix_element(a_s,b_s,c,d)*(1-((phase_a+phase_b+phase_c)%2)*2)
 
     def compute_matrix(self):
