@@ -27,7 +27,7 @@ class ResultPrinter(object):
         return output
 
     def _generate_m_scheme_output(self):
-        output="\n\nM-Scheme basis\n"
+        output="\n\nM-Scheme basis:\n"
         output+="nr\t"
         A = len(self.m_scheme_basis[0])
         output+=''.join(["|p{}\t".format(i) for i in range(1,A+1)])+"\n"
@@ -38,21 +38,21 @@ class ResultPrinter(object):
         output=''
         nushellx_file = list(open("".join((self.nushellx_folder,"/o_",str(self.num_of_particles+self.Z),"b.lpt"))))[6:]  # open file as a list and take out the first 6 rows.
         nushellx_energies = [line.split()[2] for line in nushellx_file]  # extract energies from the lines.
-        if len(nushellx_energies) != len(self.energies):
-           output+='Number of energies in program does no match NushellX!'
+        new_nushellx_energies = []
+        for j,e in enumerate(self.energies):
+            bool = False
+            value = '-'
+            for i,e_nu in enumerate(nushellx_energies):
+                if abs(e - float(e_nu)) <= 0.01:
+                    value = e_nu
+                    break
+            new_nushellx_energies.append(value)
+
         output="\n\nEnergies and J:\n"
         output+="Nr\t||\tE\t||\tJ_tot\t||\tE(NushellX)\n"
         output+="".join(("-"*60,'\n'))
-        for i,e_nush in zip(range(len(self.energies)),nushellx_energies):
+        for i,e_nush in zip(range(len(self.energies)),new_nushellx_energies):
             output+="{:<3}\t||  {:>7}\t||{:>7}\t||\t{:>7}\n".format(i+1,np.round(self.energies[i],3), "-", e_nush)#np.round(self.j_values[i],3))
-            if abs(self.energies[i] - float(e_nush)) > 0.01:
-                self.degeneracy_index.append(i+1)
-        return output
-    def _generate_degeneracy(self):
-        output='Differences from NushellX\n'
-        output+="".join(["{}, ".format(index) for index in  self.degeneracy_index[:-1]])
-        if self.degeneracy_index:
-            output+='{}'.format(str(self.degeneracy_index[-1]))
         return output
 
     def print_all_to_screen(self):
@@ -66,5 +66,4 @@ class ResultPrinter(object):
         outputfile.write(self._generate_sp_state_output())
         outputfile.write(self._generate_m_scheme_output())
         outputfile.write(self._generate_output())
-        outputfile.write(self._generate_degeneracy())
         outputfile.close()
