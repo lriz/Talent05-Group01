@@ -10,6 +10,7 @@ def hamiltonian_unperturbed_pairing(m_scheme_basis):
     for i, eig in enumerate(m_scheme_basis):
         s = np.sum([int(j.get_p())-1 for j in eig])
         h_matrix[i,i] = s
+        print("({0},{0})={1}".format(i,s))
     return h_matrix
 
 def hamiltonian_unperturbed(m_scheme_basis,

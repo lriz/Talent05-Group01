@@ -1,3 +1,4 @@
+from numpy import array
 class PairingPotential(object):
     def __init__(self,g):
         self.g = g
@@ -7,3 +8,4 @@ class PairingPotential(object):
             return -self.g
         else:
             return 0
+        
