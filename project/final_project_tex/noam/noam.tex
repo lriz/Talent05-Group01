@@ -59,7 +59,7 @@
 \begin{document}
 
 %Title of paper
-\title{A Novel First-Order Quantum Phase Transition Between Spherical and $\gamma$-unstable Nuclear Shapes}
+\title{Introduction of our theoretical framework}
 
 % repeat the \author .. \affiliation  etc. as needed
 % \email, \thanks, \homepage, \altaffiliation all apply to the current
@@ -71,7 +71,7 @@
 % \affiliation command. The \affiliation command should follow the
 % other information
 % \affiliation can be followed by \email, \homepage, \thanks as well.
-\author{}
+\author{N. Gavrielov}
 %\email[]{Your e-mail address}
 %\homepage[]{Your web page}
 %\thanks{}
@@ -98,7 +98,88 @@
 
 %\maketitle must follow title, authors, abstract, \pacs, and \keywords
 \maketitle
-\bibliography{refs.bib}
+
+
+\section{Introduction}
+
+We investigate the structural changes of the $^{18-28}$O isotopes, both even and odd isotopes, by examining the energies of their low-lying states. This is done by developing our own shell model program and comparing the energies it generates to the NushellX@MSU program \cite{Brown2014}. We use $^{16}$O as a closed core, leaving 8 protons and 8 neutron at the $sp$-shell ($0s_{1/2},0p_{3/2},0p_{1/2}$). More neutrons are then excited in the $sd$-shell ($0d_{5/2},1s_{1/2},0d_{3/2}$), which serves as our model space. The Hamiltonian \eqref{eq:H}, which incorporates the pair breaking interaction \eqref{eq:V}, is used. The two-body matrix elements (TBME) of Eq. \eqref{eq:V} \textbf{(define them as in \cite{Brown2006})} uses those of the USDB interaction \cite{Brown2006} (given there in Tables I and II, in $J$-scheme, for $T=1,0$ respectively) where the single particle energies (SPE) ($1s_{1/2},0d_{3/2},0d_{5/2}$) are ($-3.2079, 2.1117, -3.9257$). We work in $M$-scheme, where the SPE are ordered as given in Table \ref{tab:SPE}. Using the single particle states (SPS) we construct the appropriate slater determinants, $\ket{\psi}$, according to number of particles which we place in the $sd$-shell.
+
+\begin{table}[h]
+\caption{Single particle energies of the $sd$-shell in the $M$-scheme basis with their corresponding quantum numbers ($N,\ell,J,M_j$). \label{tab:SPE}}
+\begin{ruledtabular}
+\begin{tabular}{c|cccccc}
+index	&	$N$	&	$\ell$	&	$J$	&	$M_j$	&	SPE			\\
+\hline 
+1		&	1	&	0		&	1	&	$-1/2$	&	-3.20790	\\
+2		&	1	&	0		&	1	&	$+1/2$	&	-3.20790	\\
+3		& 	0	&	2		&	3	&	$-3/2$	&	 2.11170	\\
+4		&	0	&	2		&	3	&	$-1/2$	&	 2.11170	\\
+5		&	0	&	2		&	3	&	$+1/2$	&	 2.11170	\\
+6		&	0	&	2		&	3	&	$+3/2$	&	 2.11170	\\
+7		&	0	&	2		&	5	&	$-5/2$	&	-3.92570	\\
+8		&	0	&	2		&	5	&	$-3/2$	&	-3.92570	\\
+9		&	0	&	2		&	5	&	$-1/2$	&	-3.92570	\\
+10		&	0	&	2		&	5	&	$+1/2$	&	-3.92570	\\
+11		&	0	&	2		&	5	&	$+3/2$	&	-3.92570	\\
+12		&	0	&	2		&	5	&	$+5/2$	&	-3.92570	\\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+
+\section{My TOC}
+
+\subsection{Background}
+\begin{enumerate}
+	\item The $1s0d$-shell model space.
+	\item Description for the Oxygen isotopes.
+	\item Pairing Hamiltonian and pair breaking Hamiltonian (We use second quantization. Is this only in m-scheme?).
+	
+		\begin{equation} \label{eq:H}
+		\hat H = \hat H_0 + \hat V
+		\end{equation}
+				
+		\begin{equation} \label{eq:H_0}
+		\hat H_0 = \xi \sum_{p,\sigma} (p-1) \hat a_{p\sigma}^\dagger \hat a_{p\sigma},
+		\end{equation}
+		
+		\begin{equation} \label{eq:V}
+		\hat V = \sum_{p \leq q} \braket{p|V|q}\hat P_p^+ \hat P_q^- ,
+		\end{equation}
+		
+		\begin{equation} \label{eq:P}
+		\hat P_p^+ = \sum_{\sigma_p, \geq 0} \hat a_{p, \sigma_p}^\dagger \hat a_{p, -\sigma_p}^\dagger, \qquad
+		\hat P_p^- = \sum_{\sigma_p, \geq 0} \hat a_{p, -\sigma_p} \hat a_{p, \sigma_p}.
+		\end{equation}
+	\item Many-body Schrodinger eq.
+\end{enumerate}
+
+
+\subsection{Introduction of our theoretical framework}
+\begin{enumerate}
+\item Description for the Oxygen isotopes - the physical phenomenon we investigate.
+\item Describe the $sd$-shell which serves as our model space.
+\item Many-body Schrodinger eq.
+\item The Hamiltonian we are using.
+\item sps. coupling to $M_{tot}$
+\item matrix elements in m-scheme. 
+	\begin{enumerate}
+	\item Translate Eq. (19) in \cite{Brown2006} to M-scheme? 
+	\item The USD Hamiltonian is defined by 63 sd-shell two-body matrix elements (TBME) and three single-particle energies (SPE) given in Table I of [1]. This is converted to the $M$-scheme and was given to us by Morten in the sdshellint.dat file. To this we added the refinement of Eq. (19) in \cite{Brown2006}.
+	\end{enumerate}
+\item Slater determinants.
+\item The different NushellX interactions:
+	\begin{enumerate}
+	\item USD (the original, by Winldenthal)
+	\item USDB.
+	\item USDA.
+	\item CCEI (Gustav's).
+	\item 
+	\end{enumerate}
+\end{enumerate}
+
+
+\bibliography{/home/noam/Desktop/Physics/Articles/library.bib}
 \end{document}
 
 
