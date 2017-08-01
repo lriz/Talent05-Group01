@@ -83,12 +83,11 @@ if args.M_total:
         sps_object.calc_m_scheme_basis_no_orbit_separation(m_broken_basis, args.M_total)
 
     m_scheme_basis = sps_object.get_m_scheme_basis()
-    print 'm_scheme_basis',m_scheme_basis
 else:
     m_scheme_basis = np.array(m_broken_basis)
 sps_object.set_sps_list(sps_list)
 
-print("dim: {0}".format(len(m_scheme_basis)))
+
 
 tbi = TwoBodyOperator(sps_list, m_scheme_basis, V)
 tbi.compute_matrix()
@@ -120,81 +119,24 @@ en,ev =zip(*energyzip)
 energies = list(en)
 eig_vectors_list = list(ev)
 
-# Tor's Jsquared #####################################
+
+# Setting up and compute the relevant J**2 matrix
 jjop = JSquaredOperator()
 jjopmb = TwoBodyOperator(sps_list,m_scheme_basis,jjop)
 jjopmb.compute_matrix()
 jjop1bmat = jjop.get_single_body_contribution(m_scheme_basis)
 jjopmat = jjopmb.get_matrix()
-#out_str = ""
-#for r in jjopmat:
-#    for e in r:
-#        out_str+="{} ".format(np.round(e,3))
-#    out_str+="\n"
-#print(out_str)
-
-#out_str = ""
-#for r in jjop1bmat:
-#    for e in r:
-#        out_str+="{} ".format(np.round(e,3))
-#    out_str+="\n"
-#print(out_str)
-
+# The last term is to compensate for that J^2 has a two body and a one body term
 jjopmat=jjopmat-jjop1bmat*(args.num_of_particles-2)
 
-#plt.matshow(jjopmat)
-#plt.show()
-
-jj_diag,jj_Q = np.linalg.eigh(jjopmat)
-print("J^2 eigen values:\n")
-print(jj_diag)
-print(0.5*(np.sqrt(4*jj_diag+1)-1))
-
-
-for i,e in enumerate(jj_diag):
-    if np.abs(np.dot(jj_Q[:,i],jj_Q[:,i])-1)>1e-5:
-        print("Error: not an eigen vector")
-        exit(1)
-    j = -0.5+0.5*np.sqrt(4*e+1)
-    plt.plot(jj_Q[:,i]*0.5+j)
-plt.show()
-
-#for e in jj_diag:
-#    if (e != float(int(e))):
-#        print("the eigenvalues of J^2 should be an integer")
-#        exit(1)
-
-
-#Number operator squared
-num = NumberOperatorSquare()
-nummb = TwoBodyOperator(sps_list,m_scheme_basis,num)
-nummb.compute_matrix()
-nummat = nummb.get_matrix()+num.get_single_particle(m_scheme_basis)
-
-
-
-
-#jjopmat_transf = np.zeros((len(eig_vectors_list),len(eig_vectors_list)))
-
-#for i,v1 in enumerate(eig_vectors_list):
-#    for j,v2 in enumerate(eig_vectors_list):
-#        jjopmat_transf[i,j]=np.dot(v1,np.dot(jjopmat,v2))
-
-#print("min: {}".format(np.min(np.min(np.abs(jjopmat_transf)))))
-#plt.matshow(jjopmat_transf)
-#plt.colorbar()
-#plt.show()
-
-
-
-
+# Identify the corresponding J-tot quantum number to each energy state
 j_list = []
 for ev in eig_vectors_list:
     jj = np.dot(ev,np.dot(jjopmat,ev))
-    #j_list.append(np.roots([1,1,-jj]))
-    j_list.append(0.5*(-1+np.sqrt(4*jj+1)))
+    # adds the positive root of the equation J(J+1)=jj
+    j_list.append(0.5*(-1+np.sqrt(4*jj+1))) 
 
-# Tor's Jsquared #####################################
+# Prints the result
 rp = ResultPrinter(energies,
                    j_list,
                    sps_list,
@@ -205,44 +147,3 @@ rp = ResultPrinter(energies,
 rp.print_all_to_screen()
 if args.output_file:
     rp.print_all_to_file(args.output_file)
-
-#print("The eigen values:")
-
-#print(np.sort(energies))
-
-#level_diagram = LevelPloter(np.sort(energies))
-#level_diagram.plotLevels()
-
-
-"""
-# Noam's Jsquared
-# Calculate J+J-
-Jplus_Jmin = JClass(args.num_of_particles,'+-')
-Jplus_Jmin_mat = TwoBodyOperator(sps_list, m_scheme_basis, Jplus_Jmin)
-Jplus_Jmin_mat.compute_matrix()
-Jplus_Jmin_mat = Jplus_Jmin_mat.get_matrix()
-# Calculate J-J+
-Jmin_Jplus = JClass(args.num_of_particles,'-+')
-Jmin_Jplus_mat = TwoBodyOperator(sps_list, m_scheme_basis, Jmin_Jplus)
-Jmin_Jplus_mat.compute_matrix()
-Jmin_Jplus_mat = Jmin_Jplus_mat.get_matrix()
-# Calculate JzJz
-Jz_Jz = JClass(args.num_of_particles,'zz')
-Jz_Jz = TwoBodyOperator(sps_list, m_scheme_basis, Jz_Jz)
-Jz_Jz.compute_matrix()
-Jz_Jz = Jz_Jz.get_matrix()
-print 'J^2 Matrix'
-print 'Jplus_Jmin'
-print Jplus_Jmin_mat
-print
-print 'Jmin_Jplus_mat'
-print Jmin_Jplus_mat
-print
-print 'Jz_Jz'
-print Jz_Jz
-j_square = 0.5*(Jplus_Jmin_mat+Jmin_Jplus_mat)+Jz_Jz
-print j_square
-for jj in np.diagonal(j_square):
-    print 'jj',jj
-    print np.roots([4,2,-jj])/2
-"""
