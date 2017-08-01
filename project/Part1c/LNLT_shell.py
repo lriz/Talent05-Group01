@@ -49,7 +49,7 @@ args = parser.parse_args()
 
 sps_object = SPSGenerator()
 shell_configurations_list = shell_configurations()
-folder_name = 'input_files/'  # Folder of input files.
+#folder_name = 'input_files/'  # Folder of input files. # Just in the way
 
 if args.orbits_file:
     with open("".join((folder_name, args.orbits_file)), 'rb') as data_file:
@@ -63,7 +63,8 @@ if args.orbits_file:
     V = PairingPotential(1)
 
 else:
-    interaction_file = open("".join((folder_name, args.interaction_file)), 'rb')
+    #interaction_file = open("".join((folder_name, args.interaction_file)), 'rb')
+    interaction_file = open(args.interaction_file, 'rb')
     # Read the potential
     V = ReadMatrixElementsFile(interaction_file)
     V.read_file_sps()
@@ -109,8 +110,11 @@ if args.orbits_file:
 H=H0+factor*HI
 
 energies, eig_vectors_list = np.linalg.eig(np.array(H))
+energyzip=[]
+for i,e in enumerate(energies):
+    energyzip.append((e,eig_vectors_list[:,i]))
 
-energyzip = zip(energies.tolist(),eig_vectors_list.tolist())
+#energyzip = zip(energies.tolist(),eig_vectors_list.tolist())
 energyzip = sorted(energyzip,key=lambda k: k[0])
 en,ev =zip(*energyzip)
 energies = list(en)
@@ -122,28 +126,39 @@ jjopmb = TwoBodyOperator(sps_list,m_scheme_basis,jjop)
 jjopmb.compute_matrix()
 jjop1bmat = jjop.get_single_body_contribution(m_scheme_basis)
 jjopmat = jjopmb.get_matrix()
-out_str = ""
-for r in jjopmat:
-    for e in r:
-        out_str+="{} ".format(np.round(e,3))
-    out_str+="\n"
-print(out_str)
+#out_str = ""
+#for r in jjopmat:
+#    for e in r:
+#        out_str+="{} ".format(np.round(e,3))
+#    out_str+="\n"
+#print(out_str)
 
-out_str = ""
-for r in jjop1bmat:
-    for e in r:
-        out_str+="{} ".format(np.round(e,3))
-    out_str+="\n"
-print(out_str)
+#out_str = ""
+#for r in jjop1bmat:
+#    for e in r:
+#        out_str+="{} ".format(np.round(e,3))
+#    out_str+="\n"
+#print(out_str)
 
-jjopmat=jjopmat+jjop1bmat
+jjopmat=jjopmat-jjop1bmat*(args.num_of_particles-2)
 
-plt.matshow(jjopmat)
+#plt.matshow(jjopmat)
+#plt.show()
+
+jj_diag,jj_Q = np.linalg.eigh(jjopmat)
+print("J^2 eigen values:\n")
+print(jj_diag)
+print(0.5*(np.sqrt(4*jj_diag+1)-1))
+
+
+for i,e in enumerate(jj_diag):
+    if np.abs(np.dot(jj_Q[:,i],jj_Q[:,i])-1)>1e-5:
+        print("Error: not an eigen vector")
+        exit(1)
+    j = -0.5+0.5*np.sqrt(4*e+1)
+    plt.plot(jj_Q[:,i]*0.5+j)
 plt.show()
 
-jj_diag,jj_Q = np.linalg.eig(jjopmat)
-print("J^2 eigen values:\n")
-print(np.sort(jj_diag))
 #for e in jj_diag:
 #    if (e != float(int(e))):
 #        print("the eigenvalues of J^2 should be an integer")
@@ -175,9 +190,9 @@ nummat = nummb.get_matrix()+num.get_single_particle(m_scheme_basis)
 
 j_list = []
 for ev in eig_vectors_list:
-    jj = np.dot(ev,np.dot(nummat,ev))
+    jj = np.dot(ev,np.dot(jjopmat,ev))
     #j_list.append(np.roots([1,1,-jj]))
-    j_list.append(jj)
+    j_list.append(0.5*(-1+np.sqrt(4*jj+1)))
 
 # Tor's Jsquared #####################################
 rp = ResultPrinter(energies,
@@ -198,8 +213,6 @@ if args.output_file:
 #level_diagram = LevelPloter(np.sort(energies))
 #level_diagram.plotLevels()
 
-plt.plot(eig_vectors_list[0])
-plt.show()
 
 """
 # Noam's Jsquared
