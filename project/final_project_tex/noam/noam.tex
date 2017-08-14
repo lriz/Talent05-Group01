@@ -25,7 +25,7 @@
 \usepackage{multirow}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\graphicspath{{figures/}{figures/phase_diagram/}{figures/levels_scheme/}{figures/decomposition/}{figures/phase_diagram/}{figures/energies_transitions_ratios/}}
+\graphicspath{{../../figures/}}  % Search for graphics within the given directories.
 \usepackage[unicode=true,pdfusetitle,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]{hyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
@@ -59,7 +59,7 @@
 \begin{document}
 
 %Title of paper
-\title{Introduction of our theoretical framework}
+\title{Final Project - TALENT 2017 at ECT*}
 
 % repeat the \author .. \affiliation  etc. as needed
 % \email, \thanks, \homepage, \altaffiliation all apply to the current
@@ -100,40 +100,54 @@
 \maketitle
 
 
-\section{Introduction}
+\section{Introduction of our Theoretical Framework}
 
-We investigate the structural changes of the $^{18-28}$O isotopes, both even and odd isotopes, by examining the energies of their low-lying states. This is done by developing our own shell model program and comparing the energies it generates to the NushellX@MSU program \cite{Brown2014}. 
-We use a frozen $^{16}$O core, having 8 protons and 8 neutron at the $sp$-shell ($0s_{1/2},0p_{3/2},0p_{1/2}$). 
+We investigate the structural changes of the $^{18-28}$O isotopes, both even and odd, by examining their low-lying states. This is done by developing our own shell model program and comparing the energies it generates to the NushellX@MSU program \cite{Brown2014}. 
+We use an $^{16}$O core, having 8 protons and 8 neutron at the $s-p$-shells ($0s_{1/2},0p_{3/2},0p_{1/2}$). 
 More neutrons are then excited in the $sd$-shell ($0d_{5/2},1s_{1/2},0d_{3/2}$), which serves as our model space. We use all possible configurations in these orbits and work in a harmonic oscillator basis with spin-orbit splitting. 
-The model space Hamiltonian reads
+The Hamiltonian reads
 
 		\begin{equation} \label{eq:H}
 		\hat H = \hat H_0 + \hat H_I,
 		\end{equation}
-		where $\hat H_0$ is the unperturbed one-body Hamiltonian
+for
 		\begin{equation} \label{eq:H_0}
-		\hat H_0 = \sum_{p,q} \braket{p|h_0|q} \hat a_{p}^\dagger \hat a_{q},
+		\hat H_0 = \sum_{p,q} \epsilon_p \hat a_{p}^\dagger \hat a_{q},
 		\end{equation}
-		and $\hat H_I$ is the pair breaking interaction
+the one-body Hamiltonian, where $\hat n_p = \hat a_p^\dagger \hat a_p$ is the number operator for the spherical orbit $p$ with quantum numbers ($n_p,\ell_p,j_p,m_p$) and $\epsilon_p = \braket{p|h_0|p}$ are the single-particle energies (SPE) and
 		\begin{equation} \label{eq:V}
-		\hat H_I = \sum_{p,q,r,s} \braket{p,q|V|r,s}\hat P_{p,q}^+ \hat P_{r,s}^- ,
+		\hat H_I = \sum_{p < q=1}^{N} \sum_{r < s=1}^{N} V(p,q;r,s) \hat T(p,q;r,s),
 		\end{equation}
 		with
 		\begin{equation} \label{eq:P}
-		\hat P_{p,q}^+ = \sum_{p,q} \hat a_p^\dagger \hat a_q^\dagger, \qquad
-		\hat P_{r,s}^- = \sum_{r,s} \hat a_r \hat a_s,
-		\end{equation} 
-where $p,q,r,s$  represent all possible single-particle states (SPS) quantum numbers. The Hamiltonian is rotationally invariant 
+		\hat T(p,q;r,s)  = \hat P_{p,q}^+ \hat P_{r,s}^-,
+		\end{equation}
+where $\hat P_{p,q}^+ = \sum_{p,q} \hat a_p^\dagger \hat a_q^\dagger, \qquad
+								  \hat P_{r,s}^- = \sum_{r,s} \hat a_r \hat a_s.$
 
-For the two-body matrix elements (TBME) \textbf{(define them as in \cite{Brown2006})} in Eq. \eqref{eq:V} we use the USDB interaction TBME \cite{Brown2006} (Tables I and II in \cite{Brown2006}, given in $J$-scheme, for $T=1,0$ respectively), and the single-particle energies (SPE) ($1s_{1/2},0d_{3/2},0d_{5/2}$) are ($-3.2079, 2.1117, -3.9257$). 
-We work in $M$-scheme, where the SPS are ordered as given in Table \ref{tab:SPE}. 
+$\hat H_I$ is given in $M$-scheme. It is the two-body density operator for nucleon pairs in orbits $p,q$ and $r,s$ coupled to the total spin projection $M$, where $N$ is the number of particles in the configuration. In $J$-scheme, $\hat H_I$ reads 
+\begin{equation}
+	\hat H_I =  \sum_{a\leq b,c \leq d} \sum_{JT} V_{J,T}(p,q;r,s) \hat T_{J,T}(p,q;r,s),
+\end{equation}
+where $\hat T_{J,T}(p,q;r,s)$ is the scalar two-body density operator for nucleon pairs in orbits $p,q$ and $r,s$ coupled to spin quantum numbers $J,M$ and isospin quantum numbers $T,T_z$ \cite{Brown2006}. Here the appropriate quantum numbers are $(n_i,\ell_i,j_i)$, $i \in \{a,b,c,d\}$. The transformation between the two-body matrix elements (TBME) from $J$- to $M$-scheme reads
+\begin{align}
+	\nonumber
+	V(p,q;r,s) & =  \braket{j_{p},m_{p};j_{q},m_{q}|V|j_{r},m_{r};j_{s},m_{s}} \\ \nonumber
+			   & =  \sum_{J,M} \braket{j_{p},m_{p};j_{q},m_{q}|JM} \braket{j_{r},m_{r};j_{s},m_{s}|JM} \\
+			   &	\times \braket{(j_{p},j_{q})JM|V|(j_{r},j_{s})JM},
+\end{align}
+where $\braket{j_{a},m_{a};j_{b},m_{b}|JM}$ is a Clebsch-Gordan coefficient and other quantum numbers are implicitly implied.
 
-\textbf{The transformation from $J$-scheme reads?}
+We use the SPE and TBME of the USDB interaction \cite{Brown2006} and work in $M$-scheme. The SPE values and order is given in Table \ref{tab:SPE}. The TBME for $A=18$ are given in \cite{Brown2006} in $J$-scheme for $T=1,0$ in Tables I and II, respectively. As was done for the USD interaction \cite{Wildenthal1984}, the SPE are taken to be mass independent and for the TBME we employ a mass dependence of the form
+\begin{equation}
+	V(p,q;r,s)(A) = \left( \frac{18}{A} \right)^p V(p,q;r,s)(A=18),
+\end{equation}
+with $p=0.3$. This qualitative mass dependence is expected from the evaluation of a medium-range interaction with harmonic-oscillator radial wave functions. It also defines TBME for other $A$ values.
 
-Using the SPS we construct the appropriate slater determinants, $\ket{\psi}$, according to the number of particles (even or odd)  which we place in the $sd$-shell.
+Using the SPS we construct the appropriate slater determinants, $\ket{\psi}$, according to the number of particles which we place in the $sd$-shell.
 
 \begin{table}[h]
-\caption{Single particle energies of the $sd$-shell in the $M$-scheme basis with their corresponding quantum numbers: $N$, the principle quantum number; $\ell$, the orbital angular momentum; $J$, the total angular momentum; $M_j$, the total angular momentum projection to the $z$ axis.. \label{tab:SPE}}
+\caption{Single particle energies of the $sd$-shell in the $M$-scheme basis with their corresponding quantum numbers: $N$, the principle quantum number; $\ell$, the orbital angular momentum; $J$, the total angular momentum; $M_j$, the total angular momentum projection on the $z$ axis. \label{tab:SPE}}
 \begin{ruledtabular}
 \begin{tabular}{c|cccccc}
 index	&	$N$	&	$\ell$	&	$J$	&	$M_j$	&	SPE			\\
@@ -154,70 +168,13 @@ index	&	$N$	&	$\ell$	&	$J$	&	$M_j$	&	SPE			\\
 \end{ruledtabular}
 \end{table}
 
-\appendix
+\section{Structure of the Oxygen Isotopes Wave Functions}
+The even-even Oxygen isotopes have been widely investigated (see \cite{Brown2017} for a review). To describe their low lying spectrum within the shell model, different model spaces are used, starting from an $^{16}$O core with extra neutrons in the $sd$-shell \cite{Kuo1966,Wildenthal1984,Brown1988,Brown2006}, adding the lower $p$-shell for core-excitation (intruder states) with particle-hole configurations \cite{Lawson1976} and even incorporating the $pf$-shell as well \cite{Utsuno1999}. The structure of the wave functions of the different levels in these isotopes are interesting to examine since they can reveal the role of different configurations and orbits. Thus one can examine, on top of low lying energies, electromagnetic transitions rates. Here we will only investigate the $E2$ between the first $2^+$ and the first $0^+$, i.e. $B(E2; 2_1^+ \rightarrow 0_1^+)$ using NushellX@MSU, given in Fig. \ref{oxygen-be2}. For the experimental data there are only three values, however it is notable that they become closer to the USDB interaction values as neutrons are added. The $^{18}$O isotope has the largest discrepancy with the USDB interaction. The reason might be due to the fact we are neglecting $p$-shell core-excitations when using only the USDB interaction. It was found in \cite{Lawson1976} that the $0_2^+$ should have a dominant $4p-2h$ component. However there are indications that larger mixing with the $0_1^+$ should arise. The problem for mixing of these states due to the truncation in the $np–mh$ sequence is discussed in \cite{Warburton1992a}. Therefore, when close to the $^{16}$O core, e.g. at $^{18}$O, a large part of the $p$-shell is missing in the wave function rendering less components in the wave functions to connect between the $0_1^+$ and the $2_1^+$ and hence yielding a smaller $B(E2)$ value. As neutrons are added to the $^{16} $O core, the $p$-shell core-excitations move to higher energy and mix less with the low-lying states, then the USDB interaction becomes a better approximation. 
 
-\section{My TOC}
-
-\subsection{Background}
-\begin{enumerate}
-	\item Description for the Oxygen isotopes - the physical phenomenon we investigate.
-	\item The $1s0d$-shell model space.
-	\item Pairing Hamiltonian and pair breaking Hamiltonian (We use second quantization. Is this only in m-scheme?).
-	
-		\begin{equation}
-		\hat H = \hat H_0 + \hat V
-		\end{equation}
-				
-		\begin{equation}
-		\hat H_0 = \xi \sum_{p,\sigma} (p-1) \hat a_{p\sigma}^\dagger \hat a_{p\sigma},
-		\end{equation}
-		
-		\begin{equation}
-		\hat V = \sum_{p \leq q} \braket{p|V|q}\hat P_p^+ \hat P_q^- ,
-		\end{equation}
-		
-		\begin{equation}
-		\hat P_p^+ = \sum_{\sigma_p, \geq 0} \hat a_{p, \sigma_p}^\dagger \hat a_{p, -\sigma_p}^\dagger, \qquad
-		\hat P_p^- = \sum_{\sigma_p, \geq 0} \hat a_{p, -\sigma_p} \hat a_{p, \sigma_p}.
-		\end{equation}
-		
-		Aren't we using
-		\begin{equation}
-		\hat V = \sum_{p \leq q} \braket{pq|V|rs}\hat P_{p,q}^+ \hat P_{r,s}^- ?
-		\end{equation}
-		
-		\begin{equation}
-		\hat P_{p,q}^+ = \sum_{\sigma_p,\sigma_q, \geq 0} \hat a_{p, \sigma_p}^\dagger \hat a_{q, -\sigma_q}^\dagger, \qquad
-		\hat P_{r,s}^- = \sum_{\sigma_r,\sigma_s, \geq 0} \hat a_{r, -\sigma_r} \hat a_{s, \sigma_s}??
-		\end{equation}
-\end{enumerate}
-
-
-\subsection{Introduction of our theoretical framework}
-\begin{enumerate}
-	\item The $sd$-shell serves as our model space.
-	\item The Hamiltonian we are using.
-	\begin{enumerate}
-		\item Few words on the pair breaking interaction.
-		\item The Hamiltonian is rotationally invariant.
-	\end{enumerate}
-	\item SPS coupling to $M_{tot}$. For $M_{tot}=0$ ($M_{tot}=1/2$)  we obtain all possible $J$ values for even (odd) nuclei. Explain this when comparing our results to NushellX.
-	\item Matrix elements in m-scheme. 
-	\begin{enumerate}
-		\item Translate Eq. (19) in \cite{Brown2006} to M-scheme? 
-		\item The USD Hamiltonian is defined by 63 sd-shell TBME and three SPE given in Table I of [1]. This is converted to the $M$-scheme and was given to us by Morten in the sdshellint.dat file. To this we added the refinement of Eq. (19) in \cite{Brown2006}.
-	\end{enumerate}
-	\item Slater determinants.
-	\item We solve the many-body Schrodinger eq.
-	\item The different NushellX interactions:
-	\begin{enumerate}
-		\item USD (the original, by Winldenthal)
-		\item USDB.
-		\item USDA.
-		\item CCEI (Gustav's).
-	\end{enumerate}
-\end{enumerate}
-
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../figures/oxygen-be2.pdf}
+\caption{$B(E2; 2^+ \rightarrow 0^+)$ of experimental (orange) and the USDB interaction (blue) for $^{18-26}$O. \label{oxygen-be2}}
+\end{figure}
 
 \bibliography{/home/noam/Desktop/Physics/Articles/library.bib}
 \end{document}
