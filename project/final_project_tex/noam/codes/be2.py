@@ -11,10 +11,9 @@ def main():
     error_exp = [0.09,0.07,0.5]
     A = [18,20,22,24,26]
     twop_zerop_theo_weis = [x/weisskopf_units(2,a) for x,a in zip(twop_zerop_theo,A)]  # Weisskopf units.
-    error_exp_weis = [x/weisskopf_units(2,a) for x,a in zip(error_exp,A[:3])]  # Weisskopf units.
     plt.plot(A,twop_zerop_theo_weis,'o-',color='blue',label='USDB')
     plt.plot(A[:3],twop_zerop_exp,'o-',color='orange',label='Exp.')
-    plt.errorbar(A[:3],twop_zerop_exp,yerr=error_exp_weis,color='orange',capsize=5)
+    plt.errorbar(A[:3],twop_zerop_exp,yerr=error_exp,color='orange',capsize=5)
     #plt.title('Oxygen isotopes')
     plt.xlabel('$A$',fontsize=20)
     plt.ylabel('$B(E2;2_1^+ \\rightarrow 0_1^+)$(W.u.)',fontsize=20)
