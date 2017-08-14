@@ -52,7 +52,7 @@ class ResultPrinter(object):
         output+="Nr\t||\tE\t||\tJ_tot\t||\tE(NushellX)\n"
         output+="".join(("-"*60,'\n'))
         for i,e_nush in zip(range(len(self.energies)),new_nushellx_energies):
-            output+="{:<3}\t||  {:>7}\t||{:>7}\t||\t{:>7}\n".format(i+1,np.round(self.energies[i],3), "-", e_nush)#np.round(self.j_values[i],3))
+            output+="{:<3}\t||  {:>7}\t||{:>7}\t||\t{:>7}\n".format(i+1,np.round(self.energies[i],3), np.round(self.j_values[i],3), e_nush)#np.round(self.j_values[i],3))
         return output
 
     def print_all_to_screen(self):
