@@ -25,6 +25,7 @@
 \usepackage{multirow}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{float}  % For forcing a float position using 'H'.
 \graphicspath{{../../figures/}}  % Search for graphics within the given directories.
 \usepackage[unicode=true,pdfusetitle,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]{hyperref}
@@ -47,12 +48,6 @@
 %\setlength{\extrarowheight}{2pt}   % Widens rows in Tables
 
 \makeatletter
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
-\providecommand{\tabularnewline}{\\}
-%% A simple dot to overcome graphicx limitations
-\newcommand{\lyxdot}{.}
 
 \makeatother
 
@@ -102,8 +97,11 @@
 
 \section{Introduction of our Theoretical Framework}
 
-We investigate the structural changes of the $^{18-28}$O isotopes, both even and odd, by examining their low-lying states. This is done by developing our own shell model program and comparing the energies it generates to the NushellX@MSU program \cite{Brown2014}. 
-We use an $^{16}$O core, having 8 protons and 8 neutron at the $s-p$-shells ($0s_{1/2},0p_{3/2},0p_{1/2}$). 
+The oxygen isotopes have been widely investigated \citep[for a review see][]{Brown2017}. To describe their low lying spectrum within the shell model, different model spaces and interactions are used, starting from an $^{16}$O core with extra neutrons in the $sd$-shell \cite{Kuo1966,Wildenthal1984,Brown1988,Brown2006}, adding the lower $p$-shell for core-excitation (intruder states) with particle-hole configurations \cite{Lawson1976} and incorporating the $pf$-shell as well \cite{Utsuno1999}.
+
+In this work we investigate the structural changes of the $^{18-28}$O isotopes, both even and odd, by examining their low-lying states. This is done by developing our own shell model program and comparing the energies it generates with different effective interactions using NushellX@MSU program \cite{Brown2014}. Further work includes using NushellX@MSU to calculate $E2$ transition rate and Fermi and Gamow-Teller $\beta$-decay.
+
+We use an $^{16}$O core, having 8 protons and 8 neutron at the $s$-$p$-shells, ($0s_{1/2},0p_{3/2},0p_{1/2}$). 
 More neutrons are then excited in the $sd$-shell ($0d_{5/2},1s_{1/2},0d_{3/2}$), which serves as our model space. We use all possible configurations in these orbits and work in a harmonic oscillator basis with spin-orbit splitting. 
 The Hamiltonian reads
 
@@ -114,7 +112,7 @@ for
 		\begin{equation} \label{eq:H_0}
 		\hat H_0 = \sum_{p,q} \epsilon_p \hat a_{p}^\dagger \hat a_{q},
 		\end{equation}
-the one-body Hamiltonian, where $\hat n_p = \hat a_p^\dagger \hat a_p$ is the number operator for the spherical orbit $p$ with quantum numbers ($n_p,\ell_p,j_p,m_p$) and $\epsilon_p = \braket{p|h_0|p}$ are the single-particle energies (SPE) and
+the one-body Hamiltonian, where $\hat n_p = \hat a_p^\dagger \hat a_p$ is the number operator for the spherical orbit $p$ with quantum numbers ($n_p,\ell_p,j_p,m_p$) and $\epsilon_p = \braket{p|h_0|p}$ are the single-particle energies (SPE). The interaction part reads
 		\begin{equation} \label{eq:V}
 		\hat H_I = \sum_{p < q=1}^{N} \sum_{r < s=1}^{N} V(p,q;r,s) \hat T(p,q;r,s),
 		\end{equation}
@@ -125,7 +123,7 @@ the one-body Hamiltonian, where $\hat n_p = \hat a_p^\dagger \hat a_p$ is the nu
 where $\hat P_{p,q}^+ = \sum_{p,q} \hat a_p^\dagger \hat a_q^\dagger, \qquad
 								  \hat P_{r,s}^- = \sum_{r,s} \hat a_r \hat a_s.$
 
-$\hat H_I$ is given in $M$-scheme. It is the two-body density operator for nucleon pairs in orbits $p,q$ and $r,s$ coupled to the total spin projection $M$, where $N$ is the number of particles in the configuration. In $J$-scheme, $\hat H_I$ reads 
+$\hat H_I$ is given in $M$-scheme and is the two-body density operator for nucleon pairs in orbits $p,q$ and $r,s$ coupled to the total spin projection $M$, where $N$ is the number of particles in the configuration. In $J$-scheme $\hat H_I$ reads 
 \begin{equation}
 	\hat H_I =  \sum_{a\leq b,c \leq d} \sum_{JT} V_{J,T}(p,q;r,s) \hat T_{J,T}(p,q;r,s),
 \end{equation}
@@ -142,11 +140,11 @@ We use the SPE and TBME of the USDB interaction \cite{Brown2006} and work in $M$
 \begin{equation}
 	V(p,q;r,s)(A) = \left( \frac{18}{A} \right)^p V(p,q;r,s)(A=18),
 \end{equation}
-with $p=0.3$. This qualitative mass dependence is expected from the evaluation of a medium-range interaction with harmonic-oscillator radial wave functions. It also defines TBME for other $A$ values.
+with $p=0.3$. This qualitative mass dependence is expected from the evaluation of a medium-range interaction with harmonic-oscillator radial wave functions. It also defines TBME for other $A$ values in the $sd$-shell.
 
-Using the SPS we construct the appropriate slater determinants, $\ket{\psi}$, according to the number of particles which we place in the $sd$-shell.
+Using the single-particle states (SPS) we construct the appropriate slater determinants according to the number of particles which we place in the $sd$-shell. This enables us to construct expectation values of the Hamiltonian \eqref{eq:H} and diagonaliz it to obtain the energies. 
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Single particle energies of the $sd$-shell in the $M$-scheme basis with their corresponding quantum numbers: $N$, the principle quantum number; $\ell$, the orbital angular momentum; $J$, the total angular momentum; $M_j$, the total angular momentum projection on the $z$ axis. \label{tab:SPE}}
 \begin{ruledtabular}
 \begin{tabular}{c|cccccc}
@@ -168,14 +166,15 @@ index	&	$N$	&	$\ell$	&	$J$	&	$M_j$	&	SPE			\\
 \end{ruledtabular}
 \end{table}
 
-\section{Structure of the Oxygen Isotopes Wave Functions}
-The even-even Oxygen isotopes have been widely investigated (see \cite{Brown2017} for a review). To describe their low lying spectrum within the shell model, different model spaces are used, starting from an $^{16}$O core with extra neutrons in the $sd$-shell \cite{Kuo1966,Wildenthal1984,Brown1988,Brown2006}, adding the lower $p$-shell for core-excitation (intruder states) with particle-hole configurations \cite{Lawson1976} and even incorporating the $pf$-shell as well \cite{Utsuno1999}. The structure of the wave functions of the different levels in these isotopes are interesting to examine since they can reveal the role of different configurations and orbits. Thus one can examine, on top of low lying energies, electromagnetic transitions rates. Here we will only investigate the $E2$ between the first $2^+$ and the first $0^+$, i.e. $B(E2; 2_1^+ \rightarrow 0_1^+)$ using NushellX@MSU, given in Fig. \ref{oxygen-be2}. For the experimental data there are only three values, however it is notable that they become closer to the USDB interaction values as neutrons are added. The $^{18}$O isotope has the largest discrepancy with the USDB interaction. The reason might be due to the fact we are neglecting $p$-shell core-excitations when using only the USDB interaction. It was found in \cite{Lawson1976} that the $0_2^+$ should have a dominant $4p-2h$ component. However there are indications that larger mixing with the $0_1^+$ should arise. The problem for mixing of these states due to the truncation in the $np–mh$ sequence is discussed in \cite{Warburton1992a}. Therefore, when close to the $^{16}$O core, e.g. at $^{18}$O, a large part of the $p$-shell is missing in the wave function rendering less components in the wave functions to connect between the $0_1^+$ and the $2_1^+$ and hence yielding a smaller $B(E2)$ value. As neutrons are added to the $^{16} $O core, the $p$-shell core-excitations move to higher energy and mix less with the low-lying states, then the USDB interaction becomes a better approximation. 
+\section{Structure of the Oxygen Isotopes}
+The structure of the wave functions of different levels in these isotopes is interesting to examine since they can reveal the role of different configurations and orbits. Furthermore, within a given configuration examining different interactions using different observables can be also insightful. Thus one can examine, on top of low lying energies, electromagnetic transitions rates. Here we will only investigate the $E2$ between the first $2^+$ and the first $0^+$, i.e. $B(E2; 2_1^+ \rightarrow 0_1^+)$ using NushellX@MSU, given in Fig. \ref{oxygen-be2}. For the experimental data there are only three values, however it is notable that they become closer to the theoretical values as neutrons are added, with the largest discrepancy occurring for the $^{18}$O isotope. The reason might be due to the fact we are neglecting $p$-shell core-excitations when using only the $sd$-shel model space. It was found in \cite{Lawson1976} that the $0_2^+$ should have a dominant $4p-2h$ component. However there are indications that larger mixing with the $0_1^+$ should arise. The problem for mixing of these states due to the truncation in the $np–mh$ sequence is discussed in \cite{Warburton1992a}. Therefore, when close to the $^{16}$O core, e.g. at $^{18}$O, a large part of the $p$-shell is missing in the wave function rendering less components in the wave functions to connect between the $0_1^+$ and the $2_1^+$ and hence yielding a smaller $B(E2)$ value. As neutrons are added to the $^{16} $O core, the $p$-shell core-excitations move to higher energy and mix less with the low-lying states, then the $sd$-shell model space becomes a better approximation. As seen in Fig. \ref{oxygen-be2}, this is correct for all three interactions which operate in the $sd$-shell. Although the CCEI does not reproduce energies as well as USDA and USDB, it gives a slightly better approximation for the $B(E2; 2_1^+ \rightarrow 0_1^+)$. Yet, the differences are minor and other observables should be examined.
 
 \begin{figure}[h]
 \includegraphics[width=1\linewidth]{../figures/oxygen-be2.pdf}
-\caption{$B(E2; 2^+ \rightarrow 0^+)$ of experimental (orange) and the USDB interaction (blue) for $^{18-26}$O. \label{oxygen-be2}}
+\caption{$B(E2; 2^+ \rightarrow 0^+)$ of experimental (black), the USDA (red), USDB (blue) and CCEI (orange) interactions for $^{18-26}$O. \label{oxygen-be2}}
 \end{figure}
 
+\pagebreak
 \bibliography{noam.bib}
 \end{document}
 
