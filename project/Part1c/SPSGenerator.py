@@ -12,14 +12,23 @@ class SPSGenerator(object):
         self.m_scheme_basis = []
         self.m_broken_basis = []
         self.sps_list = []
+        self.shell_list = []
 
 
     def calc_sps_list(self, shell_configurations_list, orbits_dict):
         sps_index = 1
+        shell_index = 1
         for p_level_index in orbits_dict.keys():
             level_name = orbits_dict[p_level_index]["name"]
             N_number = [shell['N'] for shell in  shell_configurations_list  if shell['name'] == level_name][-1] #TODO: check that not empty.
             j_total = orbits_dict[p_level_index]["2J-total"]
+            self.shell_list.append(SingleParticleState(p_level_index,
+                                                       N_number,
+                                                       orbits_dict[p_level_index]["angular momentum"],
+                                                       j_total,
+                                                       0,
+                                                       shell_index))
+            shell_index += 1
             for m_j in range(-j_total, j_total+1, 2):
                 self.sps_list.append(SingleParticleState(p_level_index,
                                                          N_number,
@@ -77,6 +86,9 @@ class SPSGenerator(object):
     def get_sps_list(self):
         return self.sps_list
 
+    def get_shell_list(self):
+        return self.shell_list
+    
     def get_m_scheme_basis(self):
         return np.array(self.m_scheme_basis)
 
@@ -92,8 +104,8 @@ class SPSGenerator(object):
 
     def print_m_scheme_basis(self):
         print
-	print '#'*100
-	print "M-scheme Basis"
+        print '#'*100
+        print "M-scheme Basis"
         #m_total_list = [(self.input_dict["2M-total"], self.input_dict["shell-orbit P-levels"][p]["name"]) for p in self.input_dict["shell-orbit P-levels"]]
         m_total_list = []
         for p in self.input_dict["shell-orbit P-levels"]:
@@ -102,6 +114,6 @@ class SPSGenerator(object):
         print "".join(("sps with 2M-total = ","{} "*len(m_total_list))).format(*m_total_list)
         print 'Basis length:', len(self.m_scheme_basis)
         print self.m_scheme_basis
-	print '#'*100
+        print '#'*100
 	
 

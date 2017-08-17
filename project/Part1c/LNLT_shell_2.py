@@ -16,6 +16,7 @@ from NumberOperatorSquare import NumberOperatorSquare
 from OccupationNumber import occupation
 from ShellOutput import shell_output
 from NucleusManager import NucleusManager
+from SpectroScopicFactor import SpectroscopicFactor
 
 
 np.set_printoptions(threshold='nan')
@@ -48,6 +49,7 @@ group.add_argument('-of','--orbits_file', help='json file name for defining the 
 parser.add_argument('-o','--output_file',help='specify output file',default='\dev\null',type=str,required=False)
 parser.add_argument('-nu','--nushellx_folder',help='specify nushellx lpt directory to compare our results to',default='\dev\null',type=str,required=False)
 parser.add_argument('-Z','--protons_number',help='the number of protons',default=16,type=int,required=False)
+parser.add_argument('-s','--spec_factors',help='computes the spectroscopic factors to the nucleus with n-1 valence nucleons',default=False,type=bool,required=False)
 args = parser.parse_args()
 #################### Argparse ####################
 
@@ -68,7 +70,7 @@ if args.orbits_file:
                                                                                         # and values several parameters (see file itself).
     sps_object.calc_sps_list(shell_configurations_list, orbits_dict)
     sps_list = sps_object.get_sps_list()
-    shell_list = sps_object.get_shell_list()
+    #shell_list = sps_object.get_shell_list()
     V = PairingPotential(1)
 
 else:
@@ -79,98 +81,79 @@ else:
     V.read_file_sps()
     V.read_file_interaction()
     sps_list = V.get_sps_list()
-    def comp_shell(a,b):
-        return a.get_n() == b.get_n() and a.get_l() == b.get_l() and a.get_j() == b.get_j()
-    for current in sps_list:
-        if not any([comp_shell(current,sh) for sh in shell_list]):
-            shell_list.append(current)
 
+
+ 
+
+def comp_shell(a,b):
+    return a.get_n() == b.get_n() and a.get_l() == b.get_l() and a.get_j() == b.get_j()
+for current in sps_list:
+    if not any([comp_shell(current,sh) for sh in shell_list]):
+        shell_list.append(current)
 
 
             
-sps_object.calc_m_broken_basis(sps_list, args.num_of_particles)
-m_broken_basis = sps_object.get_m_broken_basis()
+current_nucleus = NucleusManager(sps_object,
+                                 sps_list,
+                                 V)
+current_nucleus.set_num_particles(args.num_of_particles)
 
 # Calculate the m_scheme_basis according to whether we have a matrix elements input file or a json orbits file.
 if args.M_total:
-    print("This do happen")
     if args.orbits_file:
-        sps_object.calc_m_scheme_basis(m_broken_basis, args.M_total, orbits_dict, args.orbits_separation)
-        m_scheme_basis = sps_object.get_m_scheme_basis()
+        current_nucleus.set_total_m(args.M_total,orbits_dict, args.orbits_separation)
     else:
-        sps_object.calc_m_scheme_basis_no_orbit_separation(m_broken_basis, args.M_total)
+        current_nucleus.set_total_m(args.M_total)
 
-    m_scheme_basis = sps_object.get_m_scheme_basis()
-else:
-    m_scheme_basis = np.array(m_broken_basis)
-sps_object.set_sps_list(sps_list)
-
-
-
-tbi = TwoBodyOperator(sps_list, m_scheme_basis, V)
-tbi.compute_matrix()
-
-print("Computes unperturbed hamiltonain")
 if args.orbits_file:
-    H0=hamiltonian_unperturbed_pairing(m_scheme_basis)
+    current_nucleus.compute_eigen_spectrum(True)
 else:
-    H0 = hamiltonian_unperturbed(m_scheme_basis, V.get_sp_energies())
-
-
-HI = tbi.get_matrix()
-if np.sum(np.sum(np.abs(HI - np.transpose(HI))))>1e-10:
-    print("Interaction hamiltonian is not symmetric")
-    exit(1)
-factor = (18.0/(16.0+args.num_of_particles))**0.3
-if args.orbits_file:
-    factor =1
-H=H0+factor*HI
-
-energies, eig_vectors_list = np.linalg.eig(np.array(H))
-energyzip=[]
-for i,e in enumerate(energies):
-    energyzip.append((e,eig_vectors_list[:,i]))
-
-#energyzip = zip(energies.tolist(),eig_vectors_list.tolist())
-energyzip = sorted(energyzip,key=lambda k: k[0])
-en,ev =zip(*energyzip)
-energies = list(en)
-eig_vectors_list = list(ev)
-
+    current_nucleus.compute_eigen_spectrum(False)
+        
 
 # Setting up and compute the relevant J**2 matrix
-jjop = JSquaredOperator()
-jjopmb = TwoBodyOperator(sps_list,m_scheme_basis,jjop)
-jjopmb.compute_matrix()
-jjop1bmat = jjop.get_single_body_contribution(m_scheme_basis)
-jjopmat = jjopmb.get_matrix()
-# The last term is to compensate for that J^2 has a two body and a one body term
-jjopmat=jjopmat-jjop1bmat*(args.num_of_particles-2)
 
-# Identify the corresponding J-tot quantum number to each energy state
-# and computes the shell occupation numbers
-j_list = []
-occs_all = []
-for ev in eig_vectors_list:
-    jj = np.dot(ev,np.dot(jjopmat,ev))
-    # adds the positive root of the equation J(J+1)=jj
-    j_list.append(0.5*(-1+np.sqrt(4*jj+1))) 
-    # computes the shell occupation numbers
-    occs=[]
-    for shell in shell_list:
-        occs.append(occupation(shell,ev,m_scheme_basis))
-    occs_all.append(occs)
+current_nucleus.compute_j_squared()
+
+current_nucleus.compute_occupation_numbers()
 
     
 # Prints the result
-rp = ResultPrinter(energies,
-                   j_list,
+rp = ResultPrinter(current_nucleus.get_energies(),
+                   current_nucleus.get_total_j(),
                    sps_list,
-                   m_scheme_basis,
+                   current_nucleus.get_m_scheme_basis(),
                    args.nushellx_folder,
                    args.num_of_particles,
                    args.protons_number,
-                   occs_all)
+                   current_nucleus.get_occupation_nums())
 rp.print_all_to_screen()
 if args.output_file:
     rp.print_all_to_file(args.output_file)
+
+if args.spec_factors:
+    daughter_nucleus = NucleusManager(sps_object,
+                                      sps_list,
+                                      V)
+    daughter_nucleus.set_num_particles(args.num_of_particles-1)
+
+    if args.M_total:
+        if args.orbits_file:
+            daughter_nucleus.set_total_m(args.M_total+((args.num_of_particles-1)%2),orbits_dict, args.orbits_separation)
+        else:
+            print "args.M_total type:{}".format(type(args.M_total))
+            print "args.num_of_particles type:{}".format(type(args.num_of_particles))
+            daughter_nucleus.set_total_m(args.M_total+((args.num_of_particles-1)%2))
+    if args.orbits_file:
+        daughter_nucleus.compute_eigen_spectrum(True)
+    else:
+        daughter_nucleus.compute_eigen_spectrum(False)
+
+    daughter_nucleus.compute_j_squared()
+
+    specs = SpectroscopicFactor(current_nucleus,daughter_nucleus)
+
+    for shell in shell_list:
+        th_spec = specs.compute_s(shell)
+        print "For: {}".format(shell_output(shell))
+        print th_spec

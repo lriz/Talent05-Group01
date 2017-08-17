@@ -13,9 +13,15 @@ class SingleParticleState(object):
     def __repr__(self):
         return str(self.index)
 
-    def __eq__(self, other):
-        return self.index == other.index
+    
 
+    def copy(self):
+        return SingleParticleState(self.p,
+                                   self.n,
+                                   self.l,
+                                   self.j,
+                                   self.m_j,
+                                   self.index)
     def get_p(self): return self.p
     def get_n(self): return self.n
     def get_l(self): return self.l
@@ -29,6 +35,9 @@ class SingleParticleState(object):
         :param m: a value to add to m_j when comparing.
         :return: bool.
         """
-        if p.get_n() == self.get_n() and p.get_l() == self.get_l() and p.get_j() == self.get_j() and p.get_m_j() == self.get_m_j()+m:
-            return True
-        else: return False
+        return p.get_n() == self.get_n() and p.get_l() == self.get_l() and p.get_j() == self.get_j() and p.get_m_j() == self.get_m_j()+m
+    def __eq__(self, other):
+        return self.equate(other,0)
+    
+    def __neq__(self, other):
+        return not self.__eq__(other)
