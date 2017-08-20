@@ -130,6 +130,11 @@ rp = ResultPrinter(current_nucleus.get_energies(),
 rp.print_all_to_screen()
 if args.output_file:
     rp.print_all_to_file(args.output_file)
+    lp = LevelPloter("{}.ps".format(args.output_file),
+                     current_nucleus.get_energies(),
+                     current_nucleus.get_total_j(),
+                     max_e=23,num_tics = 25)
+    lp.plotLevels()
 
 if args.spec_factors:
     daughter_nucleus = NucleusManager(sps_object,
