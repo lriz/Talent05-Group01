@@ -10,7 +10,7 @@ class ResultPrinter(object):
                  m_scheme_basis,
                  nushellx_folder,
                  num_of_particles,
-                 Z,
+                 A,
                  occupation_nums):
         self.energies = energies
         self.j_values = j_values
@@ -18,7 +18,7 @@ class ResultPrinter(object):
         self.m_scheme_basis = m_scheme_basis
         self.nushellx_folder = nushellx_folder
         self.num_of_particles = num_of_particles
-        self.Z = Z
+        self.A = A
         self.degeneracy_index = []
         self.occupation_nums = occupation_nums
         assert len(self.energies) == len(self.j_values), "there must be an equal number of energies and j_values"
@@ -72,6 +72,11 @@ class ResultPrinter(object):
             output+="{:<5}   {} || {}\n".format(i+1,"".join(["|| {:>9}  ".format(np.round(ocn,2)) for ocn in occs]),np.sum(occs))
         return output
 
+    def _get_nushellx_occupation_nums(self):
+        nushell_file = list(open("".join((self.nushellx_folder,"/o_",str(self.num_of_particles+self.A),"b.occ"))))[2:]
+        return [[float(v) for v in row.split()[8:]] for row in nushell_file]
+        
+    
     def _generate_occupation_num_latex(self):
         shell_list=[]
         def comp_shell(a,b):
@@ -80,25 +85,38 @@ class ResultPrinter(object):
             if not any([comp_shell(current,sh) for sh in shell_list]):
                 shell_list.append(current)
         shell_list = sorted(shell_list, key = lambda s:s.get_n())
-        #latex_generator = LatexTableGenerator(30)
-        output="\\begin{table}[ht!]\n"
-        output+="\\caption{Occupation numbers for the computed states}\n"
-        output+="\\begin{tabular}{|c|"+("".join(["c|" for shell in shell_list])+"c|}")
-        output+="\\hline state: {} & tot:\\\\\n".format("".join(["& {}:  ".format(shell_output(shell)) for shell in shell_list]))
-        output+="\\hline "
-        endl = "\\\\"
+        latex_generator = LatexTableGenerator(30)
+        latex_generator.add_entry("state","State")
+        for shell in shell_list:
+            latex_generator.add_entry(shell_output(shell),"${}$".format(shell_output(shell)))
+        latex_generator.add_entry("total","Total")
+        
         for i,occs in enumerate(self.occupation_nums):
             #if i == len(self.occupation_nums)-1:
              #   endl = ""
-            output+="{:<5}   {} & {} {}\n".format(i+1,"".join(["& {:>9}  ".format(np.round(ocn,2)) for ocn in occs]),np.sum(occs),endl)
-        output+="\\hline\n"
-        output+="\\end{tabular}\n"
-        output+="\\end{table}\n"
-        return output
+            latex_generator.add_to_entry("state","{}".format(i+1))
+            for j,shell,in enumerate(shell_list):
+                latex_generator.add_to_entry(shell_output(shell),"{}".format(np.round(occs[j],3)))
+            latex_generator.add_to_entry("total","{}".format(np.sum(occs)))
+        latex_generator.add_entry("nushell_state","NuShellX:")
+
+        for shell in shell_list:
+            latex_generator.add_entry("nushellx_"+shell_output(shell),"${}$".format(shell_output(shell)))
+        latex_generator.add_entry("nushellx_total","Total")
+
+        nushellx_occs = self._get_nushellx_occupation_nums()
+        for i,occs in enumerate(nushellx_occs):
+            latex_generator.add_to_entry("nushell_state","{}".format(i+1))
+            for j,shell in enumerate(shell_list):
+                latex_generator.add_to_entry("nushellx_"+shell_output(shell),"{}".format(np.round(occs[j],3)))
+            latex_generator.add_to_entry("nushellx_total","{}".format(np.sum(occs)))
+        
+        latex_generator.update_grid()
+        return latex_generator.get_latex()
     
     def _generate_output(self):
         output=''
-        nushellx_file = list(open("".join((self.nushellx_folder,"/o_",str(self.num_of_particles+self.Z),"b.lpt"))))[6:]  # open file as a list and take out the first 6 rows.
+        nushellx_file = list(open("".join((self.nushellx_folder,"/o_",str(self.num_of_particles+self.A),"b.lpt"))))[6:]  # open file as a list and take out the first 6 rows.
         nushellx_energies = [line.split()[2] for line in nushellx_file]  # extract energies from the lines.
         new_nushellx_energies = []
         for j,e in enumerate(self.energies):
@@ -119,7 +137,7 @@ class ResultPrinter(object):
 
     def _generate_energies_latex(self):
         latex_table = LatexTableGenerator(30)
-        nushellx_file = list(open("".join((self.nushellx_folder,"/o_",str(self.num_of_particles+self.Z),"b.lpt"))))[6:]  # open file as a list and take out the first 6 rows.
+        nushellx_file = list(open("".join((self.nushellx_folder,"/o_",str(self.num_of_particles+self.A),"b.lpt"))))[6:]  # open file as a list and take out the first 6 rows.
         nushellx_energies = [line.split()[2] for line in nushellx_file]  # extract energies from the lines.
         nushellx_j = [line.split()[4] for line in nushellx_file] # extract j from lines.
         new_nushellx_energies = []
