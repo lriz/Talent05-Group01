@@ -41,9 +41,9 @@ class SPSGenerator(object):
     def calc_m_broken_basis(self,sps_list, n):
         """
         Calculate all Slater determinants from a single particle basis.
-        :param sps_list: a list of all the single particle state.
+        :param sps_list: a list of all the single particle states.
         :param n: number of particles to couple together.
-        :return:
+        :return: a numpy array of all slater determinants with all possible M-values.
         """
         self.m_broken_basis=[]
         for l in combinations(sps_list, n):

@@ -1,7 +1,8 @@
 import numpy as np
 def hamiltonian_unperturbed_pairing(m_scheme_basis):
     """
-    The unperturbed Hamiltonian.
+    The unperturbed Hamiltonian for the pairing problem.
+    H = \sum_{p,\sigma} (p-1) \hat a_{p\sigma}^\dagger \hat a_{p\sigma}.
     :param m_scheme_basis: a basis of sps in m_scheme.
     :return: the Hamiltonian matrix.
     """
@@ -13,7 +14,6 @@ def hamiltonian_unperturbed_pairing(m_scheme_basis):
         print("({0},{0})={1}".format(i,s))
     return h_matrix
 
-def hamiltonian_unperturbed(m_scheme_basis,
-                            sp_energies):
+def hamiltonian_unperturbed(m_scheme_basis, sp_energies):
     diagonal=np.array([np.sum([sp_energies[p.get_index()-1] for p in sd]) for sd in m_scheme_basis])
     return np.diag(diagonal)

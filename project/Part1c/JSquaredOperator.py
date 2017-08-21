@@ -62,10 +62,23 @@ class JSquaredOperator(object):
     def __init__(self):
         pass
     def get_matrix_element(self,a,b,c,d):
+        """
+        Compute the J^2 operator in a two-body M-scheme basis.
+        Calculation is done by expanding the bra and the ket (given in M-scheme basis) in coupled J basis in the following manner.
+        <a,b|J^2|c,d> = \sum_J <J_a,M_a,J_b,M_b|Jtot,M_a+M_b>*<J_c,M_c,J_d,M_d|Jtot,M_c+M_d>*<(J_a,J_b)Jtot|J^2|(J_c,J_d)Jtot>
+                      = \sum_J <J_a,M_a,J_b,M_b|Jtot,M_a+M_b>*<J_c,M_c,J_d,M_d|Jtot,M_c+M_d>*Jtot(Jtot+1).
+        The sum is over J even only.
+        :param a:
+        :param b:
+        :param c:
+        :param d:
+        :return:
+        """
         if ((not comp_shell(a,c)) or
             (not comp_shell(b,d)) or
             (a.get_m_j()+b.get_m_j() != c.get_m_j()+d.get_m_j())):
             return 0
+
         min_jab = abs(a.get_j()-b.get_j())
         max_jab = a.get_j()+b.get_j()
         min_jcd = abs(c.get_j()-d.get_j())
@@ -102,10 +115,10 @@ class JSquaredOperator(object):
                                    d.get_m_j())/2).evalf(15)
             contrib+=cg1*cg2*J_tot*0.5*(J_tot*0.5+1)
         return contrib*N
+
     def get_single_body_contribution(self,m_scheme_basis):
         diagonal = [np.sum(np.array([a.get_j()*(a.get_j()+2)*0.25 for a in state])) for state in m_scheme_basis]
         return np.diag(diagonal)
-
 
 def expected_JJ2b(mp_basis):
     if (len(mp_basis[0]) != 2):
