@@ -38,7 +38,7 @@ def shell_configurations():
 #################### Argparse ####################
 parser = argparse.ArgumentParser(description='Input for shell-model program')
 group = parser.add_mutually_exclusive_group()
-parser.add_argument('-n','--num_of_particles', help='the number of particles we wish to work with.', default=2, type=int, required=True)
+parser.add_argument('-n','--num_of_particles', help='the number of valence nucleons.', default=2, type=int, required=True)
 parser.add_argument('-M','--M_total', help='the total M value for constructing an m-scheme basis.', default=0, type=int, required=False, nargs='*')
 parser.add_argument('-os','--orbits_separation', help='in case we choose an orbits file, choose also whether to have '
                                                       'separation of orbits in the m-scheme or not. Used only when -of '
@@ -93,7 +93,6 @@ m_broken_basis = sps_object.get_m_broken_basis()
 
 # Calculate the m_scheme_basis according to whether we have a matrix elements input file or a json orbits file.
 if args.M_total:
-    print("This do happen")
     if args.orbits_file:
         sps_object.calc_m_scheme_basis(m_broken_basis, args.M_total, orbits_dict, args.orbits_separation)
         m_scheme_basis = sps_object.get_m_scheme_basis()
