@@ -1,0 +1,6 @@
+1: There is alot use of the personal pronoun "we", I don't think that is any problem in it self, but I have used a pronoun neutral language in my part and think that we should atleast try to be consisten. So one of us must change to one or the other.
+
+2: The splitting for the Fermi sum rule that we see for ccei isn't it because ccei contains Coulomb forces and are therefore iso-spin breaking, while usdb is explicitly designed to be isospin conserving?
+
+3: Do we have any idea why ccei underestimates the half-life time (perhaps it hopes for an early release of Half-Life 3?) and why usdb overestimates the q-value?
+

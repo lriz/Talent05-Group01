@@ -1,0 +1,14 @@
+1: As for the moment we can only do a comparision between NuShellX and LNLT_shell using usdb, so it is perhaps not a good idea to write that we do the comparision with different interactions.
+
+2: in the expression for H_0 we should have the same index on the creation and annihilation operator, since we assume that h_0 is diagonal in our single particle basis.
+
+3: Seems to be a bit redundant to introduce P+ and P-, but if you prefer that then should it realy be a sum in their definitions?
+
+4: In equation (6), are we dealing with fully anti-symmeterized states? if so, we should have extra Normalization coefficients N_{p,q}(one for the ket and one for the bra), which are 1 if p != q, sqrt(2) if p == q, also J must be odd if p == q (to satisfy the Pauli principle).
+
+5: Also in equation (6), we can use Wigner-Eckart to remove the summation over total M, and only use the reduced matrix element <(jp,jq)J||V||(jr,js)J>delta_{mp+mq,mr+ms} (this is what is in the usdb file in NuShellX)
+
+6: In the first sentence under "Structure of the oxygen isotopes" perhaps write out "the oxygen isotopes", rather than "these isotopes" I think it reduces the risk of confusion for the reader.
+
+
+7: I'm not convinced that the table with the single particle states (Table I) are contributing anything of interest to the discussion.
