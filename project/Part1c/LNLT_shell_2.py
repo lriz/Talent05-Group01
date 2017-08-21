@@ -48,7 +48,7 @@ group.add_argument('-if','--interaction_file', help='interaction file name.', de
 group.add_argument('-of','--orbits_file', help='json file name for defining the wanted orbits.', default=False, type=str, required=False)
 parser.add_argument('-o','--output_file',help='specify output file',default='\dev\null',type=str,required=False)
 parser.add_argument('-nu','--nushellx_folder',help='specify nushellx lpt directory to compare our results to',default='\dev\null',type=str,required=False)
-parser.add_argument('-Z','--protons_number',help='the number of protons',default=16,type=int,required=False)
+parser.add_argument('-A','--core_nucleon_number',help='the number of core_nucleons',default=16,type=int,required=False) 
 parser.add_argument('-s','--spec_factors',help='computes the spectroscopic factors to the nucleus with n-1 valence nucleons',default=False,type=bool,required=False)
 args = parser.parse_args()
 #################### Argparse ####################
@@ -125,15 +125,14 @@ rp = ResultPrinter(current_nucleus.get_energies(),
                    current_nucleus.get_m_scheme_basis(),
                    args.nushellx_folder,
                    args.num_of_particles,
-                   args.protons_number,
+                   args.core_nucleon_number,
                    current_nucleus.get_occupation_nums())
 rp.print_all_to_screen()
 if args.output_file:
     rp.print_all_to_file(args.output_file)
-    lp = LevelPloter("{}.ps".format(args.output_file),
+    lp = LevelPloter("{}.eps".format(args.output_file),
                      current_nucleus.get_energies(),
-                     current_nucleus.get_total_j(),
-                     max_e=23,num_tics = 25)
+                     current_nucleus.get_total_j())
     lp.plotLevels()
 
 if args.spec_factors:
