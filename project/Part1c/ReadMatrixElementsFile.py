@@ -46,8 +46,6 @@ class ReadMatrixElementsFile(object):
 
 
     def read_file_interaction(self):
-        #TODO: should be generalized for any number of particles. For this assumes 4-particles.
-        # This is in case we get an input file with 5-particle state or 6-particle states, etc...
         self.tp_matelems = np.zeros((self.sps_length, self.sps_length, self.sps_length, self.sps_length))
         # get how many two particle matrix elements there are
         len_tpme = int(self.file_list[1+self.sps_length])
