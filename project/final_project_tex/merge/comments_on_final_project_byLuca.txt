@@ -26,12 +26,12 @@ noam-nushellx-intro.tex
 	line  3 The third subsection address -> addresses. Fixed.
 
 luca-nushellx.tex
-	line 08 add in caption: Experimental errorbars are really small compared to plot resolution.
-	line 13 $^{26}$ oxygen -> $^{26}$ O ? I think so.
-	line 14 add in the end: This may be due to the presence of Coulomb forces CCEI interaction and are therefore iso-spin breaking and it behaves differently with increasing neutron number in isotope chains.
-	line 16 black dots in the experimental panel indicates -> indicate
-	line 30 add in the end: This different level ordering may also be related to the inclusion of Coulomb forces in CCEI interaction, which may exchange energy-levels.
-	line 36 add in the end: (USDA interaction gives similar results of USDB interaction).
+	line 08 add in caption: Experimental errorbars are really small compared to plot resolution. Fixed.
+	line 13 $^{26}$ oxygen -> $^{26}$ O ? I think so. Fixed.
+	line 14 add in the end: This may be due to the presence of Coulomb forces CCEI interaction and are therefore iso-spin breaking and it behaves differently with increasing neutron number in isotope chains. Fixed.
+	line 16 black dots in the experimental panel indicates -> indicate Fixed.
+	line 30 add in the end: This different level ordering may also be related to the inclusion of Coulomb forces in CCEI interaction, which may exchange energy-levels. Fixed.
+	line 36 add in the end: (USDA interaction gives similar results of USDB interaction). Fixed.
 
 	Tor comment: Do we have any idea why ccei underestimates the half-life time (perhaps it hopes for an early release of Half-Life 3?) and why usdb overestimates the q-value?
 	Luca comment: I have no clue.
