@@ -1,10 +1,10 @@
-\section{LNLTShell} \label{sec:CodeExpl}
+\section{LNLT\_shell} \label{sec:CodeExpl}
 % General Introduction about the shell model code
 %% Toy code, with goal to compute oxygen isotope spectrum in the sd shell
 
-Throughout this project a simple shell-model code, called ``LNLTShell'', has been developed in python. The main goal of this shell-model is to be able reproduce the oxygen isotopes spectra in the sd-shell.
+Throughout this project a simple shell-model code, called ``LNLT\_shell'', has been developed in python. The main goal of this shell-model is to be able reproduce the oxygen isotopes spectra in the sd-shell.
 
-A nuclear shell-model code approximate a spectrum for an atomic Nucleus of with \(A\) nucleons by assuming a frozen core of \(A_{\rm{core}}\) nucleons, and then solves the many-body Schrödinger equation % refer to Noams part
+A nuclear shell-model code approximate the spectrum for an atomic Nucleus with \(A\) nucleons by assuming a frozen core with \(A_{\rm{core}}\) nucleons, and then solves the many-body Schrödinger equation \(H\ket{\Psi}=E\ket{\Psi}\) where \(H\) is described in equation \ref{eq:H}
 for a group of \(n=A-A_{\rm{core}}\) valence nucleons.
 
 
@@ -28,7 +28,7 @@ observe that -of and -if are mutually exclusive.
 
 The first thing the code does after parsing the arguments is setting up the single particle basis.
 This is done either by reading them directly from the m-scheme matrix element file %\cite Morten and Alex
-or by constructing them from given shells it reads in a given json file.
+or by constructing them from shells it reads in a given json file.
 
 % Format n l 2j 2m ?
 
@@ -43,17 +43,17 @@ After the many-body basis is constructed, it is possible to apply total M-restri
 The many-body Hamiltonian matrix is constructed in the class TwoBodyOperator, by acting with \(\bra{a,b}V\ket{c,d}_{AS}a^\dagger_a a^\dagger_b a_d a_c\) repeatedly for different values of \(a,\,b,\,c,\,d\) on all the Slater determinants in the many-body basis to determine which states differ with up to two single-particles states. This process results in a full matrix
 %% The diagonalisation using numpy
 which then is diagonalized by applying a full diagonalization routine from numpy. % cite numpy?
-This results in list of eigen energies \(E\) with associated eigen states \(\ket{E,i}\) where \(i\) takes care of potential degeneracy.
+This results in list of eigen energies \(E\) with associated eigen states \(\ket{E,i}\) where \(i\) takes in to account potential degeneracy.
 
 %% The J^2 operator
-When the eigenstates to the Hamiltonian has been computed, the total angular momentum of each state is computed by solving  \(\hbar^2 J(J+1) = \bra{E,i}\hat{J}^2\ket{E,i}\) for each state. The operator \(\hat{J}^2\) can be divided in a two-body and a one-body operator, from which a many-body matrix can be obtained with the same machinery as the full Hamiltonian matrix can be obtained.
+When the eigenstates to the Hamiltonian has been computed, the total angular momentum of each state is computed by solving  \(\hbar^2 J(J+1) = \bra{E,i}\hat{J}^2\ket{E,i}\) for each state. The operator \(\hat{J}^2\) can be divided in a two- and one-body operator, from which a many-body matrix can be obtained with the same machinery described for the full Hamiltonian matrix.
 
 %% Occupation numbers
 For each state shell-occupation number is determined by the application of
 \begin{equation}
   \bra{E,i}n_k\ket{E,i}=\bra{E,i}\sum_{m=-j}^j a^\dagger_{k,m}a_{k,m}\ket{E,i}
 \end{equation}
-where \(k\) represents the shell, and \(j\) is associated by \(k\).
+where \(k\) represents the shell, and \(j\) is associated to shell \(k\).
 
 %% The output format
 The program writes the results to the screen and optionally to a user specified file, where the single-particle basis, the many-body basis and the eigen-spectrum of the Hamiltonian.
