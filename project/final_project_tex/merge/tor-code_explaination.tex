@@ -2,11 +2,9 @@
 % General Introduction about the shell model code
 %% Toy code, with goal to compute oxygen isotope spectrum in the sd shell
 
-
 Throughout this project a simple shell-model code, called ``LNLT\_shell'', has been developed in python. The main goal of this shell-model is to be able reproduce the oxygen isotopes spectra in the sd-shell.
 
-
-A nuclear shell-model code approximate the spectrum for an atomic Nucleus with \(A\) nucleons by assuming a frozen core with \(A_{\rm{core}}\) nucleons, and then solves the many-body Schrödinger equation \(H\ket{\Psi}=E\ket{\Psi}\) where \(H\) is described in equation \ref{eq:H}
+A nuclear shell-model code approximates the spectrum for an atomic Nucleus with \(A\) nucleons by assuming a frozen core with \(A_{\rm{core}}\) nucleons, and then solves the many-body Schrödinger equation \(H\ket{\Psi}=E\ket{\Psi}\) where \(H\) is described in equation \ref{eq:H}
 for a group of \(n=A-A_{\rm{core}}\) valence nucleons.
 
 
@@ -21,6 +19,7 @@ The program starts by parsing the argument list. There are six different argumen
 \item[-os bool:] To turn the pairing basis on and off.
 \item[-if filename:] To specify what file contains the two-body matrix elements.
 \item[-o filename:] To specify what file to write the output to.
+\item[-nu directory:] To specify where the NuShellX results are located for the target nucleus.
 \end{itemize}
 observe that -of and -if are mutually exclusive.
 
@@ -58,7 +57,7 @@ For each state shell-occupation number is determined by the application of
 where \(k\) represents the shell, and \(j\) is associated to shell \(k\).
 
 %% The output format
-The program writes the results to the screen and optionally to a user specified file, where the single-particle basis, the many-body basis and the eigen-spectrum of the Hamiltonian.
+The program writes the results to the screen and optionally to a user specified file, where the single-particle basis, the many-body basis, the eigen-spectrum of the Hamiltonian and the shell-occupation numbers can be seen.
 
 Different interactions can be provided in two different ways. Either by a file which format will be described below, or as a class containing a method get\_matrix\_element that takes four single particle states as its arguments.
 The matrix element file starts by stating how many single-particle states there are, and then continues listing them together with the single-particle energies. There after the file contains a number \(l\) representing how many two-body matrix elements there exists, followed by \(l\) lines of four integers representing the two-body states on the bra and ket side of the two-body matrix element and one fixed point value with \(5\) decimals and one hole number.

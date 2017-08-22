@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2af66e10-18e4-43a7-a943-cf3d15c16fa8" name="Default" comment="Added my notes. I have changed the \documentclass since I do not have 'llncs'. Sorry if it caused any trouble...">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/final_project_tex/noam/noam.pdf" afterPath="$PROJECT_DIR$/project/final_project_tex/noam/noam.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/final_project_tex/noam/noam.synctex.gz" afterPath="$PROJECT_DIR$/project/final_project_tex/noam/noam.synctex.gz" />
+    <list default="true" id="2af66e10-18e4-43a7-a943-cf3d15c16fa8" name="Default" comment="Resolve conflict">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/final_project_tex/merge/outlook.tex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/final_project_tex/merge/final_project.pdf" afterPath="$PROJECT_DIR$/project/final_project_tex/merge/final_project.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/final_project_tex/merge/final_projectNotes.bib" afterPath="$PROJECT_DIR$/project/final_project_tex/merge/final_projectNotes.bib" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/JSquaredOperator.py" afterPath="$PROJECT_DIR$/project/Part1c/JSquaredOperator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/SPSGenerator.py" afterPath="$PROJECT_DIR$/project/Part1c/SPSGenerator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/Part1c/hamiltonian_unperturbed.py" afterPath="$PROJECT_DIR$/project/Part1c/hamiltonian_unperturbed.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/final_project_tex/noam/noam.tex" afterPath="$PROJECT_DIR$/project/final_project_tex/noam/noam.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/final_project_tex/tor/code_explaination.tex" afterPath="$PROJECT_DIR$/project/final_project_tex/tor/code_explaination.tex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/final_project_tex/merge/tor-code_explaination.tex" afterPath="$PROJECT_DIR$/project/final_project_tex/merge/tor-code_explaination.tex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/final_project_tex/merge/tor-compare_to_nushellx.tex" afterPath="$PROJECT_DIR$/project/final_project_tex/merge/tor-compare_to_nushellx.tex" />
     </list>
+    <list id="03469123-e470-4f8c-8583-d725c9025e2d" name="Failed commit: Default" comment="Resolved conflicts" />
+    <list id="321bc247-d9b1-4b5a-be2f-aff113ec35df" name="Failed commit: Default (2)" comment="added abstract" />
     <ignored path="Talent05-Group01.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -31,56 +31,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LNLT_shell.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LNLT_shell.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/Part1c/LNLT_shell.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.029411765">
               <caret line="59" column="10" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="10" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OccupationNumber.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/Part1c/OccupationNumber.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JSquaredOperator.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/project/Part1c/JSquaredOperator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.89330024">
-              <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TwoBodyOperator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/Part1c/TwoBodyOperator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NumberOperatorSquare.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/Part1c/NumberOperatorSquare.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -128,6 +86,7 @@
         <option value="$PROJECT_DIR$/project/Part1c/SPSGenerator.py" />
         <option value="$PROJECT_DIR$/project/Part1c/LNLT_shell.py" />
         <option value="$PROJECT_DIR$/project/Part1c/JSquaredOperator.py" />
+        <option value="$PROJECT_DIR$/project/final_project_tex/merge/tor-code_explaination.tex" />
       </list>
     </option>
   </component>
@@ -167,7 +126,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -232,7 +190,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Part1c" />
+              <option name="myItemId" value="final_project_tex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="merge" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -241,10 +203,11 @@
       <pane id="Scope">
         <subPane subId="Project Files" />
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="202" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -474,30 +437,6 @@
       <created>1499355999787</created>
       <option name="number" value="Default" />
       <updated>1499355999787</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Added &quot;orbit separation&quot; option.">
-      <created>1499788428835</created>
-      <option name="number" value="00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1499788428835</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Added &quot;orbit separation&quot; option.">
-      <created>1499788512143</created>
-      <option name="number" value="00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1499788512143</updated>
-    </task>
-    <task id="LOCAL-00014" summary="deleted print">
-      <created>1499951909009</created>
-      <option name="number" value="00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1499951909009</updated>
-    </task>
-    <task id="LOCAL-00015" summary="questions when reading the code&#10;">
-      <created>1499951944797</created>
-      <option name="number" value="00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1499951944797</updated>
     </task>
     <task id="LOCAL-00016" summary="simple organization">
       <created>1499951977344</created>
@@ -769,22 +708,46 @@
       <option name="project" value="LOCAL" />
       <updated>1503302343623</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Correction after Tor's notes">
+      <created>1503400699310</created>
+      <option name="number" value="00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1503400699310</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Added our merge with my comments txt file. Please proof read.">
+      <created>1503400745894</created>
+      <option name="number" value="00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1503400745894</updated>
+    </task>
+    <task id="LOCAL-00063" summary="To resolve conflicts by merge">
+      <created>1503426532877</created>
+      <option name="number" value="00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1503426532879</updated>
+    </task>
+    <task id="LOCAL-00064" summary="test">
+      <created>1503426926272</created>
+      <option name="number" value="00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1503426926272</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1840796" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19071311" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3291536" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42319748" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24764891" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12643678" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12643678" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -830,13 +793,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="deleted notes" />
-    <MESSAGE value="created Jclass for calculating the different J^2 elements" />
-    <MESSAGE value="a" />
-    <MESSAGE value="created Jclass" />
-    <MESSAGE value="implemented Jclass" />
-    <MESSAGE value="written the JzJz,  J+J-,  J-J+ functions - they do not give a good results (negative values for J-J+ and J+J-" />
-    <MESSAGE value="added an 'equate' function to compare the quantum numbers of to sps. Where one of the sps m_j is modified" />
     <MESSAGE value="added J^2 prints. We do not get good results for now (negative values in the matrix diagonal." />
     <MESSAGE value="a test file to push the results LNLT_shell.py gives" />
     <MESSAGE value="Changed output format" />
@@ -855,36 +811,24 @@
     <MESSAGE value="Added note on USDA-B and CCEI" />
     <MESSAGE value="Added my notes. I have changed the \documentclass since I do not have 'llncs'. Sorry if it causes any trouble." />
     <MESSAGE value="Changed semantic stuff." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed semantic stuff." />
+    <MESSAGE value="Correction after Tor's notes" />
+    <MESSAGE value="Added our merge with my comments txt file. Please proof read." />
+    <MESSAGE value="Resolved conflicts" />
+    <MESSAGE value="To resolve conflicts by merge" />
+    <MESSAGE value="test" />
+    <MESSAGE value="added abstract" />
+    <MESSAGE value="Resolve conflict" />
+    <option name="LAST_COMMIT_MESSAGE" value="Resolve conflict" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/project/Part1c/SingleParticleState.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Part1c/PairingPotential.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/Part1c/ReadMatrixElementsFile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#51#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -909,7 +853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -931,7 +874,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="14" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -939,7 +881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -947,9 +888,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#51#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1134,9 +1072,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5317578">
           <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1144,7 +1079,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="80" selection-start-line="9" selection-start-column="80" selection-end-line="9" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1152,7 +1086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="14" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1160,7 +1093,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1168,7 +1100,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1176,7 +1107,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50516987">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1184,7 +1114,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1192,7 +1121,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1200,7 +1128,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.124076806">
           <caret line="56" column="56" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1208,7 +1135,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33281735">
           <caret line="74" column="37" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1216,23 +1142,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.717873">
           <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Part1c/TwoBodyOperator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Part1c/NumberOperatorSquare.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1240,26 +1149,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/Part1c/LNLT_shell.py">
+    <entry file="file://$PROJECT_DIR$/project/Part1c/TwoBodyOperator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="10" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+          <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/Part1c/JSquaredOperator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89330024">
+        <state vertical-scroll-proportion="0.0">
           <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Part1c/NumberOperatorSquare.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Part1c/LNLT_shell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029411765">
+          <caret line="59" column="10" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="10" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
