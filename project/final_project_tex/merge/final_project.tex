@@ -1,0 +1,114 @@
+%\documentclass[aps,prl,groupedaddress]{revtex4-1}  % One column - tight
+%\documentclass[aps,prl,preprint,groupedaddress]{revtex4-1}  % One column - spread
+\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}  % Two column
+%\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
+%\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
+
+% Use the \preprint command to place your local institutional report
+% number in the upper righthand corner of the title page in preprint mode.
+% Multiple \preprint commands are allowed.
+% Use the 'preprintnumbers' class option to override journal defaults
+% to display numbers if necessary
+%\preprint{}
+
+% You should use BibTeX and apsrev.bst for references
+% Choosing a journal automatically selects the correct APS
+% BibTeX style file (bst file), so only uncomment the line
+% below if necessary.
+%\bibliographystyle{apsrev4-1}
+
+% % % % % % % % % % % % Noam% % % % % % % % % % % % 
+% Added preamble commands:
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}  % For forcing a float position using 'H'.
+\graphicspath{{../../figures/}}  % Search for graphics within the given directories.
+\usepackage[unicode=true,pdfusetitle,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{braket}
+\hypersetup{colorlinks=True,urlcolor=blue,linkcolor=blue,citecolor=blue,filecolor=black}
+\usepackage[caption=false]{subfig}
+% Extra commands
+%\usepackage{lmodern}
+%\usepackage[T1]{fontenc}
+%\setcounter{secnumdepth}{3}
+%\usepackage{color}
+%\usepackage{float}
+%\usepackage{mathtools}
+%\usepackage{amssymb}
+%\usepackage{breakurl}
+
+%\usepackage{pslatex}  % Change font style.
+%\renewcommand{\arraystretch}{1.5}  % Widens rows in Tables
+%\setlength{\extrarowheight}{2pt}   % Widens rows in Tables
+
+\makeatletter
+
+\makeatother
+
+\begin{document}
+
+%Title of paper
+\title{Final Project - TALENT 2017 at ECT* \\
+		\small Structure of the Oxygen Isotopes}
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current
+% author. Explanatory text should go in the []'s, actual e-mail
+% address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro foreach each type of information
+
+% \affiliation command applies to all authors since the last
+% \affiliation command. The \affiliation command should follow the
+% other information
+% \affiliation can be followed by \email, \homepage, \thanks as well.
+\author{N. Gavrielov}
+%\email[]{Your e-mail address}
+%\homepage[]{Your web page}
+%\thanks{}
+%\altaffiliation{}
+\affiliation{}
+
+%Collaboration name if desired (requires use of superscriptaddress
+%option in \documentclass). \noaffiliation is required (may also be
+%used with the \author command).
+%\collaboration can be followed by \email, \homepage, \thanks as well.
+%\collaboration{}
+%\noaffiliation
+
+\date{\today}
+
+\begin{abstract}
+Our abstract.
+\end{abstract}
+
+% insert suggested PACS numbers in braces on next line
+\pacs{}
+% insert suggested keywords - APS authors don't need to do this
+%\keywords{}
+
+%\maketitle must follow title, authors, abstract, \pacs, and \keywords
+\maketitle
+
+\newpage
+\input{noam-intro}
+\input{tor-code_explaination}
+\input{tor-compare_to_nushellx}
+\input{noam-nushellx-intro}
+\input{luca-nushellx}
+\input{noam-oxygen-structure}
+\input{conclusions-outlook}
+\newpage
+\appendix
+\onecolumngrid
+\input{tor-compare_to_nushellx-appendix}
+\newpage
+\bibliography{final_project.bib}
+\end{document}
+
+

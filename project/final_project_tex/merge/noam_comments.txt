@@ -1,0 +1,7 @@
+1: Tor, can you align in the appendix the first table to center?
+
+2: Luca, what about your red comments?
+
+3: can you change any 'table' to 'Table', 'figure' to 'Fig.' and 'usdb' to 'USDB' (USDA etc.)?
+
+4: Conclusion and Outlook and abstract, we should write something down.
