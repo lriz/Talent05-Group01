@@ -1,10 +1,12 @@
 #comments
 Where is my name in the Authors? :-P
+SORRY!!!
+
 Attach also python program?
 
 noam-intro.tex
-	line 36 when and other quantum numbers -> what you wanted to say?
-	line 38 The SPE values and order is given -> are given
+	line 36 when and other quantum numbers -> what you wanted to say? Fixed.
+	line 38 The SPE values and order is given -> are given. Fixed.
 
 tor-code_explaination.tex
 	line  7 A nuclear shell-model code approximate -> approximates
@@ -21,11 +23,11 @@ tor-compare_to_nushellx.tex
 	line 33 Also here there are a slight difference -> is
 
 noam-nushellx-intro.tex
-	line  3 The third subsection address -> addresses
+	line  3 The third subsection address -> addresses. Fixed.
 
 luca-nushellx.tex
 	line 08 add in caption: Experimental errorbars are really small compared to plot resolution.
-	line 13 $^{26}$ oxygen -> $^{26}$ O ?
+	line 13 $^{26}$ oxygen -> $^{26}$ O ? I think so.
 	line 14 add in the end: This may be due to the presence of Coulomb forces CCEI interaction and are therefore iso-spin breaking and it behaves differently with increasing neutron number in isotope chains.
 	line 16 black dots in the experimental panel indicates -> indicate
 	line 30 add in the end: This different level ordering may also be related to the inclusion of Coulomb forces in CCEI interaction, which may exchange energy-levels.
