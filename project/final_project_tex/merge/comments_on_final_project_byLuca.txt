@@ -1,0 +1,35 @@
+#comments
+Where is my name in the Authors? :-P
+Attach also python program?
+
+noam-intro.tex
+	line 36 when and other quantum numbers -> what you wanted to say?
+	line 38 The SPE values and order is given -> are given
+
+tor-code_explaination.tex
+	line  7 A nuclear shell-model code approximate -> approximates
+	line 59 where the single-particle basis, the many-body basis and the eigen-spectrum of the Hamiltonian. -> something missing? verb?
+
+tor-compare_to_nushellx.tex
+	line  6 descirbed -> described 
+	line  6 reference missing in pdf
+	line  6 the eigenenergies of \(^{18,19,20}\rm{O}\) is compared -> are compared
+	line  6 the lowest energies are ploted -> plotted
+	line 33 In addition to the eigen-spectrum for each shell-occupation numbers where also computed -> each .. isotope? + where -> were
+	line 33 There are some slight difference -> differences
+	line 33 is moste likely -> is most
+	line 33 Also here there are a slight difference -> is
+
+noam-nushellx-intro.tex
+	line  3 The third subsection address -> addresses
+
+luca-nushellx.tex
+	line 08 add in caption: Experimental errorbars are really small compared to plot resolution.
+	line 13 $^{26}$ oxygen -> $^{26}$ O ?
+	line 14 add in the end: This may be due to the presence of Coulomb forces CCEI interaction and are therefore iso-spin breaking and it behaves differently with increasing neutron number in isotope chains.
+	line 16 black dots in the experimental panel indicates -> indicate
+	line 30 add in the end: This different level ordering may also be related to the inclusion of Coulomb forces in CCEI interaction, which may exchange energy-levels.
+	line 36 add in the end: (USDA interaction gives similar results of USDB interaction).
+
+	Tor comment: Do we have any idea why ccei underestimates the half-life time (perhaps it hopes for an early release of Half-Life 3?) and why usdb overestimates the q-value?
+	Luca comment: I have no clue.
