@@ -1,14 +1,20 @@
 1: As for the moment we can only do a comparision between NuShellX and LNLT_shell using usdb, so it is perhaps not a good idea to write that we do the comparision with different interactions.
+Ans: You are correct.
 
 2: in the expression for H_0 we should have the same index on the creation and annihilation operator, since we assume that h_0 is diagonal in our single particle basis.
+Ans: You are correct.
 
 3: Seems to be a bit redundant to introduce P+ and P-, but if you prefer that then should it realy be a sum in their definitions?
+Ans: You are correct.
 
 4: In equation (6), are we dealing with fully anti-symmeterized states? if so, we should have extra Normalization coefficients N_{p,q}(one for the ket and one for the bra), which are 1 if p != q, sqrt(2) if p == q, also J must be odd if p == q (to satisfy the Pauli principle).
+Ans: You are correct. Only even values (not odd) for p == q.
 
 5: Also in equation (6), we can use Wigner-Eckart to remove the summation over total M, and only use the reduced matrix element <(jp,jq)J||V||(jr,js)J>delta_{mp+mq,mr+ms} (this is what is in the usdb file in NuShellX)
+Ans: You are correct. The M in the sum was not suppose to be there from the first place.
 
 6: In the first sentence under "Structure of the oxygen isotopes" perhaps write out "the oxygen isotopes", rather than "these isotopes" I think it reduces the risk of confusion for the reader.
-
+Ans: You are correct.
 
 7: I'm not convinced that the table with the single particle states (Table I) are contributing anything of interest to the discussion.
+Ans: Usually articles give in the text the values of the SPE's, so I though it is important. However they work in J-scheme and for the sd-shell give the values in the text (only three values). In M-scheme this becomes 12 values so I thought of writing them as I did, plus adding our notation for the particles. If you think it is better to just denote the values in the text it is fine by me as well.

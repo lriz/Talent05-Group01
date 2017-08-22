@@ -96,10 +96,9 @@
 
 
 \section{Introduction of our Theoretical Framework}
-
 The oxygen isotopes have been widely investigated \citep[for a review see][]{Brown2017}. To describe their low lying spectrum within the shell model, different model spaces and interactions are used, starting from an $^{16}$O core with extra neutrons in the $sd$-shell \cite{Kuo1966,Wildenthal1984,Brown1988,Brown2006}, adding the lower $p$-shell for core-excitation (intruder states) with particle-hole configurations \cite{Lawson1976} and incorporating the $pf$-shell as well \cite{Utsuno1999}.
 
-In this work we investigate the structural changes of the $^{18-28}$O isotopes, both even and odd, by examining their low-lying states. This is done by developing our own shell model program and comparing the energies it generates with different effective interactions using NushellX@MSU program \cite{Brown2014}. Further work includes using NushellX@MSU to calculate $E2$ transition rate and Fermi and Gamow-Teller $\beta$-decay.
+In this work we investigate the structure of the $^{18-28}$O isotopes, both even and odd, by examining their low-lying states. This is done by developing our own shell model program and comparing its results to the NushellX@MSU program \cite{Brown2014}.
 
 We use an $^{16}$O core, having 8 protons and 8 neutron at the $s$-$p$-shells, ($0s_{1/2},0p_{3/2},0p_{1/2}$). 
 More neutrons are then excited in the $sd$-shell ($0d_{5/2},1s_{1/2},0d_{3/2}$), which serves as our model space. We use all possible configurations in these orbits and work in a harmonic oscillator basis with spin-orbit splitting. 
@@ -110,7 +109,7 @@ The Hamiltonian reads
 		\end{equation}
 for
 		\begin{equation} \label{eq:H_0}
-		\hat H_0 = \sum_{p,q} \epsilon_p \hat a_{p}^\dagger \hat a_{q},
+		\hat H_0 = \sum_{p} \epsilon_p \hat n_{p},
 		\end{equation}
 the one-body Hamiltonian, where $\hat n_p = \hat a_p^\dagger \hat a_p$ is the number operator for the spherical orbit $p$ with quantum numbers ($n_p,\ell_p,j_p,m_p$) and $\epsilon_p = \braket{p|h_0|p}$ are the single-particle energies (SPE). The interaction part reads
 		\begin{equation} \label{eq:V}
@@ -118,23 +117,20 @@ the one-body Hamiltonian, where $\hat n_p = \hat a_p^\dagger \hat a_p$ is the nu
 		\end{equation}
 		with
 		\begin{equation} \label{eq:P}
-		\hat T(p,q;r,s)  = \hat P_{p,q}^+ \hat P_{r,s}^-,
+		\hat T(p,q;r,s)  = \hat a_p^\dagger \hat a_q^\dagger \hat a_r \hat a_s,
 		\end{equation}
-where $\hat P_{p,q}^+ = \sum_{p,q} \hat a_p^\dagger \hat a_q^\dagger, \qquad
-								  \hat P_{r,s}^- = \sum_{r,s} \hat a_r \hat a_s.$
 
 $\hat H_I$ is given in $M$-scheme and is the two-body density operator for nucleon pairs in orbits $p,q$ and $r,s$ coupled to the total spin projection $M$, where $N$ is the number of particles in the configuration. In $J$-scheme $\hat H_I$ reads 
 \begin{equation}
 	\hat H_I =  \sum_{a\leq b,c \leq d} \sum_{JT} V_{J,T}(p,q;r,s) \hat T_{J,T}(p,q;r,s),
 \end{equation}
 where $\hat T_{J,T}(p,q;r,s)$ is the scalar two-body density operator for nucleon pairs in orbits $p,q$ and $r,s$ coupled to spin quantum numbers $J,M$ and isospin quantum numbers $T,T_z$ \cite{Brown2006}. Here the appropriate quantum numbers are $(n_i,\ell_i,j_i)$, $i \in \{a,b,c,d\}$. The transformation between the two-body matrix elements (TBME) from $J$- to $M$-scheme reads
-\begin{align}
-	\nonumber
-	V(p,q;r,s) & =  \braket{j_{p},m_{p};j_{q},m_{q}|V|j_{r},m_{r};j_{s},m_{s}} \\ \nonumber
-			   & =  \sum_{J,M} \braket{j_{p},m_{p};j_{q},m_{q}|JM} \braket{j_{r},m_{r};j_{s},m_{s}|JM} \\
-			   &	\times \braket{(j_{p},j_{q})JM|V|(j_{r},j_{s})JM},
-\end{align}
-where $\braket{j_{a},m_{a};j_{b},m_{b}|JM}$ is a Clebsch-Gordan coefficient and other quantum numbers are implicitly implied.
+\begin{multline}
+	V(p,q;r,s)  =  \braket{j_{p},m_{p};j_{q},m_{q}|V|j_{r},m_{r};j_{s},m_{s}} \\ 
+			    =  \mathcal{N}_{pq} \mathcal{N}_{rs} \sum_{J} \braket{j_{p},m_{p};j_{q},m_{q}|JM} \braket{j_{r},m_{r};j_{s},m_{s}|JM} \\
+			   	\times \braket{(j_{p},j_{q})J||V||(j_{r},j_{s})J} \delta_{m_p+m_q,m_r+m_s},
+\end{multline}
+where we have used the Wigner-Eckart theorem with the fact that $ V $ is a rank-zero tensor. Furthermore, $\braket{j_{a},m_{a};j_{b},m_{b}|JM}$ is a Clebsch-Gordan coefficient, $ \mathcal{N}_{pq} $ ($ \mathcal{N}_{rs} $) is a normalization factor and is equal $ \sqrt{2} $ if $ p=q $ ($ r=s $) with only even values of $ J $ and 1 if $ p \not=q $ ($ r \not=s $) when and other quantum numbers are implicitly implied.
 
 We use the SPE and TBME of the USDB interaction \cite{Brown2006} and work in $M$-scheme. The SPE values and order is given in Table \ref{tab:SPE}. The TBME for $A=18$ are given in \cite{Brown2006} in $J$-scheme for $T=1,0$ in Tables I and II, respectively. As was done for the USD interaction \cite{Wildenthal1984}, the SPE are taken to be mass independent and for the TBME we employ a mass dependence of the form
 \begin{equation}
